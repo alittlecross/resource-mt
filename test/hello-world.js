@@ -12,7 +12,7 @@ describe('User visits index page', () => {
     return browser.visit('/')
   })
 
-  it('should display "Hello World', () => {
+  it('should display "Hello World"', () => {
     browser.assert.text('body', 'Hello World')
   })
 })
