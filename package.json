@@ -4,7 +4,7 @@
   "description": "a resource management tool",
   "main": "app.js",
   "scripts": {
-    "postinstall": "node db/database-migrations.js",
+    "heroku-postbuild": "node db/database-migrations.js",
     "start": "node app.js",
     "test": "nyc --reporter=text mocha --exit"
   },
