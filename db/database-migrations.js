@@ -35,7 +35,7 @@ class Migrations {
     lines.pop()
     lines.push('  - psql -d ketchup_test')
     for (let script of scripts) {
-      lines[10] += ` -f ${script}`
+      lines[10] += ` -f ${directory + script}`
     }
     travis = ''
     for (let line of lines) {
