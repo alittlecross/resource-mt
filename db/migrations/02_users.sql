@@ -1,4 +1,3 @@
-
 CREATE TABLE users (
   userid SERIAL PRIMARY KEY,
   firstname varchar(50),
