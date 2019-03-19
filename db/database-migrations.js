@@ -31,15 +31,13 @@ class Migrations {
   static updateTravisYml (scripts) {
     let travis = fs.readFileSync('./.travis.yml', 'utf8')
     let lines = travis.split('\n')
-    lines.pop()
-    lines.pop()
+    travis = ''
+    for (let i = 0; i < 10; i++) {
+      travis += lines[i] + '\n'
+    }
     lines.push('  - psql -d ketchup_test')
     for (let script of scripts) {
-      lines[10] += ` -f ${directory + script}`
-    }
-    travis = ''
-    for (let line of lines) {
-      travis += line + '\n'
+      travis += `  - psql -d ketchup_test -f ${directory + script} \n`
     }
     fs.writeFileSync('./.travis.yml', travis, 'utf8')
   }
