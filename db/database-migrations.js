@@ -46,7 +46,8 @@ class Migrations {
     `, [script])
   }
 
-  static async run () {
+  static async run (database = 'ketchup') {
+    process.env.PKDATABASE = database
     await this.createMigrationsTable()
     let scripts = []
     fs.readdirSync(directory).forEach(file => {

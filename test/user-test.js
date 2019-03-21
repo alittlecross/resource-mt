@@ -6,7 +6,6 @@ const expect = require('chai').expect
 describe('User', () => {
   beforeEach(async () => {
     await Helper.changeEnvironment()
-    await Helper.runMigrations()
     await Helper.truncateDatabase()
   })
 
