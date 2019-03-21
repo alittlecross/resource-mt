@@ -8,10 +8,3 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database ketchup_test;' -U postgres
-  - psql -d ketchup_test -f ./db/migrations/01_roles.sql 
-  - psql -d ketchup_test -f ./db/migrations/02_locations.sql 
-  - psql -d ketchup_test -f ./db/migrations/03_statuses.sql 
-  - psql -d ketchup_test -f ./db/migrations/04_skills.sql 
-  - psql -d ketchup_test -f ./db/migrations/05_users.sql 
-  - psql -d ketchup_test -f ./db/migrations/06_userroles.sql 
-  - psql -d ketchup_test -f ./db/migrations/07_userskills.sql 
