@@ -24,7 +24,9 @@ class Migrations {
           createdat timestamptz NOT NULL DEFAULT NOW()
         );
       `)
-      console.log('00_migrations.sql')
+      if (!process.env.PKDATABASE.includes('test')) {
+        console.log('00_migrations.sql')
+      }
     }
   }
 
@@ -70,10 +72,12 @@ class Migrations {
         let sql = fs.readFileSync(directory + script).toString()
         await dbc.query(sql)
         await this.updateMigrationsTable(script)
-        console.log(script)
+        if (!process.env.PKDATABASE.includes('test')) {
+          console.log(script)
+        }
       }
     }
   }
 }
 
-Migrations.run()
+module.exports = Migrations
