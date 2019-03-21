@@ -4,11 +4,11 @@ const User = require('../lib/user')
 const expect = require('chai').expect
 
 describe('User', () => {
-  beforeEach(async () => {
-    await Helper.changeEnvironment()
-    await Helper.runMigrations()
-    await Helper.truncateDatabase()
-  })
+  // beforeEach(async () => {
+  //   await Helper.changeEnvironment()
+  //   await Helper.runMigrations()
+  //   await Helper.truncateDatabase()
+  // })
 
   describe('.userObejct', () => {
     it('should return a user object', () => {
