@@ -18,47 +18,47 @@ describe('User', () => {
     })
   })
 
-  describe('.getProfile', () => {
-    it('should return a user record from the database', async () => {
-      await Helper.createUser()
+  // describe('.getProfile', () => {
+  //   it('should return a user record from the database', async () => {
+  //     await Helper.createUser()
 
-      let result = await User.getProfile('michael.scott@scranton.com')
+  //     let result = await User.getProfile('michael.scott@scranton.com')
 
-      expect(result.rows[0].firstname).equal('Michael')
-    })
-  })
+  //     expect(result.rows[0].firstname).equal('Michael')
+  //   })
+  // })
 
-  describe('.buildUserObject', () => {
-    it('should return a user object', async () => {
-      let result = await User.buildUserObject(Helper.databaseUserOutput().rows)
+  // describe('.buildUserObject', () => {
+  //   it('should return a user object', async () => {
+  //     let result = await User.buildUserObject(Helper.databaseUserOutput().rows)
 
-      expect(result.firstName).equal('Michael')
-    })
-  })
+  //     expect(result.firstName).equal('Michael')
+  //   })
+  // })
 
-  describe('.logIn', () => {
-    it('correct email and password should be successful', async () => {
-      await Helper.createUser()
+  // describe('.logIn', () => {
+  //   it('correct email and password should be successful', async () => {
+  //     await Helper.createUser()
 
-      let result = await User.logIn({ email: 'michael.scott@scranton.com', password: 'password' })
+  //     let result = await User.logIn({ email: 'michael.scott@scranton.com', password: 'password' })
 
-      expect(result.status).equal(true)
-    })
+  //     expect(result.status).equal(true)
+  //   })
 
-    it('incorrect email should be unsuccessful', async () => {
-      await Helper.createUser()
+  //   it('incorrect email should be unsuccessful', async () => {
+  //     await Helper.createUser()
 
-      let result = await User.logIn({ email: 'michael@scranton.com', password: 'password' })
+  //     let result = await User.logIn({ email: 'michael@scranton.com', password: 'password' })
 
-      expect(result.status).equal(false)
-    })
+  //     expect(result.status).equal(false)
+  //   })
 
-    it('incorrect password should be unsuccessful', async () => {
-      await Helper.createUser()
+  //   it('incorrect password should be unsuccessful', async () => {
+  //     await Helper.createUser()
 
-      let result = await User.logIn({ email: 'michael.scott@scranton.com', password: 'incorrect' })
+  //     let result = await User.logIn({ email: 'michael.scott@scranton.com', password: 'incorrect' })
 
-      expect(result.status).equal(false)
-    })
-  })
+  //     expect(result.status).equal(false)
+  //   })
+  // })
 })
