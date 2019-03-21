@@ -4,10 +4,10 @@
   "description": "a resource management tool",
   "main": "app.js",
   "scripts": {
-    "heroku-postbuild": "node db/database-migrations.js",
-    "migrations": "node db/database-migrations.js",
+    "heroku-postbuild": "node db/run-migrations.js",
+    "migrations": "node db/run-migrations.js",
     "start": "node app.js",
-    "test": "nyc --reporter=text mocha --exit"
+    "test": "nyc --reporter=text mocha --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -36,5 +36,11 @@
   },
   "standard": {
     "ignore": []
+  },
+  "nyc": {
+    "exclude": [
+      "db/*",
+      "test/*"
+    ]
   }
 }
