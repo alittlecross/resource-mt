@@ -30,20 +30,6 @@ class Migrations {
     }
   }
 
-  static updateTravisYml (scripts) {
-    let travis = fs.readFileSync('./.travis.yml', 'utf8')
-    let lines = travis.split('\n')
-    travis = ''
-    for (let i = 0; i < 10; i++) {
-      travis += lines[i] + '\n'
-    }
-    lines.push('  - psql -d ketchup_test')
-    for (let script of scripts) {
-      travis += `  - psql -d ketchup_test -f ${directory + script} \n`
-    }
-    fs.writeFileSync('./.travis.yml', travis, 'utf8')
-  }
-
   static async scriptAlreadyRan (script) {
     let result = await dbc.query(`
       SELECT *
@@ -66,7 +52,6 @@ class Migrations {
     fs.readdirSync(directory).forEach(file => {
       scripts.push(file)
     })
-    this.updateTravisYml(scripts)
     for (let script of scripts) {
       if (await this.scriptAlreadyRan(script)) {
         let sql = fs.readFileSync(directory + script).toString()
