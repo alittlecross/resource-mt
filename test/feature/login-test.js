@@ -11,7 +11,6 @@ describe('User visits index page', () => {
 
   before(async () => {
     await Helper.changeEnvironment()
-    await Helper.runMigrations()
     await Helper.truncateDatabase()
     await Helper.createUser()
   })

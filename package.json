@@ -4,10 +4,10 @@
   "description": "a resource management tool",
   "main": "app.js",
   "scripts": {
-    "heroku-postbuild": "node db/run-migrations.js",
-    "migrations": "node db/run-migrations.js",
+    "heroku-postbuild": "node db/live-migrations.js",
+    "migrations": "node db/live-migrations.js; node db/test-migrations.js",
     "start": "node app.js",
-    "test": "nyc --reporter=text mocha --recursive --exit"
+    "test": "node db/test-migrations.js; nyc --reporter=text mocha --recursive --exit"
   },
   "repository": {
     "type": "git",
