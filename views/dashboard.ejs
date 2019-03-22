@@ -1,1 +1,5 @@
-Hello World
+<%- include('_head') %>
+
+<% data.forEach(function(person) { %>
+  <div><%= person.firstName + ' ' + person.surname %></div>
+<% }) %>

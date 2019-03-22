@@ -1,5 +1,5 @@
 const Browser = require('zombie')
-const Helper = require('../test-helpers')
+const Helper = require('../support/person-helpers')
 
 const app = require('../../app')
 const http = require('http')
@@ -12,10 +12,10 @@ describe('User visits index page', () => {
   before(async () => {
     await Helper.changeEnvironment()
     await Helper.truncateDatabase()
-    await Helper.createUser()
+    await Helper.createUsers()
   })
 
-  describe('submit form', () => {
+  describe('submits form', () => {
     it('correct email and password should be successful', async () => {
       await browser.visit('/')
       await browser.fill('email', 'michael.scott@scranton.com')

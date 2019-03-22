@@ -6,6 +6,7 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const user = require('./lib/user')
+const manager = require('./lib/manager')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
 app.post('/log-in', async (req, res) => {
   let result = await user.logIn(req.body)
   if (result.status) {
-    req.session.user = result.user
+    req.session.user = result.user[0]
     res.redirect('/dashboard')
   } else {
     req.session.sessionFlash = { message: result.message }
@@ -37,7 +38,8 @@ app.post('/log-in', async (req, res) => {
 })
 
 app.get('/dashboard', async (req, res) => {
-  res.render('dashboard.ejs')
+  let results = await manager.getTeam(req.session.user)
+  res.render('dashboard.ejs', { data: results })
 })
 
 app.listen(port)
