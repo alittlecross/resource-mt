@@ -1,13 +1,8 @@
-const dbc = require('../db/database-connection')
-const migrations = require('../db/database-migrations')
+const dbc = require('../../db/database-connection')
 
 class Helper {
   static changeEnvironment () {
     process.env.PKDATABASE = 'ketchup_test'
-  }
-
-  static async runMigrations () {
-    await migrations.run()
   }
 
   static async truncateDatabase () {
@@ -33,19 +28,19 @@ class Helper {
           skill: ''
         },
         { kind: 'role',
-          userid: 0,
+          userid: 1,
           firstname: '',
           surname: '',
           email: '',
           password: '',
-          role: 'area manager',
+          role: 'regional manager',
           location: '',
           status: '',
           manager: '',
           skill: ''
         },
         { kind: 'skill',
-          userid: 0,
+          userid: 1,
           firstname: '',
           surname: '',
           email: '',
@@ -54,34 +49,46 @@ class Helper {
           location: '',
           status: '',
           manager: '',
-          skill: 'node.js'
+          skill: 'people'
         }
       ]
     }
   }
 
-  static async createUser () {
+  static async createUsers () {
     await dbc.query(`
       INSERT INTO roles
-      VALUES ('1', 'area manager');
+      VALUES
+        ('1', 'regional manager'),
+        ('2', 'assistant to the regional manager');
 
       INSERT INTO locations
-      VALUES ('1', 'scranton');
+      VALUES
+        ('1', 'scranton');
 
       INSERT INTO statuses
-      VALUES ('1', 'permanent');
+      VALUES
+        ('1', 'permanent');
 
       INSERT INTO skills
-      VALUES ('1', 'node.js');
+      VALUES
+        ('1', 'people'),
+        ('2', 'farming');
 
       INSERT INTO users
-      VALUES ('1', 'Michael', 'Scott', 'michael.scott@scranton.com', 'password', '1', '1', '1');
+      VALUES
+        ('1', 'Michael', 'Scott', 'michael.scott@scranton.com', 'password', '1', '1', '1'),
+        ('2', 'Dwight', 'Schrute', 'dwight.schrute@scranton.com', 'password', '1', '1', '1');
 
       INSERT INTO userroles
-      VALUES ('1', '1');
+      VALUES
+        ('1', '1'),
+        ('2', '2');
 
       INSERT INTO userskills
-      VALUES ('1', '1');
+      VALUES
+        ('1', '1'),
+        ('2', '2');
     `)
   }
 }

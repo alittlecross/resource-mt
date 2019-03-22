@@ -6,6 +6,7 @@
   "scripts": {
     "heroku-postbuild": "node db/live-migrations.js",
     "migrations": "node db/live-migrations.js; node db/test-migrations.js",
+    "seeds": "node db/seeds.js",
     "start": "node app.js",
     "test": "node db/test-migrations.js; nyc --reporter=text mocha --recursive --exit"
   },
@@ -20,19 +21,20 @@
   },
   "homepage": "https://github.com/alittlecross/project-ketchup#readme",
   "dependencies": {
-    "bcrypt": "^3.0.4",
-    "body-parser": "^1.18.3",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "express-session": "^1.15.6",
-    "pg": "^7.9.0"
+    "bcrypt": "3.0.5",
+    "body-parser": "1.18.3",
+    "ejs": "2.6.1",
+    "express": "4.16.4",
+    "express-session": "1.15.6",
+    "pg": "7.9.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.0.2",
-    "nodemon": "^1.18.10",
-    "nyc": "^13.3.0",
-    "zombie": "^6.1.4"
+    "chai": "4.2.0",
+    "mocha": "6.0.2",
+    "nodemon": "1.18.10",
+    "nyc": "13.3.0",
+    "sinon": "^7.3.0",
+    "zombie": "6.1.4"
   },
   "standard": {
     "ignore": []
