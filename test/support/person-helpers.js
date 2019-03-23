@@ -22,8 +22,8 @@ class Helper {
           email: 'michael.scott@scranton.com',
           password: 'password',
           role: '',
-          location: 'scranton',
-          status: 'permanent',
+          location: 'Scranton',
+          status: 'Permanent',
           manager: 'Michael Scott',
           skill: ''
         },
@@ -33,7 +33,7 @@ class Helper {
           surname: '',
           email: '',
           password: '',
-          role: 'regional manager',
+          role: 'Regional Manager',
           location: '',
           status: '',
           manager: '',
@@ -49,7 +49,7 @@ class Helper {
           location: '',
           status: '',
           manager: '',
-          skill: 'people'
+          skill: 'People'
         }
       ]
     }
@@ -59,21 +59,21 @@ class Helper {
     await dbc.query(`
       INSERT INTO roles
       VALUES
-        ('1', 'regional manager'),
-        ('2', 'assistant to the regional manager');
+        ('1', 'Regional Manager'),
+        ('2', 'Assistant to the Regional Manager');
 
       INSERT INTO locations
       VALUES
-        ('1', 'scranton');
+        ('1', 'Scranton');
 
       INSERT INTO statuses
       VALUES
-        ('1', 'permanent');
+        ('1', 'Permanent');
 
       INSERT INTO skills
       VALUES
-        ('1', 'people'),
-        ('2', 'farming');
+        ('1', 'People'),
+        ('2', 'Farming');
 
       INSERT INTO users
       VALUES
@@ -90,6 +90,20 @@ class Helper {
         ('1', '1'),
         ('2', '2');
     `)
+  }
+
+  static peopleArrayDouble () {
+    return [{
+      userId: 3,
+      firstName: 'Jim',
+      surname: 'Halpert',
+      email: 'jim.halpert@scranton.com',
+      roles: [ 'Sales Representative' ],
+      location: 'Scranton',
+      status: 'Permanent',
+      manager: 'Michael Scott',
+      skills: [ 'Farming' ]
+    }]
   }
 }
 
