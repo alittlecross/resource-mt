@@ -1,5 +1,6 @@
-const Manager = require('../../lib/manager')
 const Helper = require('../support/person-helpers')
+const Manager = require('../../lib/manager')
+const Person = require('../../lib/person')
 
 const expect = require('chai').expect
 
@@ -9,6 +10,12 @@ describe('class Manager', () => {
   beforeEach(async () => {
     await Helper.changeEnvironment()
     await Helper.truncateDatabase()
+
+    sandbox = require('sinon').createSandbox()
+  })
+
+  afterEach(() => {
+    sandbox.restore()
   })
 
   describe('.getManagedUserRecords', () => {
@@ -24,6 +31,8 @@ describe('class Manager', () => {
   describe('.getTeam', () => {
     it('a manager should return a people array', async () => {
       await Helper.createUsers()
+
+      sandbox.stub(Person, 'buildPersonObjects').returns(Helper.peopleArrayDouble())
 
       let result = await Manager.getTeam({ userId: '1' })
 

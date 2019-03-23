@@ -1,12 +1,21 @@
 const Helper = require('../support/person-helpers')
 const User = require('../../lib/user')
+const Person = require('../../lib/person')
 
 const expect = require('chai').expect
 
 describe('class User', () => {
+  let sandbox
+
   beforeEach(async () => {
     await Helper.changeEnvironment()
     await Helper.truncateDatabase()
+
+    sandbox = require('sinon').createSandbox()
+  })
+
+  afterEach(() => {
+    sandbox.restore()
   })
 
   describe('.getCurrentUserRecord', () => {
@@ -22,6 +31,8 @@ describe('class User', () => {
   describe('.logIn', () => {
     it('correct email and password should be successful', async () => {
       await Helper.createUsers()
+
+      sandbox.stub(Person, 'buildPersonObjects').returns(Helper.peopleArrayDouble())
 
       let result = await User.logIn({ email: 'michael.scott@scranton.com', password: 'password' })
 
