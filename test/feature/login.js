@@ -1,5 +1,5 @@
 const Browser = require('zombie')
-const Helper = require('../support/person-helpers')
+const Helper = require('../test-helpers')
 
 const app = require('../../app')
 const http = require('http')
