@@ -6,7 +6,7 @@
   "scripts": {
     "heroku-postbuild": "node db/live-migrations.js",
     "migrations": "node db/live-migrations.js; node db/test-migrations.js",
-    "seeds": "node db/seeds.js",
+    "seeds": "node db/seeds/people.js",
     "start": "node app.js",
     "test": "node db/test-migrations.js; nyc --reporter=text mocha --recursive --exit"
   },

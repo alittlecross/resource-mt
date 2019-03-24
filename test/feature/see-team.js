@@ -1,5 +1,5 @@
 const Browser = require('zombie')
-const Helper = require('../support/person-helpers')
+const Helper = require('../test-helpers')
 
 const app = require('../../app')
 const http = require('http')
@@ -31,7 +31,7 @@ describe('User visits dashboard page', () => {
       await browser.fill('password', 'password')
       await browser.pressButton('log in')
 
-      browser.assert.text('body', '')
+      browser.assert.text('div', 'no people managed')
     })
   })
 })

@@ -1,4 +1,4 @@
-const Helper = require('../support/person-helpers')
+const Helper = require('../test-helpers')
 const Manager = require('../../lib/manager')
 const Person = require('../../lib/person')
 

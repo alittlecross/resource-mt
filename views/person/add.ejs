@@ -1,0 +1,48 @@
+<%- include('../_head') %>
+
+<body>
+  <form action='/person/add' method='POST'>
+  
+  <input type='text' name='firstName' placeholder='first name' required>
+  <input type='text' name='surname' placeholder='surname' required>
+  <input type='text' name='email' placeholder='email' required>
+  
+  <select name='roles' multiple>
+    <option value='' disabled>roles</option>
+    <% data.roles.forEach(function(role) { %>
+      <option value='<%= role.optionId %>'><%= role.option %></option>
+    <% }) %>
+  </select>
+  
+  <select name='locationId'>
+    <option value='' disabled selected>location</option>
+    <% data.locations.forEach(function(location) { %>
+      <option value='<%= location.optionId %>'><%= location.option %></option>
+    <% }) %>
+  </select>
+  
+  <select name='statusId'>
+    <option value='' disabled selected>status</option>
+    <% data.statuses.forEach(function(status) { %>
+      <option value='<%= status.optionId %>'><%= status.option %></option>
+    <% }) %>
+  </select>
+  
+  <select name='managerId'>
+    <option value='' disabled selected>manager</option>
+    <% data.managers.forEach(function(manager) { %>
+      <option value='<%= manager.optionId %>'><%= manager.option %></option>
+    <% }) %>
+  </select>
+  
+  <select name='skills' multiple>
+    <option value='' disabled>skills</option>
+    <% data.skills.forEach(function(skill) { %>
+      <option value='<%= skill.optionId %>'><%= skill.option %></option>
+    <% }) %>
+  </select>
+  
+  <input type='submit' value='add'>
+  
+  </form>
+</body>

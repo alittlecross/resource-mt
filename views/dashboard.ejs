@@ -1,5 +1,13 @@
 <%- include('_head') %>
 
-<% data.forEach(function(person) { %>
-  <div><%= person.firstName + ' ' + person.surname %></div>
-<% }) %>
+<body>
+  <a href='/people'>people</a>
+
+  <% if(data.length > 0) { %>
+    <% data.forEach(function(person) { %>
+      <div><%= person.firstName + ' ' + person.surname %></div>
+    <% }) %>
+  <% } else { %>
+    <div>no people managed</div>
+  <% }%>
+</body>
