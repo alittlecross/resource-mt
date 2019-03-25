@@ -58,6 +58,11 @@ app.post('/person/add', async (req, res) => {
   res.redirect('/people')
 })
 
+app.get('/log-out', (req, res) => {
+  req.session.destroy()
+  res.redirect('/')
+})
+
 app.listen(port)
 
 module.exports = app

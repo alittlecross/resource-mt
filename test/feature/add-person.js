@@ -15,8 +15,8 @@ describe('Resource Manager adds a person', () => {
     await Helper.createUsers()
   })
 
-  describe('submits form', () => {
-    it('correct email and password should be successful', async () => {
+  describe('...by completeing and submitting the form', () => {
+    it('a person should be created', async () => {
       await browser.visit('/')
       await browser.fill('email', 'michael.scott@scranton.com')
       await browser.fill('password', 'password')
