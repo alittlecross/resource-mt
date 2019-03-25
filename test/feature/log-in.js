@@ -6,7 +6,7 @@ const http = require('http')
 
 http.createServer(app)
 
-describe('User visits index page', () => {
+describe('User visits the log in screen', () => {
   const browser = new Browser({ site: 'http://localhost:3000' })
 
   before(async () => {
@@ -15,7 +15,7 @@ describe('User visits index page', () => {
     await Helper.createUsers()
   })
 
-  describe('submits form', () => {
+  describe('...by completeing and submitting the form', () => {
     it('correct email and password should be successful', async () => {
       await browser.visit('/')
       await browser.fill('email', 'michael.scott@scranton.com')
