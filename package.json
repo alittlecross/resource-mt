@@ -4,8 +4,8 @@
   "description": "a resource management tool",
   "main": "app.js",
   "scripts": {
-    "heroku-postbuild": "node db/migrations-live.js",
-    "migrations": "node db/migrations-live.js",
+    "heroku-postbuild": "node db/migrations.js",
+    "migrations": "node db/migrations.js",
     "seeds": "node db/seeds.js",
     "start": "node app.js",
     "test": "node test/migrations.js; nyc --reporter=text mocha --recursive --exit"

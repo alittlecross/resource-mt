@@ -3,7 +3,7 @@ const express = require('express')
 const session = require('express-session')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 const manager = require('./lib/manager')
 const options = require('./lib/options')
@@ -15,7 +15,7 @@ app.use(express.static('public'))
 app.use(session({
   resave: false,
   saveUninitialized: true,
-  secret: 'not-secret'
+  secret: process.env.SESSIONSECRET
 }))
 
 app.use((req, res, next) => {
@@ -45,17 +45,24 @@ app.get('/dashboard', async (req, res) => {
 })
 
 app.get('/people', async (req, res) => {
-  res.render('people.ejs')
+  let results = await person.getEveryone()
+  res.render('people.ejs', { data: results })
 })
 
 app.get('/person/add', async (req, res) => {
   let results = await options.addPerson()
-  res.render('./person/add.ejs', { data: results })
+  res.render('./person/add.ejs', { data: results, sessionFlash: res.locals.sessionFlash })
 })
 
 app.post('/person/add', async (req, res) => {
-  await person.add(req.body)
-  res.redirect('/people')
+  let result = await person.alreadyExists(req.body)
+  if (!result.status) {
+    await person.add(req.body)
+    res.redirect('/people')
+  } else {
+    req.session.sessionFlash = { message: result.message }
+    res.redirect('/person/add')
+  }
 })
 
 app.get('/log-out', (req, res) => {

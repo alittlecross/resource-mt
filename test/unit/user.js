@@ -1,4 +1,4 @@
-const Helper = require('../test-helpers')
+const Helper = require('../support')
 const User = require('../../lib/user')
 const Person = require('../../lib/person')
 
@@ -16,16 +16,6 @@ describe('class User', () => {
 
   afterEach(() => {
     sandbox.restore()
-  })
-
-  describe('.getCurrentUserRecord', () => {
-    it('should return a user record from the database', async () => {
-      await Helper.createUsers()
-
-      let result = await User.getCurrentUserRecord('michael.scott@scranton.com')
-
-      expect(result.rows[0].firstname).equal('Michael')
-    })
   })
 
   describe('.logIn', () => {

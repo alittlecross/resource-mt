@@ -1,4 +1,4 @@
-const Helper = require('../test-helpers')
+const Helper = require('../support')
 const Options = require('../../lib/options')
 
 const expect = require('chai').expect
@@ -15,16 +15,6 @@ describe('class Options', () => {
 
       expect(Object.keys(result).length).equal(5)
       expect(result.roles.length).equal(0)
-    })
-  })
-
-  describe('.getOptions', () => {
-    it('should return options records from the database', async () => {
-      await Helper.createUsers()
-
-      let results = await Options.getOptions()
-
-      expect(results.rows.length).equal(10)
     })
   })
 

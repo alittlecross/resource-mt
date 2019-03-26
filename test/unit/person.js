@@ -1,4 +1,4 @@
-const Helper = require('../test-helpers')
+const Helper = require('../support')
 const Person = require('../../lib/person')
 
 const expect = require('chai').expect
@@ -69,6 +69,32 @@ describe('class Person', () => {
       })
 
       expect(success.reduce(sum)).equal(5)
+    })
+  })
+
+  describe('.getEveryone', () => {
+    it('should return a people array', async () => {
+      await Helper.createUsers()
+
+      let result = await Person.getEveryone()
+
+      expect(result.length).equal(2)
+    })
+  })
+
+  describe('.alreadyExists', () => {
+    it(`should return false if person doesn't already exist`, async () => {
+      let result = await Person.alreadyExists({ email: 'michael.scott@scranton.com' })
+
+      expect(result.status).equal(false)
+    })
+
+    it(`should return true if person already exists`, async () => {
+      await Helper.createUsers()
+
+      let result = await Person.alreadyExists({ email: 'michael.scott@scranton.com' })
+
+      expect(result.status).equal(true)
     })
   })
 })
