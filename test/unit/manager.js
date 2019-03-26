@@ -1,4 +1,4 @@
-const Helper = require('../test-helpers')
+const Helper = require('../support')
 const Manager = require('../../lib/manager')
 const Person = require('../../lib/person')
 
@@ -16,16 +16,6 @@ describe('class Manager', () => {
 
   afterEach(() => {
     sandbox.restore()
-  })
-
-  describe('.getManagedUserRecords', () => {
-    it('should return user records from the database', async () => {
-      await Helper.createUsers()
-
-      let result = await Manager.getManagedUserRecords('1')
-
-      expect(result.rows[0].firstname).equal('Dwight')
-    })
   })
 
   describe('.getTeam', () => {

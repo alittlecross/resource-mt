@@ -5,4 +5,7 @@
   <a href='/dashboard'>dashboard</a>
   <a href='/people'>people</a>
   <a href='/person/add'>add</a>
+  <% data.forEach(function(person) { %>
+    <div><%= person.firstName + ' ' + person.surname %></div>
+  <% }) %>
 </body>
