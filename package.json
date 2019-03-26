@@ -4,12 +4,11 @@
   "description": "a resource management tool",
   "main": "app.js",
   "scripts": {
-    "heroku-postbuild": "node db/live-migrations.js",
-    "live-migrations": "node db/live-migrations.js",
-    "test-migrations": "node db/test-migrations.js",
-    "seeds": "node db/seeds/people.js",
+    "heroku-postbuild": "node db/migrations-live.js",
+    "migrations": "node db/migrations-live.js",
+    "seeds": "node db/seeds.js",
     "start": "node app.js",
-    "test": "node db/test-migrations.js; nyc --reporter=text mocha --recursive --exit"
+    "test": "node test/migrations.js; nyc --reporter=text mocha --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,7 @@
     "ejs": "2.6.1",
     "express": "4.16.4",
     "express-session": "1.15.6",
+    "nodemailer": "^6.0.0",
     "pg": "7.9.0"
   },
   "devDependencies": {
