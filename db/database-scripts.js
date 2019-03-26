@@ -1,69 +1,69 @@
 const dbc = require('./database-connection')
-const directory = './db/migrations/'
 const fs = require('fs')
 
-class Migrations {
-  static async migrationsTableExists () {
+class Scripts {
+  static async tableExists (table) {
     let result = await dbc.query(`
       SELECT EXISTS (
         SELECT 1
         FROM   information_schema.tables 
         WHERE  table_schema = 'public'
-        AND    table_name = 'migrations'
+        AND    table_name = $1
       );
-    `)
+    `, [table])
     return result.rows[0].exists
   }
 
-  static async createMigrationsTable () {
-    if (!await this.migrationsTableExists()) {
+  static async createTable (table) {
+    if (!await this.tableExists(table)) {
       await dbc.query(`
-        CREATE TABLE migrations (
+        CREATE TABLE ${table} (
           id SERIAL PRIMARY KEY,
           script varchar(50),
           createdat timestamptz NOT NULL DEFAULT NOW()
         );
       `)
       if (!process.env.PKDATABASE.includes('test')) {
-        console.log('00_migrations.sql')
+        console.log(`${table} 00_migrations.sql`)
       }
     }
   }
 
-  static async scriptAlreadyRan (script) {
+  static async scriptAlreadyRan (table, script) {
     let result = await dbc.query(`
       SELECT *
-      FROM migrations
+      FROM ${table}
       WHERE script = $1;
     `, [script])
     return result.rowCount === 0
   }
 
-  static async updateMigrationsTable (script) {
+  static async updateTable (table, script) {
     await dbc.query(`
-      INSERT INTO migrations (script)
+      INSERT INTO ${table} (script)
       VALUES ($1);
     `, [script])
   }
 
-  static async run (database = 'ketchup') {
+  static async run (type, database) {
     process.env.PKDATABASE = database
-    await this.createMigrationsTable()
+    await this.createTable(type)
+    const directory = `./db/${type}/`
     let scripts = []
     fs.readdirSync(directory).forEach(file => {
       scripts.push(file)
     })
     for (let script of scripts) {
-      if (await this.scriptAlreadyRan(script)) {
+      if (await this.scriptAlreadyRan(type, script)) {
         let sql = fs.readFileSync(directory + script).toString()
         await dbc.query(sql)
-        await this.updateMigrationsTable(script)
+        await this.updateTable(type, script)
         if (!process.env.PKDATABASE.includes('test')) {
-          console.log(script)
+          console.log(`${type} ${script}`)
         }
       }
     }
   }
 }
 
-module.exports = Migrations
+module.exports = Scripts
