@@ -7,7 +7,7 @@ class Helper {
 
   static async truncateDatabase () {
     await dbc.query(`
-      TRUNCATE userskills, userroles, users, skills, statuses, locations, roles RESTART IDENTITY CASCADE;
+      TRUNCATE personskills, personroles, people, skills, statuses, locations, roles RESTART IDENTITY CASCADE;
     `)
   }
 
@@ -16,7 +16,7 @@ class Helper {
       rowCount: 3,
       rows: [
         { kind: 'details',
-          userid: 1,
+          personid: 1,
           firstname: 'Michael',
           surname: 'Scott',
           email: 'michael.scott@scranton.com',
@@ -28,7 +28,7 @@ class Helper {
           skill: ''
         },
         { kind: 'role',
-          userid: 1,
+          personid: 1,
           firstname: '',
           surname: '',
           email: '',
@@ -40,7 +40,7 @@ class Helper {
           skill: ''
         },
         { kind: 'skill',
-          userid: 1,
+          personid: 1,
           firstname: '',
           surname: '',
           email: '',
@@ -61,8 +61,7 @@ class Helper {
       VALUES
         ('Regional Manager'),
         ('Assistant to the Regional Manager'),
-        ('Sales Representative'),
-        ('Manager');
+        ('Sales Representative');
 
       INSERT INTO locations (location)
       VALUES
@@ -78,47 +77,47 @@ class Helper {
         ('Farming'),
         ('Selling');
 
-      INSERT INTO users (firstname, surname, email, password)
+      INSERT INTO people (firstname, surname, email, password)
       VALUES
         ('Michael', 'Scott', 'michael.scott@scranton.com', 'password'),
         ('Dwight', 'Schrute', 'dwight.schrute@scranton.com', 'password');
 
-      UPDATE users
+      UPDATE people
       SET locationid = locations.locationid
       FROM locations
-      WHERE users.email = 'michael.scott@scranton.com' AND locations.location = 'Scranton'
-         OR users.email = 'dwight.schrute@scranton.com' AND locations.location = 'Scranton';
+      WHERE people.email = 'michael.scott@scranton.com' AND locations.location = 'Scranton'
+         OR people.email = 'dwight.schrute@scranton.com' AND locations.location = 'Scranton';
 
-      UPDATE users
+      UPDATE people
       SET statusid = statuses.statusid
       FROM statuses
-      WHERE users.email = 'michael.scott@scranton.com' AND statuses.status = 'Permanent'
-         OR users.email = 'dwight.schrute@scranton.com' AND statuses.status = 'Permanent';
+      WHERE people.email = 'michael.scott@scranton.com' AND statuses.status = 'Permanent'
+         OR people.email = 'dwight.schrute@scranton.com' AND statuses.status = 'Permanent';
 
-      UPDATE users A
-      SET managerid = B.userid
-      FROM users B
+      UPDATE people A
+      SET managerid = B.personid
+      FROM people B
       WHERE A.email = 'michael.scott@scranton.com' AND B.email = 'michael.scott@scranton.com'
          OR A.email = 'dwight.schrute@scranton.com' AND B.email = 'michael.scott@scranton.com';
 
-      INSERT INTO userroles
-      SELECT users.userid, roles.roleid
-      FROM users, roles
-      WHERE users.email = 'michael.scott@scranton.com' AND roles.role = 'Regional Manager'
-         OR users.email = 'michael.scott@scranton.com' AND roles.role = 'Manager'
-         OR users.email = 'dwight.schrute@scranton.com' AND roles.role = 'Assistant to the Regional Manager';
+      INSERT INTO personroles
+      SELECT people.personid, roles.roleid
+      FROM people, roles
+      WHERE people.email = 'michael.scott@scranton.com' AND roles.role = 'Regional Manager'
+         OR people.email = 'michael.scott@scranton.com' AND roles.role = 'Manager'
+         OR people.email = 'dwight.schrute@scranton.com' AND roles.role = 'Assistant to the Regional Manager';
 
-      INSERT INTO userskills
-      SELECT users.userid, skills.skillid
-      FROM users, skills
-      WHERE users.email = 'michael.scott@scranton.com' AND skills.skill = 'People'
-         OR users.email = 'dwight.schrute@scranton.com' AND skills.skill = 'Farming';
+      INSERT INTO personskills
+      SELECT people.personid, skills.skillid
+      FROM people, skills
+      WHERE people.email = 'michael.scott@scranton.com' AND skills.skill = 'People'
+         OR people.email = 'dwight.schrute@scranton.com' AND skills.skill = 'Farming';
     `)
   }
 
   static peopleArrayDouble () {
     return [{
-      userId: 3,
+      personId: 3,
       firstName: 'Jim',
       surname: 'Halpert',
       email: 'jim.halpert@scranton.com',

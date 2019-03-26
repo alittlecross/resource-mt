@@ -24,7 +24,7 @@ describe('class Manager', () => {
 
       sandbox.stub(Person, 'buildPersonObjects').returns(Helper.peopleArrayDouble())
 
-      let result = await Manager.getTeam({ userId: '1' })
+      let result = await Manager.getTeam({ personId: '1' })
 
       expect(result.length).greaterThan(0)
     })
@@ -32,7 +32,7 @@ describe('class Manager', () => {
     it('a non-manager should not return a people array', async () => {
       await Helper.createUsers()
 
-      let result = await Manager.getTeam({ userId: '2' })
+      let result = await Manager.getTeam({ personId: '2' })
 
       expect(result.length).equal(0)
     })

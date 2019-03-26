@@ -5,7 +5,6 @@ VALUES
   ('Developer'),
   ('Junior Developer'),
   ('Lead Developer'),
-  ('Manager'),
   ('Principal Developer'),
   ('Resource Manager'),
   ('Senior Developer'),

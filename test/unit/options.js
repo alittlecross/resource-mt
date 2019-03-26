@@ -34,7 +34,7 @@ describe('class Options', () => {
       let result = await Options.addPerson()
 
       expect(Object.keys(result).length).equal(5)
-      expect(result.roles.length).equal(4)
+      expect(result.roles.length).equal(3)
     })
   })
 })
