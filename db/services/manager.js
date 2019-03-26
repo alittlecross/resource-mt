@@ -1,40 +1,40 @@
 const dbc = require('../database-connection')
 
 class Database {
-  static async getManagedPeopleRecords (userId) {
+  static async getManagedPeopleRecords (personId) {
     return dbc.query(`
-      SELECT 'details' AS kind, A.userid, A.firstname, A.surname, A.email, A.password, '' AS role, locations.location, statuses.status, CONCAT( B.firstname, ' ', B.surname) AS manager, '' AS skill
-      FROM users A
+      SELECT 'details' AS kind, A.personid, A.firstname, A.surname, A.email, A.password, '' AS role, locations.location, statuses.status, CONCAT( B.firstname, ' ', B.surname) AS manager, '' AS skill
+      FROM people A
       INNER JOIN locations
       ON A.locationid = locations.locationid
       INNER JOIN statuses
       ON A.statusid = statuses.statusid
-      INNER JOIN users B
-      ON A.managerid = B.userid
-      WHERE A.managerid = $1 AND A.userid != $1
+      INNER JOIN people B
+      ON A.managerid = B.personid
+      WHERE A.managerid = $1 AND A.personid != $1
       
       UNION
 
-      SELECT 'role' AS kind, users.userid AS userid, '' AS firstname, '' AS surname, '' AS email, '' AS password, roles.role, '' AS location, '' AS status, '' AS manager, '' AS skill
-      FROM userroles
+      SELECT 'role' AS kind, people.personid AS personid, '' AS firstname, '' AS surname, '' AS email, '' AS password, roles.role, '' AS location, '' AS status, '' AS manager, '' AS skill
+      FROM personroles
       INNER JOIN roles
-      ON userroles.roleid = roles.roleid
-      INNER JOIN users
-      ON userroles.userid = users.userid
-      WHERE users.managerid = $1 AND users.userid != $1
+      ON personroles.roleid = roles.roleid
+      INNER JOIN people
+      ON personroles.personid = people.personid
+      WHERE people.managerid = $1 AND people.personid != $1
       
       UNION
 
-      SELECT 'skill' AS kind, users.userid AS userid, '' AS firstname, '' AS surname, '' AS email, '' AS password, '' AS role, '' AS location, '' AS status, '' AS manager, skills.skill
-      FROM userskills
+      SELECT 'skill' AS kind, people.personid AS personid, '' AS firstname, '' AS surname, '' AS email, '' AS password, '' AS role, '' AS location, '' AS status, '' AS manager, skills.skill
+      FROM personskills
       INNER JOIN skills
-      ON userskills.skillid = skills.skillid
-      INNER JOIN users
-      ON userskills.userid = users.userid
-      WHERE users.managerid = $1 AND users.userid != $1
+      ON personskills.skillid = skills.skillid
+      INNER JOIN people
+      ON personskills.personid = people.personid
+      WHERE people.managerid = $1 AND people.personid != $1
       
       ORDER BY kind, firstname, role, skill;
-    `, [userId])
+    `, [personId])
   }
 }
 

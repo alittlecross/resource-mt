@@ -2,13 +2,13 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const session = require('express-session')
 
+const Manager = require('./lib/manager')
+const Options = require('./lib/options')
+const Person = require('./lib/person')
+const User = require('./lib/user')
+
 const app = express()
 const port = process.env.PORT
-
-const manager = require('./lib/manager')
-const options = require('./lib/options')
-const person = require('./lib/person')
-const user = require('./lib/user')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/log-in', async (req, res) => {
-  let result = await user.logIn(req.body)
+  let result = await User.logIn(req.body)
   if (result.status) {
     req.session.user = result.user[0]
     res.redirect('/dashboard')
@@ -40,24 +40,24 @@ app.post('/log-in', async (req, res) => {
 })
 
 app.get('/dashboard', async (req, res) => {
-  let results = await manager.getTeam(req.session.user)
+  let results = await Manager.getTeam(req.session.user)
   res.render('dashboard.ejs', { data: results })
 })
 
 app.get('/people', async (req, res) => {
-  let results = await person.getEveryone()
+  let results = await Person.getEveryone()
   res.render('people.ejs', { data: results })
 })
 
 app.get('/person/add', async (req, res) => {
-  let results = await options.addPerson()
+  let results = await Options.addPerson()
   res.render('./person/add.ejs', { data: results, sessionFlash: res.locals.sessionFlash })
 })
 
 app.post('/person/add', async (req, res) => {
-  let result = await person.alreadyExists(req.body)
+  let result = await Person.alreadyExists(req.body)
   if (!result.status) {
-    await person.add(req.body)
+    await Person.add(req.body)
     res.redirect('/people')
   } else {
     req.session.sessionFlash = { message: result.message }

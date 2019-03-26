@@ -18,13 +18,13 @@ class Database {
       
       UNION
             
-      SELECT 'manager' AS kind, users.userid AS optionid, CONCAT( firstname, ' ', surname) AS option
-      FROM users
-      INNER JOIN userroles
-      ON users.userid = userroles.userid
+      SELECT 'manager' AS kind, people.personid AS optionid, CONCAT( firstname, ' ', surname) AS option
+      FROM people
+      INNER JOIN personroles
+      ON people.personid = personroles.personid
       INNER JOIN roles
-      ON userroles.roleid = roles.roleid
-      WHERE role = 'Manager'
+      ON personroles.roleid = roles.roleid
+      WHERE role = 'Resource Manager'
                   
       UNION 
             

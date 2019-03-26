@@ -1,5 +1,5 @@
-CREATE TABLE users (
-  userid SERIAL PRIMARY KEY,
+CREATE TABLE people (
+  personid SERIAL PRIMARY KEY,
   firstname varchar(50),
   surname varchar(50),
   email varchar(100) UNIQUE,
@@ -10,5 +10,5 @@ CREATE TABLE users (
   createdat timestamptz NOT NULL DEFAULT NOW(),
   FOREIGN KEY (locationid) REFERENCES locations(locationid),
   FOREIGN KEY (statusid) REFERENCES statuses(statusid),
-  FOREIGN KEY (managerid) REFERENCES users(userid)
+  FOREIGN KEY (managerid) REFERENCES people(personid)
 );
