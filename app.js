@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.post('/log-in', async (req, res) => {
   let result = await User.logIn(req.body)
   if (result.status) {
-    req.session.user = result.user[0]
+    req.session.user = result.user
     res.redirect('/dashboard')
   } else {
     req.session.sessionFlash = { message: result.message }

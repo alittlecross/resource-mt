@@ -22,4 +22,5 @@ WHERE people.email = 'nicholas.blows@rpa.gov.uk' AND skills.skill = 'C#'
    OR people.email = 'paul.fazackerley@rpa.gov.uk' AND skills.skill = 'Node.js'
    OR people.email = 'paul.fazackerley@rpa.gov.uk' AND skills.skill = 'SQL'
    OR people.email = 'tim.butterworth@rpa.gov.uk' AND skills.skill = 'SQL'
+   OR people.email = 'mike.johnson@rpa.gov.uk' AND skills.skill = 'SQL'
    OR people.email = 'marc.solomon@rpa.gov.uk' AND skills.skill = 'SQL';

@@ -9,24 +9,24 @@ describe('class Person', () => {
     await Helper.truncateDatabase()
   })
 
-  describe('.personObejct', () => {
+  describe('.object', () => {
     it('should return a user object', () => {
-      let result = Person.personObject(Helper.databaseUserOutput().rows[0])
+      let result = Person.object(Helper.databaseUserOutput().rows[0])
 
       expect(result.firstName).equal('Michael')
     })
   })
 
-  describe('.buildPersonObjects', () => {
+  describe('.buildPeopleArray', () => {
     it('should return a people array', async () => {
-      let result = await Person.buildPersonObjects(Helper.databaseUserOutput().rows)
+      let result = await Person.buildPeopleArray(Helper.databaseUserOutput().rows)
 
       expect(result[0].firstName).equal('Michael')
     })
   })
 
   describe('.add', () => {
-    it('should create records in the users, userroles, and userskills tables (no role, no skill)', async () => {
+    it('should create records in the users, userroles, and userskills tables (no skill)', async () => {
       await Helper.createUsers()
 
       let results = await Person.add(Helper.addFormDataZero())
@@ -41,7 +41,7 @@ describe('class Person', () => {
       expect(success.reduce(sum)).equal(1)
     })
 
-    it('should create records in the users, userroles, and userskills tables (one role, one skill)', async () => {
+    it('should create records in the users, userroles, and userskills tables (one skill)', async () => {
       await Helper.createUsers()
 
       let results = await Person.add(Helper.addFormDataOne())
@@ -53,10 +53,10 @@ describe('class Person', () => {
         success.push(result.rowCount)
       })
 
-      expect(success.reduce(sum)).equal(3)
+      expect(success.reduce(sum)).equal(2)
     })
 
-    it('should create records in the users, userroles, and userskills tables (multi role, multi skill)', async () => {
+    it('should create records in the users, userroles, and userskills tables (multi skill)', async () => {
       await Helper.createUsers()
 
       let results = await Person.add(Helper.addFormDataMulti())
@@ -68,7 +68,7 @@ describe('class Person', () => {
         success.push(result.rowCount)
       })
 
-      expect(success.reduce(sum)).equal(5)
+      expect(success.reduce(sum)).equal(3)
     })
   })
 

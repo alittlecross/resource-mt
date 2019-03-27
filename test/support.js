@@ -7,59 +7,20 @@ class Helper {
 
   static async truncateDatabase () {
     await dbc.query(`
-      TRUNCATE personskills, personroles, people, skills, statuses, locations, roles RESTART IDENTITY CASCADE;
+    TRUNCATE personskills, people, statuses, skills, roles, locations, grades RESTART IDENTITY CASCADE;
     `)
-  }
-
-  static databaseUserOutput () {
-    return {
-      rowCount: 3,
-      rows: [
-        { kind: 'details',
-          personid: 1,
-          firstname: 'Michael',
-          surname: 'Scott',
-          email: 'michael.scott@scranton.com',
-          password: 'password',
-          role: '',
-          location: 'Scranton',
-          status: 'Permanent',
-          manager: 'Michael Scott',
-          skill: ''
-        },
-        { kind: 'role',
-          personid: 1,
-          firstname: '',
-          surname: '',
-          email: '',
-          password: '',
-          role: 'Regional Manager',
-          location: '',
-          status: '',
-          manager: '',
-          skill: ''
-        },
-        { kind: 'skill',
-          personid: 1,
-          firstname: '',
-          surname: '',
-          email: '',
-          password: '',
-          role: '',
-          location: '',
-          status: '',
-          manager: '',
-          skill: 'People'
-        }
-      ]
-    }
   }
 
   static async createUsers () {
     await dbc.query(`
+      INSERT INTO grades (grade)
+      VALUES
+        ('HEO'),
+        ('EO');
+
       INSERT INTO roles (role)
       VALUES
-        ('Regional Manager'),
+        ('Resource Manager'),
         ('Assistant to the Regional Manager'),
         ('Sales Representative');
 
@@ -77,10 +38,17 @@ class Helper {
         ('Farming'),
         ('Selling');
 
-      INSERT INTO people (firstname, surname, email, password)
+      INSERT INTO people (staffid, firstname, surname, email, password)
       VALUES
-        ('Michael', 'Scott', 'michael.scott@scranton.com', 'password'),
-        ('Dwight', 'Schrute', 'dwight.schrute@scranton.com', 'password');
+        ('MS1234', 'Michael', 'Scott', 'michael.scott@scranton.com', 'password'),
+        ('DS1234', 'Dwight', 'Schrute', 'dwight.schrute@scranton.com', 'password');
+
+      UPDATE people
+      SET gradeid = grades.gradeid
+      FROM grades
+      WHERE people.email = 'michael.scott@scranton.com' AND grades.grade = 'HEO'
+         OR people.email = 'dwight.schrute@scranton.com' AND grades.grade = 'EO';
+
 
       UPDATE people
       SET locationid = locations.locationid
@@ -88,24 +56,23 @@ class Helper {
       WHERE people.email = 'michael.scott@scranton.com' AND locations.location = 'Scranton'
          OR people.email = 'dwight.schrute@scranton.com' AND locations.location = 'Scranton';
 
-      UPDATE people
-      SET statusid = statuses.statusid
-      FROM statuses
-      WHERE people.email = 'michael.scott@scranton.com' AND statuses.status = 'Permanent'
-         OR people.email = 'dwight.schrute@scranton.com' AND statuses.status = 'Permanent';
-
       UPDATE people A
       SET managerid = B.personid
       FROM people B
       WHERE A.email = 'michael.scott@scranton.com' AND B.email = 'michael.scott@scranton.com'
          OR A.email = 'dwight.schrute@scranton.com' AND B.email = 'michael.scott@scranton.com';
-
-      INSERT INTO personroles
-      SELECT people.personid, roles.roleid
-      FROM people, roles
-      WHERE people.email = 'michael.scott@scranton.com' AND roles.role = 'Regional Manager'
-         OR people.email = 'michael.scott@scranton.com' AND roles.role = 'Manager'
+        
+      UPDATE people
+      SET roleid = roles.roleid
+      FROM roles
+      WHERE people.email = 'michael.scott@scranton.com' AND roles.role = 'Resource Manager'
          OR people.email = 'dwight.schrute@scranton.com' AND roles.role = 'Assistant to the Regional Manager';
+           
+      UPDATE people
+      SET statusid = statuses.statusid
+      FROM statuses
+      WHERE people.email = 'michael.scott@scranton.com' AND statuses.status = 'Permanent'
+         OR people.email = 'dwight.schrute@scranton.com' AND statuses.status = 'Permanent';
 
       INSERT INTO personskills
       SELECT people.personid, skills.skillid
@@ -119,49 +86,62 @@ class Helper {
     return [{
       personId: 3,
       firstName: 'Jim',
-      surname: 'Halpert',
-      email: 'jim.halpert@scranton.com',
-      roles: [ 'Sales Representative' ],
-      location: 'Scranton',
-      status: 'Permanent',
-      manager: 'Michael Scott',
-      skills: [ 'Farming' ]
+      surname: 'Halpert'
     }]
+  }
+
+  static databaseUserOutput () {
+    return {
+      rowCount: 1,
+      rows: [
+        { personid: 1,
+          firstname: 'Michael',
+          surname: 'Scott'
+        }
+      ]
+    }
   }
 
   static addFormDataZero () {
     return {
+      staffId: 'JH1234',
       firstName: 'Jim',
       surname: 'Halpert',
       email: 'jim.halpert@scranton.com',
+      gradeId: '2',
       locationId: '1',
-      statusId: '1',
-      managerId: '1'
+      managerId: '1',
+      roleid: '1',
+      statusId: '1'
     }
   }
 
   static addFormDataOne () {
     return {
+      staffId: 'JH1234',
       firstName: 'Jim',
       surname: 'Halpert',
       email: 'jim.halpert@scranton.com',
-      roles: '3',
+      gradeId: '2',
       locationId: '1',
-      statusId: '1',
       managerId: '1',
+      roleid: '1',
+      statusId: '1',
       skills: '3'
     }
   }
 
   static addFormDataMulti () {
     return {
+      staffId: 'JH1234',
       firstName: 'Jim',
       surname: 'Halpert',
       email: 'jim.halpert@scranton.com',
-      roles: ['2', '3'],
+      gradeId: '2',
       locationId: '1',
-      statusId: '1',
       managerId: '1',
+      roleid: '1',
+      statusId: '1',
       skills: ['1', '3']
     }
   }

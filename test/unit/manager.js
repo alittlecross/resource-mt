@@ -22,7 +22,7 @@ describe('class Manager', () => {
     it('a manager should return a people array', async () => {
       await Helper.createUsers()
 
-      sandbox.stub(Person, 'buildPersonObjects').returns(Helper.peopleArrayDouble())
+      sandbox.stub(Person, 'buildPeopleArray').returns(Helper.peopleArrayDouble())
 
       let result = await Manager.getTeam({ personId: '1' })
 
