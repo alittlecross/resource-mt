@@ -11,9 +11,9 @@ describe('class Options', () => {
 
   describe('.optionsObject', () => {
     it('should return an empty options object', () => {
-      let result = Options.optionsObject()
+      let result = Options.object()
 
-      expect(Object.keys(result).length).equal(5)
+      expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(0)
     })
   })
@@ -22,7 +22,7 @@ describe('class Options', () => {
     it('should return a full options object', () => {
       let result = Options.buildOptionsObject(Helper.databaseOptionsOutput().rows)
 
-      expect(Object.keys(result).length).equal(5)
+      expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(4)
     })
   })
@@ -33,7 +33,7 @@ describe('class Options', () => {
 
       let result = await Options.addPerson()
 
-      expect(Object.keys(result).length).equal(5)
+      expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(3)
     })
   })

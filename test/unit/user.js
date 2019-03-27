@@ -22,7 +22,7 @@ describe('class User', () => {
     it('correct email and password should be successful', async () => {
       await Helper.createUsers()
 
-      sandbox.stub(Person, 'buildPersonObjects').returns(Helper.peopleArrayDouble())
+      sandbox.stub(Person, 'buildPeopleArray').returns(Helper.peopleArrayDouble())
 
       let result = await User.logIn({ email: 'michael.scott@scranton.com', password: 'password' })
 
