@@ -41,27 +41,59 @@ app.post('/log-in', async (req, res) => {
 
 app.get('/dashboard', async (req, res) => {
   let results = await Manager.getTeam(req.session.user)
-  res.render('dashboard.ejs', { data: results })
+  res.render('dashboard.ejs', { people: results, user: req.session.user })
 })
 
 app.get('/people', async (req, res) => {
   let results = await Person.getEveryone()
-  res.render('people.ejs', { data: results })
+  res.render('people.ejs', { people: results, user: req.session.user })
 })
 
 app.get('/person/add', async (req, res) => {
-  let results = await Options.addPerson()
-  res.render('./person/add.ejs', { data: results, sessionFlash: res.locals.sessionFlash })
+  if (req.session.user.role === 'Resource Manager') {
+    let results = await Options.person()
+    res.render('./person/add.ejs', { options: results, sessionFlash: res.locals.sessionFlash })
+  } else {
+    res.redirect('/people')
+  }
 })
 
 app.post('/person/add', async (req, res) => {
   let result = await Person.alreadyExists(req.body)
   if (!result.status) {
-    await Person.add(req.body)
-    res.redirect('/people')
+    let person = await Person.add(req.body)
+    res.redirect(`/${person[0].rows[0].personid}/person`)
   } else {
     req.session.sessionFlash = { message: result.message }
     res.redirect('/person/add')
+  }
+})
+
+app.get('/:personId/person', async (req, res) => {
+  let result = await Person.getOne(req.params.personId)
+  let results = await Options.person()
+  res.render('./person/view.ejs', { person: result, options: results, user: req.session.user })
+})
+
+app.get('/:personId/person/edit', async (req, res) => {
+  if (req.session.user.role === 'Resource Manager') {
+    let result = await Person.getOne(req.params.personId)
+    let results = await Options.person()
+    res.render('./person/edit.ejs', { person: result, options: results, sessionFlash: res.locals.sessionFlash })
+  } else {
+    res.redirect(`/${req.params.personId}/person`)
+  }
+})
+
+app.post('/person/edit', async (req, res) => {
+  let extra = `personid != ${req.body.personId} AND`
+  let result = await Person.alreadyExists(req.body, extra)
+  if (!result.status) {
+    await Person.update(req.body)
+    res.redirect(`/${req.body.personId}/person`)
+  } else {
+    req.session.sessionFlash = { message: result.message }
+    res.redirect(`/${req.body.personId}/person/edit`)
   }
 })
 

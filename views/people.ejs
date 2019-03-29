@@ -4,8 +4,11 @@
   <a href='/log-out'>log out</a>
   <a href='/dashboard'>dashboard</a>
   <a href='/people'>people</a>
-  <a href='/person/add'>add</a>
-  <% data.forEach(function(person) { %>
-    <div><%= person.firstName + ' ' + person.surname %></div>
+
+  <% if (user.role === 'Resource Manager') { %>
+    <a href='/person/add'>add</a>
+  <% } %>
+  <% people.forEach(function(person) { %>
+    <a href='/<%= person.personId %>/person'><%= person.firstName + ' ' + person.surname %></a>
   <% }) %>
 </body>

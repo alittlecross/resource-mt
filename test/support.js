@@ -86,19 +86,51 @@ class Helper {
     return [{
       personId: 3,
       firstName: 'Jim',
-      surname: 'Halpert'
+      surname: 'Halpert',
+      roleId: 3
     }]
   }
 
-  static databaseUserOutput () {
+  static databaseUserOutputOne () {
     return {
       rowCount: 1,
       rows: [
         { personid: 1,
           firstname: 'Michael',
-          surname: 'Scott'
+          surname: 'Scott',
+          roleid: 1
         }
       ]
+    }
+  }
+
+  static databaseUserOutputTwo () {
+    return {
+      rowCount: 3,
+      rows: [ { kind: 'details',
+        personid: 1,
+        staffid: 'MS1234',
+        firstname: 'Michael',
+        surname: 'Scott',
+        email: 'michael.scott@scranton.com',
+        gradeid: 1,
+        locationid: 1,
+        managerid: 1,
+        role: 'Regional Manager',
+        statusid: 1,
+        skillid: 0 },
+      { kind: 'skill',
+        personid: 0,
+        staffid: '',
+        firstname: '',
+        surname: '',
+        email: '',
+        gradeid: 0,
+        locationid: 0,
+        managerid: 0,
+        role: '',
+        statusid: 0,
+        skillid: 1 } ]
     }
   }
 
@@ -146,6 +178,22 @@ class Helper {
     }
   }
 
+  static updateFormData () {
+    return {
+      personId: '1',
+      staffId: 'MS1234',
+      firstName: 'Mickey',
+      surname: 'Scott',
+      email: 'michael.scott@scranton.com',
+      gradeId: '1',
+      roleId: '1',
+      statusId: '1',
+      locationId: '1',
+      managerId: '1',
+      skills: '1'
+    }
+  }
+
   static databaseOptionsOutput () {
     return {
       rowCount: 10,
@@ -153,7 +201,6 @@ class Helper {
         { kind: 'location', optionid: 1, option: 'Scranton' },
         { kind: 'manager', optionid: 1, option: 'Michael Scott' },
         { kind: 'role', optionid: 2, option: 'Assistant to the Regional Manager' },
-        { kind: 'role', optionid: 4, option: 'Manager' },
         { kind: 'role', optionid: 1, option: 'Regional Manager' },
         { kind: 'role', optionid: 3, option: 'Sales Representative' },
         { kind: 'skill', optionid: 2, option: 'Farming' },
