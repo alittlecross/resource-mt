@@ -21,6 +21,7 @@ describe('User logs out', () => {
       await browser.fill('email', 'michael.scott@scranton.com')
       await browser.fill('password', 'password')
       await browser.pressButton('log in')
+
       await browser.clickLink('log out')
 
       browser.assert.url('http://localhost:3000')

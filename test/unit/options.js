@@ -23,7 +23,7 @@ describe('class Options', () => {
       let result = Options.buildOptionsObject(Helper.databaseOptionsOutput().rows)
 
       expect(Object.keys(result).length).equal(6)
-      expect(result.roles.length).equal(4)
+      expect(result.roles.length).equal(3)
     })
   })
 
@@ -31,7 +31,7 @@ describe('class Options', () => {
     it('should return a full options object', async () => {
       await Helper.createUsers()
 
-      let result = await Options.addPerson()
+      let result = await Options.person()
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(3)

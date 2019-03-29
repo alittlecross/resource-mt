@@ -5,9 +5,12 @@
   <a href='/dashboard'>dashboard</a>
   <a href='/people'>people</a>
 
-  <% if(data.length > 0) { %>
-    <% data.forEach(function(person) { %>
-      <div><%= person.firstName + ' ' + person.surname %></div>
+
+  <a href='/<%= user.personId %>/person'><%= user.firstName + ' ' + user.surname %></a>
+
+  <% if(people.length > 0) { %>
+    <% people.forEach(function(person) { %>
+      <a href='/<%= person.personId %>/person'><%= person.firstName + ' ' + person.surname %></a>
     <% }) %>
   <% } else { %>
     <div>no people managed</div>

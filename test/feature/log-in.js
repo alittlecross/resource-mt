@@ -18,7 +18,7 @@ describe('User visits the log in screen', () => {
   describe('...by completeing and submitting the form', () => {
     it('correct email and password should be successful', async () => {
       await browser.visit('/')
-      await browser.fill('email', 'michael.scott@scranton.com')
+      await browser.fill('email', 'dwight.schrute@scranton.com')
       await browser.fill('password', 'password')
       await browser.pressButton('log in')
 

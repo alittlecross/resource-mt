@@ -22,7 +22,7 @@ describe('User visits dashboard screen', () => {
       await browser.fill('password', 'password')
       await browser.pressButton('log in')
 
-      browser.assert.text('div', 'Dwight Schrute')
+      browser.assert.text('a:nth-child(5)', 'Dwight Schrute')
     })
 
     it('a non-manager should not see a people list', async () => {
