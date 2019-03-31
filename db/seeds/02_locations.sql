@@ -1,8 +1,7 @@
 INSERT INTO locations (location)
-VALUES 
+VALUES
   ('Bristol'),
   ('Exeter'),
   ('Newcastle'),
   ('Warrington'),
   ('York');
-  

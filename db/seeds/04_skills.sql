@@ -5,4 +5,3 @@ VALUES
   ('Node.js'),
   ('Ruby'),
   ('SQL');
-  

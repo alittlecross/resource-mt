@@ -1,5 +1,5 @@
 INSERT INTO roles (role)
-VALUES 
+VALUES
   ('Apprentice Developer'),
   ('Database Analyst'),
   ('Developer'),
@@ -9,4 +9,3 @@ VALUES
   ('Resource Manager'),
   ('Senior Developer'),
   ('Systems Administrator');
-  

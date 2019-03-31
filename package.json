@@ -26,7 +26,7 @@
     "ejs": "2.6.1",
     "express": "4.16.4",
     "express-session": "1.15.6",
-    "nodemailer": "^6.0.0",
+    "nodemailer": "6.0.0",
     "pg": "7.9.0"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "mocha": "6.0.2",
     "nodemon": "1.18.10",
     "nyc": "13.3.0",
-    "sinon": "^7.3.0",
+    "sinon": "7.3.0",
     "zombie": "6.1.4"
   },
   "standard": {

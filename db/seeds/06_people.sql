@@ -32,7 +32,7 @@ WHERE people.email = 'alan.slee@defra.gov.uk' AND grades.grade = 'G7'
    OR people.email = 'mike.johnson@rpa.gov.uk' AND grades.grade = 'SEO'
    OR people.email = 'marc.solomon@rpa.gov.uk' AND grades.grade = 'SEO'
    OR people.email = 'jonathan.drake@defra.gov.uk' AND grades.grade = 'HEO';
-   
+
 UPDATE people
 SET locationid = locations.locationid
 FROM locations
@@ -87,7 +87,6 @@ WHERE people.email = 'alan.slee@defra.gov.uk' AND roles.role = 'Resource Manager
    OR people.email = 'marc.solomon@rpa.gov.uk' AND roles.role = 'Database Analyst'
    OR people.email = 'jonathan.drake@defra.gov.uk' AND roles.role = 'Systems Administrator';
 
-
 UPDATE people
 SET statusid = statuses.statusid
 FROM statuses
@@ -105,5 +104,3 @@ WHERE people.email = 'alan.slee@defra.gov.uk' AND statuses.status = 'Permanent'
    OR people.email = 'mike.johnson@rpa.gov.uk' AND statuses.status = 'Permanent'
    OR people.email = 'marc.solomon@rpa.gov.uk' AND statuses.status = 'Permanent'
    OR people.email = 'jonathan.drake@defra.gov.uk' AND statuses.status = 'Permanent';    
-
-

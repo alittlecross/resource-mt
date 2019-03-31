@@ -1,36 +1,23 @@
 const Browser = require('zombie')
-const Helper = require('../support')
+const support = require('../support')
 
 const app = require('../../app')
 const http = require('http')
 
 http.createServer(app)
 
-describe('Resource Manager adds a person', () => {
+describe('When a resource manager navigates to the add person screen', () => {
   const browser = new Browser({ site: 'http://localhost:3000' })
 
-  before(async () => {
-    await Helper.changeEnvironment()
-    await Helper.truncateDatabase()
-    await Helper.createUsers()
+  beforeEach(async () => {
+    await support.changeEnvironment()
+    await support.truncateDatabase()
+    await support.createUsers()
+    await browser.visit('/')
   })
 
-  describe('...a non-resource manager cannot directly visit the url', () => {
-    it('they should be redirected to the people screen', async () => {
-      await browser.visit('/')
-      await browser.fill('email', 'dwight.schrute@scranton.com')
-      await browser.fill('password', 'password')
-      await browser.pressButton('log in')
-
-      await browser.visit('/person/add')
-
-      browser.assert.url('http://localhost:3000/people')
-    })
-  })
-
-  describe('...by completeing and submitting the form', () => {
+  describe('...then completes and submits the add person form', () => {
     it('a person should be created', async () => {
-      await browser.visit('/')
       await browser.fill('email', 'michael.scott@scranton.com')
       await browser.fill('password', 'password')
       await browser.pressButton('log in')
@@ -52,8 +39,7 @@ describe('Resource Manager adds a person', () => {
       browser.assert.url('http://localhost:3000/3/person')
     })
 
-    it('an error message is shown if a staff number or email already in use', async () => {
-      await browser.visit('/')
+    it('a flash message should be shown if a staff number or email is already in use', async () => {
       await browser.fill('email', 'michael.scott@scranton.com')
       await browser.fill('password', 'password')
       await browser.pressButton('log in')
@@ -74,6 +60,18 @@ describe('Resource Manager adds a person', () => {
 
       browser.assert.url('http://localhost:3000/person/add')
       browser.assert.text('#flash', 'staff number or email already in use')
+    })
+  })
+
+  describe('...when a non-resource manager directly visits the url', () => {
+    it('they should be redirected to the people screen', async () => {
+      await browser.fill('email', 'dwight.schrute@scranton.com')
+      await browser.fill('password', 'password')
+      await browser.pressButton('log in')
+
+      await browser.visit('/person/add')
+
+      browser.assert.url('http://localhost:3000/people')
     })
   })
 })
