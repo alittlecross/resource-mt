@@ -1,0 +1,16 @@
+<%- include('_head') %>
+
+<body>
+  <a href='/log-out'>log out</a>
+  <a href='/dashboard'>dashboard</a>
+  <a href='/people'>people</a>
+
+  <% if (user.role === 'Resource Manager') { %>
+    <a href='/person/add'>add</a>
+    <a href='/people/archive'>archive</a>
+  <% } %>
+  
+  <% people.forEach(function(person) { %>
+    <a href='/<%= person.personId %>/person'><%= person.firstName + ' ' + person.surname %></a>
+  <% }) %>
+</body>

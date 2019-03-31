@@ -1,16 +1,32 @@
 const dbc = require('./database-connection')
 const fs = require('fs')
 
-class Scripts {
+class Run {
+  static async updateTable (table, script) {
+    await dbc.query(`
+      INSERT INTO ${table} (script)
+      VALUES ('${script}');
+    `)
+  }
+
+  static async scriptAlreadyRan (table, script) {
+    let result = await dbc.query(`
+      SELECT *
+      FROM ${table}
+      WHERE script = '${script}';
+    `)
+    return result.rowCount === 0
+  }
+
   static async tableExists (table) {
     let result = await dbc.query(`
       SELECT EXISTS (
         SELECT 1
         FROM   information_schema.tables 
         WHERE  table_schema = 'public'
-        AND    table_name = $1
+        AND    table_name = '${table}'
       );
-    `, [table])
+    `)
     return result.rows[0].exists
   }
 
@@ -23,29 +39,11 @@ class Scripts {
           createdat timestamptz NOT NULL DEFAULT NOW()
         );
       `)
-      if (!process.env.PKDATABASE.includes('test')) {
-        console.log(`${table} 00_migrations.sql`)
-      }
+      console.log(`${table} 00_${table}.sql`)
     }
   }
 
-  static async scriptAlreadyRan (table, script) {
-    let result = await dbc.query(`
-      SELECT *
-      FROM ${table}
-      WHERE script = $1;
-    `, [script])
-    return result.rowCount === 0
-  }
-
-  static async updateTable (table, script) {
-    await dbc.query(`
-      INSERT INTO ${table} (script)
-      VALUES ($1);
-    `, [script])
-  }
-
-  static async run (type, database) {
+  static async scripts (type, database) {
     process.env.PKDATABASE = database
     await this.createTable(type)
     const directory = `./db/${type}/`
@@ -58,12 +56,10 @@ class Scripts {
         let sql = fs.readFileSync(directory + script).toString()
         await dbc.query(sql)
         await this.updateTable(type, script)
-        if (!process.env.PKDATABASE.includes('test')) {
-          console.log(`${type} ${script}`)
-        }
+        console.log(`${type} ${script}`)
       }
     }
   }
 }
 
-module.exports = Scripts
+module.exports = Run

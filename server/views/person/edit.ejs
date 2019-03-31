@@ -1,0 +1,97 @@
+<%- include('../_head') %>
+
+<body>
+  <a href='/log-out'>log out</a>
+  <a href='/dashboard'>dashboard</a>
+  <a href='/people'>people</a>
+  <% if (user.role === 'Resource Manager') { %>
+    <% if (person.archived === false) { %>
+      <a href='/<%= person.personId %>/person/archive/true'>archive</a>
+    <% } else { %>
+      <a href='/<%= person.personId %>/person/archive/false'>restore</a>
+    <% } %>
+  <% } %>
+  <form action='/<%= person.personId %>/person/edit' method='POST'>
+  
+    <input type='text' name='personId' hidden value='<%= person.personId %>'>
+    <input type='text' name='staffId' placeholder='staff number' value='<%= person.staffId %>'>
+    <input type='text' name='firstName' placeholder='first name' value='<%= person.firstName%>'>
+    <input type='text' name='surname' placeholder='surname' value='<%= person.surname %>'>
+    <input type='email' name='email' placeholder='email' value='<%= person.email %>'>
+
+    <select name='gradeId'>
+      <option value='' disabled selected>grade</option>
+      <% options.grades.forEach(function(grade) { %>
+        <option value='<%= grade.optionId %>'
+          <% if (person.gradeId === grade.optionId) { %>
+            selected
+          <% } %>
+        ><%= grade.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='roleId'>
+      <option value='' disabled selected>role</option>
+      <% options.roles.forEach(function(role) { %>
+        <option value='<%= role.optionId %>'
+          <% if (person.role === role.option) { %>
+            selected
+          <% } %>
+        ><%= role.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='statusId'>
+      <option value='' disabled selected>status</option>
+      <% options.statuses.forEach(function(status) { %>
+        <option value='<%= status.optionId %>'
+          <% if (person.statusId === status.optionId) { %>
+            selected
+          <% } %>
+        ><%= status.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='locationId'>
+      <option value='' disabled selected>location</option>
+      <% options.locations.forEach(function(location) { %>
+        <option value='<%= location.optionId %>'
+          <% if (person.locationId === location.optionId) { %>
+            selected
+          <% } %>
+        ><%= location.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='managerId'>
+        <option value='' disabled selected>manager</option>
+        <% options.managers.forEach(function(manager) { %>
+          <option value='<%= manager.optionId %>'
+            <% if (person.managerId === manager.optionId) { %>
+              selected
+            <% } %>
+          ><%= manager.option %></option>
+        <% }) %>
+    </select>
+    
+    <select name='skills' multiple>
+      <option value='' disabled>skills</option>
+      <% options.skills.forEach(function(skill) { %>
+        <option value='<%= skill.optionId %>' 
+          <% if (person.skills.includes(skill.optionId)) { %>
+            selected
+          <% } %>
+        ><%= skill.option %></option>
+      <% }) %>
+    </select>
+
+    <input type='submit' value='submit'>
+  
+  </form>
+
+  <div id='flash'>
+    <% if (flash && flash.message) { %>
+      <%= flash.message %>
+    <% } %>
+  </div>
+</body>

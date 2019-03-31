@@ -1,3 +1,3 @@
-const migrations = require('../db/database-scripts')
+const run = require('../db/database-scripts')
 
-migrations.run('migrations', 'ketchup_test')
+run.scripts('migrations', 'ketchup_test')

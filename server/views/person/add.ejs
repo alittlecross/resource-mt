@@ -1,0 +1,65 @@
+<%- include('../_head') %>
+
+<body>
+  <a href='/log-out'>log out</a>
+  <a href='/dashboard'>dashboard</a>
+  <a href='/people'>people</a>
+  <form action='/person/add' method='POST'>
+  
+    <input type='text' name='staffId' placeholder='staff number' required>
+    <input type='text' name='firstName' placeholder='first name' required>
+    <input type='text' name='surname' placeholder='surname' required>
+    <input type='email' name='email' placeholder='email' required>
+
+    <select name='gradeId' required>
+      <option value='' disabled selected>grade</option>
+      <% options.grades.forEach(function(grade) { %>
+        <option value='<%= grade.optionId %>'><%= grade.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='roleId' required>
+      <option value='' disabled selected>role</option>
+      <% options.roles.forEach(function(role) { %>
+        <option value='<%= role.optionId %>'><%= role.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='statusId' required>
+      <option value='' disabled selected>status</option>
+      <% options.statuses.forEach(function(status) { %>
+        <option value='<%= status.optionId %>'><%= status.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='locationId' required>
+      <option value='' disabled selected>location</option>
+      <% options.locations.forEach(function(location) { %>
+        <option value='<%= location.optionId %>'><%= location.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='managerId' required>
+      <option value='' disabled selected>manager</option>
+      <% options.managers.forEach(function(manager) { %>
+        <option value='<%= manager.optionId %>'><%= manager.option %></option>
+      <% }) %>
+    </select>
+    
+    <select name='skills' multiple>
+      <option value='' disabled>skills</option>
+      <% options.skills.forEach(function(skill) { %>
+        <option value='<%= skill.optionId %>'><%= skill.option %></option>
+      <% }) %>
+    </select>
+    
+    <input type='submit' value='submit'>
+  
+  </form>
+
+  <div id='flash'>
+    <% if (flash && flash.message) { %>
+      <%= flash.message %>
+    <% } %>
+  </div>
+</body>
