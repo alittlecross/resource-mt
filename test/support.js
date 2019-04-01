@@ -78,6 +78,9 @@ class Support {
       FROM people, skills
       WHERE people.email = 'michael.scott@scranton.com' AND skills.skill = 'People'
          OR people.email = 'dwight.schrute@scranton.com' AND skills.skill = 'Farming';
+
+      INSERT INTO resetrequests (email, hash)
+      VALUES ('michael.scott@scranton.com', '123456'); 
     `)
   }
 

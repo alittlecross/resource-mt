@@ -11,7 +11,7 @@
       <a href='/<%= person.personId %>/person/archive/false'>restore</a>
     <% } %>
   <% } %>
-  <form action='/<%= person.personId %>/person/edit' method='POST'>
+  <form action='/<%= person.personId %>/person/edit' autocomplete='off' method='POST'>
   
     <input type='text' name='personId' hidden value='<%= person.personId %>'>
     <input type='text' name='staffId' placeholder='staff number' value='<%= person.staffId %>'>
