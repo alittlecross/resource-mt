@@ -29,6 +29,12 @@ app.post('/:personId/person/edit', require('./server/routes/person/edit').post)
 
 app.get('/:personId/person/archive/:archived', require('./server/routes/person/archive'))
 
+app.get('/forgot-password', require('./server/routes/forgot-password').get)
+app.post('/forgot-password', require('./server/routes/forgot-password').post)
+
+app.get('/:hash/forgot-password', require('./server/routes/forgot-password/reset').get)
+app.post('/:hash/forgot-password', require('./server/routes/forgot-password/reset').post)
+
 app.listen(port)
 
 module.exports = app
