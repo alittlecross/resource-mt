@@ -25,7 +25,7 @@ class AddEdit {
       if (!Array.isArray(data.skills)) {
         data.skills = [data.skills]
       }
-      data.skills.forEach((skillId) => {
+      data.skills.forEach(skillId => {
         string += `INSERT INTO personskills VALUES (${personId}, ${skillId});`
       })
       await databaseAddEdit.addSkills(string)

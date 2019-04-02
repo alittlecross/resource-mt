@@ -14,7 +14,7 @@ class Form {
 
   static buildObject (data) {
     let options = this.object()
-    data.forEach((row) => {
+    data.forEach(row => {
       if (row.kind === 'grade') {
         options.grades.push({ optionId: row.optionid, option: row.option })
       } else if (row.kind === 'location') {

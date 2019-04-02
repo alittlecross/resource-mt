@@ -12,7 +12,7 @@ class People {
 
   static buildArray (data) {
     let people = []
-    data.forEach((row) => {
+    data.forEach(row => {
       people.push(this.object(row))
     })
     return people

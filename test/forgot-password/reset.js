@@ -17,10 +17,12 @@ describe('class Reset', () => {
   describe('.password', () => {
     it('should update the users password in the database', async () => {
       let password = sandbox.stub(databaseReset, 'password')
+      let request = sandbox.stub(databaseReset, 'request')
 
       await reset.password('Bears', '123456')
 
       expect(password.callCount).equal(1)
+      expect(request.callCount).equal(1)
     })
   })
 })
