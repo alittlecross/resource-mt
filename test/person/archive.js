@@ -1,5 +1,5 @@
-const archive = require('../../../server/lib/person/archive')
-const databaseArchive = require('../../../server/services/person/archive')
+const archive = require('../../server/lib/person/archive')
+const databaseArchive = require('../../server/services/person/archive')
 
 const expect = require('chai').expect
 

@@ -1,6 +1,6 @@
-const databasePeople = require('../../server/services/people')
-const people = require('../../server/lib/people')
-const support = require('../support')
+const databasePeople = require('../server/services/people')
+const people = require('../server/lib/people')
+const support = require('./support')
 
 const expect = require('chai').expect
 

@@ -1,6 +1,6 @@
-const databaseForgotPassword = require('../../server/services/forgot-password')
-const email = require('../../server/lib/email')
-const forgotPassword = require('../../server/lib/forgot-password')
+const databaseForgotPassword = require('../server/services/forgot-password')
+const email = require('../server/lib/email')
+const forgotPassword = require('../server/lib/forgot-password')
 
 const expect = require('chai').expect
 

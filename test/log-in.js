@@ -1,7 +1,7 @@
-const databasePeople = require('../../server/services/people')
-const logIn = require('../../server/lib/log-in')
-const people = require('../../server/lib/people')
-const support = require('../support')
+const databasePeople = require('../server/services/people')
+const logIn = require('../server/lib/log-in')
+const people = require('../server/lib/people')
+const support = require('./support')
 
 const expect = require('chai').expect
 
@@ -33,7 +33,7 @@ describe('class logIn', () => {
       let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'BattlestarGalactica' })
 
       expect(result.status).equal(false)
-      expect(result.message).equal('password incorrect')
+      expect(result.message).equal('email or password incorrect')
     })
 
     it('incorrect email should be unsuccessful', async () => {
@@ -41,7 +41,15 @@ describe('class logIn', () => {
       let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
 
       expect(result.status).equal(false)
-      expect(result.message).equal('no account with that email')
+      expect(result.message).equal('email or password incorrect')
+    })
+
+    it('correct email with no password should be unsuccessful', async () => {
+      sandbox.stub(databasePeople, 'getPeople').returns({ rowCount: 1 })
+      let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com' })
+
+      expect(result.status).equal(true)
+      expect(result.message).equal('email or password incorrect')
     })
   })
 })

@@ -1,5 +1,5 @@
-const reset = require('../../../server/lib/forgot-password/reset')
-const databaseReset = require('../../../server/services/forgot-password/reset')
+const reset = require('../../server/lib/forgot-password/reset')
+const databaseReset = require('../../server/services/forgot-password/reset')
 
 const expect = require('chai').expect
 

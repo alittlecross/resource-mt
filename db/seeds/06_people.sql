@@ -1,19 +1,19 @@
-INSERT INTO people (staffid, firstname, surname, email, password)
+INSERT INTO people (staffid, firstname, surname, email)
 VALUES
-  ('302151', 'Alan', 'Slee', 'alan.slee@defra.gov.uk', 'password'),
-  ('992810', 'Nicholas', 'Blows', 'nicholas.blows@rpa.gov.uk', 'password'),
-  ('992746', 'Paul', 'Doyle', 'paul.doyle@rpa.gov.uk', 'password'),
-  ('992772', 'Lee', 'Gordon', 'lee.gordon@rpa.gov.uk', 'password'),
-  ('992874', 'Ian', 'Noonan', 'ian.noonan@rpa.gov.uk', 'password'),
-  ('992918', 'Matthew', 'Quinton', 'matthew.quinton@rpa.gov.uk', 'password'),
-  ('992809', 'John', 'Watson', 'john.watson@rpa.gov.uk', 'password'),
-  ('992742', 'Scott', 'Dormand', 'scott.dormand@rpa.gov.uk', 'password'),
-  ('992827', 'Fay', 'Toward', 'fay.toward@rpa.gov.uk', 'password'),
-  ('992749', 'Paul', 'Fazackerley', 'paul.fazackerley@rpa.gov.uk', 'password'),
-  ('992893', 'Tim', 'Butterworth', 'tim.butterworth@rpa.gov.uk', 'password'),
-  ('992829', 'Mike', 'Johnson', 'mike.johnson@rpa.gov.uk', 'password'),
-  ('992856', 'Marc', 'Solomon', 'marc.solomon@rpa.gov.uk', 'password'),
-  ('169899', 'Jonathan', 'Drake', 'jonathan.drake@defra.gov.uk', 'password');
+  ('302151', 'Alan', 'Slee', 'alan.slee@defra.gov.uk'),
+  ('992810', 'Nicholas', 'Blows', 'nicholas.blows@rpa.gov.uk'),
+  ('992746', 'Paul', 'Doyle', 'paul.doyle@rpa.gov.uk'),
+  ('992772', 'Lee', 'Gordon', 'lee.gordon@rpa.gov.uk'),
+  ('992874', 'Ian', 'Noonan', 'ian.noonan@rpa.gov.uk'),
+  ('992918', 'Matthew', 'Quinton', 'matthew.quinton@rpa.gov.uk'),
+  ('992809', 'John', 'Watson', 'john.watson@rpa.gov.uk'),
+  ('992742', 'Scott', 'Dormand', 'scott.dormand@rpa.gov.uk'),
+  ('992827', 'Fay', 'Toward', 'fay.toward@rpa.gov.uk'),
+  ('992749', 'Paul', 'Fazackerley', 'paul.fazackerley@rpa.gov.uk'),
+  ('992893', 'Tim', 'Butterworth', 'tim.butterworth@rpa.gov.uk'),
+  ('992829', 'Mike', 'Johnson', 'mike.johnson@rpa.gov.uk'),
+  ('992856', 'Marc', 'Solomon', 'marc.solomon@rpa.gov.uk'),
+  ('169899', 'Jonathan', 'Drake', 'jonathan.drake@defra.gov.uk');
 
 UPDATE people
 SET gradeid = grades.gradeid
