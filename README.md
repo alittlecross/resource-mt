@@ -37,11 +37,9 @@ Close postgres with `\q`
 
 In Terminal:
 
-`npm run live-migrations`
+`npm run migrations`
 
-If you intend to run tests, in Terminal, in postgres, paste the SQL script `CREATE DATABASE ketchup_test;`, close postgres with `\q`, and in Terminal `npm run test-migrations`
-
-Create local environmental variables by pasting each of the following into Terminal (if you have already set up user names, passwords, or changed the defaults for postgres, these should be entered beside the '=''s):
+Store local environmental variables by pasting each of the following into Terminal (if you have already set up user names, passwords, or changed the defaults for postgres, these should be entered beside the '=''s):
 
 ```
 export PKDATABASE=ketchup
@@ -49,6 +47,18 @@ export PKHOST=
 export PKPASSWORD=
 export PKPORT=
 export PKUSER=
+
+export SESSIONSECRET='this can be anything you like'
+export URL=http://localhost:3000/
+```
+
+To use the 'forgot your password' functionality, store additional local environmental variables for an email account:
+
+```
+export NMHOST='this is the host of the email account, for example, smtp.office365.com'
+export NMPASS='this is the email account password'
+export NMPORT='this is the port for the host, typically 587 but can vary'
+export NMUSER='this is the email address itself'
 ```
 
 ## Local Usage

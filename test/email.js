@@ -1,4 +1,4 @@
-const email = require('../../server/lib/email')
+const email = require('../server/lib/email')
 const nodemailer = require('nodemailer')
 
 const expect = require('chai').expect

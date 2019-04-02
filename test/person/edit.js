@@ -1,7 +1,7 @@
-const addEdit = require('../../../server/lib/person/add-edit')
-const databaseEdit = require('../../../server/services/person/edit')
-const edit = require('../../../server/lib/person/edit')
-const support = require('../../support')
+const addEdit = require('../../server/lib/person/add-edit')
+const databaseEdit = require('../../server/services/person/edit')
+const edit = require('../../server/lib/person/edit')
+const support = require('../support')
 
 const expect = require('chai').expect
 

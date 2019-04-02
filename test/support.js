@@ -1,89 +1,4 @@
-const dbc = require('../db/database-connection')
-
 class Support {
-  static changeEnvironment () {
-    process.env.PKDATABASE = 'ketchup_test'
-  }
-
-  static async truncateDatabase () {
-    await dbc.query(`
-    TRUNCATE personskills, people, statuses, skills, roles, locations, grades RESTART IDENTITY CASCADE;
-    `)
-  }
-
-  static async createUsers () {
-    await dbc.query(`
-      INSERT INTO grades (grade)
-      VALUES
-        ('HEO'),
-        ('EO');
-
-      INSERT INTO roles (role)
-      VALUES
-        ('Resource Manager'),
-        ('Assistant to the Regional Manager'),
-        ('Sales Representative');
-
-      INSERT INTO locations (location)
-      VALUES
-        ('Scranton');
-
-      INSERT INTO statuses (status)
-      VALUES
-        ('Permanent');
-
-      INSERT INTO skills (skill)
-      VALUES
-        ('People'),
-        ('Farming'),
-        ('Selling');
-
-      INSERT INTO people (staffid, firstname, surname, email, password)
-      VALUES
-        ('MS1234', 'Michael', 'Scott', 'michael.scott@scranton.com', 'password'),
-        ('DS1234', 'Dwight', 'Schrute', 'dwight.schrute@scranton.com', 'password');
-
-      UPDATE people
-      SET gradeid = grades.gradeid
-      FROM grades
-      WHERE people.email = 'michael.scott@scranton.com' AND grades.grade = 'HEO'
-         OR people.email = 'dwight.schrute@scranton.com' AND grades.grade = 'EO';
-
-      UPDATE people
-      SET locationid = locations.locationid
-      FROM locations
-      WHERE people.email = 'michael.scott@scranton.com' AND locations.location = 'Scranton'
-         OR people.email = 'dwight.schrute@scranton.com' AND locations.location = 'Scranton';
-
-      UPDATE people A
-      SET managerid = B.personid
-      FROM people B
-      WHERE A.email = 'michael.scott@scranton.com' AND B.email = 'michael.scott@scranton.com'
-         OR A.email = 'dwight.schrute@scranton.com' AND B.email = 'michael.scott@scranton.com';
-
-      UPDATE people
-      SET roleid = roles.roleid
-      FROM roles
-      WHERE people.email = 'michael.scott@scranton.com' AND roles.role = 'Resource Manager'
-         OR people.email = 'dwight.schrute@scranton.com' AND roles.role = 'Assistant to the Regional Manager';
-
-      UPDATE people
-      SET statusid = statuses.statusid
-      FROM statuses
-      WHERE people.email = 'michael.scott@scranton.com' AND statuses.status = 'Permanent'
-         OR people.email = 'dwight.schrute@scranton.com' AND statuses.status = 'Permanent';
-
-      INSERT INTO personskills
-      SELECT people.personid, skills.skillid
-      FROM people, skills
-      WHERE people.email = 'michael.scott@scranton.com' AND skills.skill = 'People'
-         OR people.email = 'dwight.schrute@scranton.com' AND skills.skill = 'Farming';
-
-      INSERT INTO resetrequests (email, hash)
-      VALUES ('michael.scott@scranton.com', '123456'); 
-    `)
-  }
-
   static getPersonDouble () {
     return {
       rowCount: 2,
@@ -126,7 +41,7 @@ class Support {
         firstname: 'Dwight',
         surname: 'Schrute',
         email: 'dwight.schrute@scranton.com',
-        password: 'password',
+        password: '$2b$10$Jdm/.lzRgG9IiINFufv/keVED2khArCaBDDT532jccHHlg6dxnlzW',
         gradeid: 2,
         locationid: 1,
         managerid: 1,

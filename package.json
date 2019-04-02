@@ -8,7 +8,7 @@
     "migrations": "node db/migrations.js",
     "seeds": "node db/seeds.js",
     "start": "node app.js",
-    "test": "node test/migrations.js; nyc --reporter=text mocha --recursive --exit"
+    "test": "nyc --reporter=text mocha --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
   "nyc": {
     "exclude": [
       "db/*",
+      "server/services/*",
       "test/*"
     ]
   }
