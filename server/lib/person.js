@@ -20,7 +20,7 @@ class Person {
 
   static buildObject (data) {
     let person
-    data.forEach((row) => {
+    data.forEach(row => {
       if (row.kind === 'details') {
         person = this.object(row)
       } else {
