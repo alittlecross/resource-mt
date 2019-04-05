@@ -10,7 +10,7 @@ class Run {
   }
 
   static async scriptAlreadyRan (table, script) {
-    let result = await dbc.query(`
+    const result = await dbc.query(`
       SELECT *
       FROM ${table}
       WHERE script = '${script}';
@@ -19,7 +19,7 @@ class Run {
   }
 
   static async tableExists (table) {
-    let result = await dbc.query(`
+    const result = await dbc.query(`
       SELECT EXISTS (
         SELECT 1
         FROM   information_schema.tables 
@@ -47,13 +47,13 @@ class Run {
     process.env.PKDATABASE = database
     await this.createTable(type)
     const directory = `./db/${type}/`
-    let scripts = []
+    const scripts = []
     fs.readdirSync(directory).forEach(file => {
       scripts.push(file)
     })
-    for (let script of scripts) {
+    for (const script of scripts) {
       if (await this.scriptAlreadyRan(type, script)) {
-        let sql = fs.readFileSync(directory + script).toString()
+        const sql = fs.readFileSync(directory + script).toString()
         await dbc.query(sql)
         await this.updateTable(type, script)
         console.log(`${type} ${script}`)

@@ -11,7 +11,7 @@ class People {
   }
 
   static buildArray (data) {
-    let people = []
+    const people = []
     data.forEach(row => {
       people.push(this.object(row))
     })
@@ -19,7 +19,7 @@ class People {
   }
 
   static async getPeople (query) {
-    let results = await databasePeople.getPeople(query)
+    const results = await databasePeople.getPeople(query)
     return this.buildArray(results.rows)
   }
 }

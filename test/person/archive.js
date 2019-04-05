@@ -16,7 +16,7 @@ describe('class Archive', () => {
 
   describe('.person', () => {
     it('should change the archived column in the database', async () => {
-      let change = sandbox.stub(databaseArchive, 'change')
+      const change = sandbox.stub(databaseArchive, 'change')
 
       await archive.person()
 

@@ -16,8 +16,8 @@ describe('class Reset', () => {
 
   describe('.password', () => {
     it('should update the users password in the database', async () => {
-      let password = sandbox.stub(databaseReset, 'password')
-      let request = sandbox.stub(databaseReset, 'request')
+      const password = sandbox.stub(databaseReset, 'password')
+      const request = sandbox.stub(databaseReset, 'request')
 
       await reset.password('Bears', '123456')
 

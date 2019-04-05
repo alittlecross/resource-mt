@@ -19,9 +19,9 @@ describe('class Add', () => {
   describe('.person', () => {
     it('should add person and skills to the database', async () => {
       sandbox.stub(databaseAdd, 'addPerson').returns(support.addPersonDouble())
-      let skills = sandbox.stub(addEdit, 'skills')
+      const skills = sandbox.stub(addEdit, 'skills')
 
-      let result = await add.person(support.personFormData())
+      const result = await add.person(support.personFormData())
 
       expect(skills.callCount).equal(1)
       expect(result.rowCount).equal(1)

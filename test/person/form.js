@@ -17,7 +17,7 @@ describe('class Form', () => {
 
   describe('.object', () => {
     it('should return an options object', () => {
-      let result = form.object()
+      const result = form.object()
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(0)
@@ -26,7 +26,7 @@ describe('class Form', () => {
 
   describe('.buildObject', () => {
     it('should build, and return an options object', () => {
-      let result = form.buildObject(support.getOptionsDouble().rows)
+      const result = form.buildObject(support.getOptionsDouble().rows)
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(3)
@@ -37,7 +37,7 @@ describe('class Form', () => {
     it('should get options from the database, build, and return an options object', async () => {
       sandbox.stub(databaseForm, 'getOptions').returns(support.getOptionsDouble())
 
-      let result = await form.options()
+      const result = await form.options()
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(3)

@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt')
 
 class LogIn {
   static async authenticate (data) {
-    let query = `WHERE email = '${data.email}'`
-    let result = await databasePeople.getPeople(query)
+    const query = `WHERE email = '${data.email}'`
+    const result = await databasePeople.getPeople(query)
     if (result.rowCount > 0 && data.password === undefined) {
       return {
         status: true,

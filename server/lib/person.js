@@ -31,8 +31,8 @@ class Person {
   }
 
   static async getPerson (personId) {
-    let query = `WHERE personid = ${personId}`
-    let result = await databasePerson.getPerson(query)
+    const query = `WHERE personid = ${personId}`
+    const result = await databasePerson.getPerson(query)
     return this.buildObject(result.rows)
   }
 }

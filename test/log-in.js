@@ -21,7 +21,7 @@ describe('class logIn', () => {
       sandbox.stub(people, 'object').returns(support.objectDouble())
       sandbox.stub(databasePeople, 'getPeople').returns(support.getPeopleDouble())
 
-      let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
+      const result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
 
       expect(result.status).equal(true)
       expect(result.user.firstName).equal('Dwight')
@@ -30,7 +30,7 @@ describe('class logIn', () => {
     it('incorrect password should be unsuccessful', async () => {
       sandbox.stub(databasePeople, 'getPeople').returns(support.getPeopleDouble())
 
-      let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'BattlestarGalactica' })
+      const result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'BattlestarGalactica' })
 
       expect(result.status).equal(false)
       expect(result.message).equal('email or password incorrect')
@@ -38,7 +38,7 @@ describe('class logIn', () => {
 
     it('incorrect email should be unsuccessful', async () => {
       sandbox.stub(databasePeople, 'getPeople').returns({ rowCount: 0 })
-      let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
+      const result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
 
       expect(result.status).equal(false)
       expect(result.message).equal('email or password incorrect')
@@ -46,7 +46,7 @@ describe('class logIn', () => {
 
     it('correct email with no password should be unsuccessful', async () => {
       sandbox.stub(databasePeople, 'getPeople').returns({ rowCount: 1 })
-      let result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com' })
+      const result = await logIn.authenticate({ email: 'dwight.schrute@scranton.com' })
 
       expect(result.status).equal(true)
       expect(result.message).equal('email or password incorrect')

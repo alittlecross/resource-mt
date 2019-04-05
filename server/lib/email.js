@@ -1,8 +1,8 @@
-let nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 
 class Email {
   static async send (to, subject, html) {
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: process.env.NMHOST,
       port: process.env.NMPORT,
       secure: false,
@@ -12,7 +12,7 @@ class Email {
       }
     })
 
-    let mailOptions = {
+    const mailOptions = {
       from: process.env.NMUSER,
       to: to,
       subject: subject,

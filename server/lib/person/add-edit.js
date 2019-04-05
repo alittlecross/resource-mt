@@ -3,8 +3,8 @@ const databasePeople = require('../../services/people')
 
 class AddEdit {
   static async personExists (data, personId = '') {
-    let query = `WHERE email = '${data.email}' ${personId} OR staffid = '${data.staffId}' ${personId}`
-    let result = await databasePeople.getPeople(query)
+    const query = `WHERE email = '${data.email}' ${personId} OR staffid = '${data.staffId}' ${personId}`
+    const result = await databasePeople.getPeople(query)
 
     if (result.rowCount === 0) {
       return {
