@@ -1,14 +1,19 @@
 <%- include('_head') %>
 
 <body>
-  <form action='/log-in' autocomplete='off' method='POST'>
-    <input type='email' name='email' placeholder='email' required>
-    <input type='password' name='password' placeholder='password' required>
-    <input type='submit' value='log in'>
-  </form>
-
-  <a href=/forgot-password>forgot your password?</a>
+  <div id='title'>Resource Management&nbsp;Tool</div>
+  <div id='sub-title'>log in</div>
   
+  <form id='authenticate' action='/log-in' autocomplete='off' method='POST'>
+    <input class='authenticate' type='email' name='email' placeholder='email' required>
+    <input class='authenticate' type='password' name='password' placeholder='password' required>
+  </form>
+  
+  <div id='auth-container'>
+    <input class='authenticate' form='authenticate' type='submit' value='submit'>
+    <a id='forgot-password' class='right' href=/forgot-password>forgot your password?</a>
+  </div>
+
   <div id='flash'>
     <% if (flash && flash.message) { %>
       <%= flash.message %>

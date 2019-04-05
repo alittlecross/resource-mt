@@ -1,16 +1,19 @@
 <%- include('_head') %>
 
 <body>
-  <a href='/log-out'>log out</a>
-  <a href='/dashboard'>dashboard</a>
-  <a href='/people'>people</a>
+  <div id='banner'>
+    <div id='small-title'>Resource Management&nbsp;Tool</div>
+    <a class='banner-link right' href='/log-out'>log out</a>
+    <a class='banner-link right' href='/dashboard'>dashboard</a>
+    <% if (user.role === 'Resource Manager') { %>
+      <a class='banner-link' href='/person/add'>add</a>
+      <a class='banner-link right' href='<%= breadcrumb.route %>'><%= breadcrumb.text %></a>
+    <% } %>
+  </div>
 
-  <% if (user.role === 'Resource Manager') { %>
-    <a href='/person/add'>add</a>
-    <a href='/people/archive'>archive</a>
-  <% } %>
-  
-  <% people.forEach(function(person) { %>
-    <a href='/<%= person.personId %>/person'><%= person.firstName + ' ' + person.surname %></a>
-  <% }) %>
+  <div id='people'>
+    <% people.forEach(function(person) { %>
+      <a class='person' href='/<%= person.personId %>/person'><%= person.firstName + ' ' + person.surname %></a>
+    <% }) %>
+  </div>
 </body>

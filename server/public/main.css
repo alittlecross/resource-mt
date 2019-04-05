@@ -1,0 +1,299 @@
+* {
+  display: inline-block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  cursor: default;
+  font-size: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 19px #333333 inset;
+    -webkit-box-shadow: 0 0 0 19px #333333 inset;
+    -webkit-text-fill-color: #ffffff;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+::placeholder, .locked {
+  color: #777777;
+}
+
+.right {
+  float: right;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: block;
+  margin: 20px;
+  background-color: #333333;
+  background-attachment: fixed
+}
+
+.banner-link, #sub-title, .person, input[type='submit'] {
+  font-size: 20px;
+}
+
+select, th, td, .authenticate, #flash, .person-link, .field-label {
+  font-size: 18px;
+}
+
+.person-record, #forgot-password, .skill-button {
+  font-size: 16px;
+}
+
+#title {
+  display: block;
+  font-size: 60px;
+  font-weight: 600;
+}
+
+#sub-title, #flash {
+  display: block;
+  margin: 15px;
+}
+
+#authenticate {
+  display: block;
+  max-width: 394px;
+  padding: 0 4px;
+}
+
+#authenticate > input {
+  display: block;
+}
+
+input.authenticate  {
+  margin: 24px 0 20px 0;
+  border: 1px solid #ffffff;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  background: none;
+}
+
+#auth-container {
+  width: 100%;
+  max-width: 402px;
+}
+
+input[type='submit'].authenticate {
+  margin: 0 4px 0 4px;
+  border: none;
+  border-radius: 5px;
+  width: auto;
+  padding: 0 11px;
+  cursor: pointer;
+}
+
+input[type='submit'].authenticate:hover {
+  background-color: #222222;
+}
+
+#forgot-password {
+  margin: 1px 15px;
+  color: #777777;
+  line-height: 40px;
+  vertical-align: top;
+}
+
+#forgot-password:hover {
+  color: #ffffff;
+}
+
+#banner {
+  display: block;
+  height: 50px;
+}
+
+#small-title {
+  font-size: 25px;
+  font-weight: 600;
+  vertical-align: top;
+}
+
+.banner-link {
+  margin-left: 15px;
+  line-height: 28px;
+  color: #777777;
+}
+
+.banner-link:hover {
+  color: #ffffff;
+}
+
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+tr {
+  display: table-row;
+  height: 40px;
+}
+
+th, td {
+  display: table-cell;
+  border: 1px solid #777777;
+  width: 1%;
+}
+
+#people {
+  display: block;
+  margin: auto;
+  width: 1800px;
+}
+
+.person {
+  width: 300px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.person:hover {
+  color: #777777;
+}
+
+#person-form {
+  width: 100%;
+  max-width: 550px;
+  padding: 0 4px;
+}
+
+.form-row {
+  clear: right;
+  display: block;
+  margin-bottom: 15px;
+  height: 40px;
+}
+
+.field-label {
+  margin-left: 15px;
+  width: 141px;
+  height: 40px;
+  line-height: 40px;
+  color: #777777
+}
+
+input.person-record, select.person-record {
+  border: 1px solid #ffffff;
+  width: 100%;
+  max-width: 394px;
+  height: 40px;
+  padding: 0 10px;
+  background: none;
+  cursor: pointer;
+}
+
+#skills {
+  width: 100%;
+  max-width: 394px;
+  vertical-align: top;
+}
+
+.hidden {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.skill-button {
+  margin: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #777777;
+  cursor: pointer;
+}
+
+input[type='submit'].person-record {
+  display: block;
+  margin: 5px 4px;
+  border: none;
+  border-radius: 5px;
+  width: auto;
+  padding: 0 11px;
+  cursor: pointer;
+}
+
+input[type='submit'].person-record:hover {
+  background-color: #222222;
+}
+
+input[type=checkbox]:checked + label {
+  background-color: #222222;
+}
+
+input.person-record:disabled, select.person-record:disabled, input[type=checkbox]:disabled + label {
+  cursor: default;
+}
+
+@media screen and (max-width: 1839px) {
+  #people {
+    width: 1500px;
+  }
+}
+
+@media screen and (max-width: 1539px) {
+  #people {
+    width: 1200px;
+  }
+}
+
+@media screen and (max-width: 1239px) {
+  #people {
+    width: 900px;
+  }
+}
+
+@media screen and (max-width: 939px) {
+  #people {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  #people {
+    width: 100%;
+  }
+  .person {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 541px) {
+  #title {
+    margin: 2px;
+    font-size: 30px
+  }
+}
+
+@media screen and (max-width: 441px) {
+  input[type='submit'].authenticate {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 313px) {
+  #forgot-password {
+    float: left;
+  }
+}
