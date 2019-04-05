@@ -20,7 +20,6 @@ class AddEdit {
 
   static async skills (data, personId) {
     let string = ''
-
     if (data.skills !== undefined) {
       if (!Array.isArray(data.skills)) {
         data.skills = [data.skills]

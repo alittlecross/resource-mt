@@ -34,7 +34,7 @@ class Database {
       SELECT 'skill' AS kind, skillid AS optionid, skill AS option
       FROM skills
 
-      ORDER BY kind, optionid;
+      ORDER BY kind, option;
     `)
   }
 }
