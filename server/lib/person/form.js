@@ -13,7 +13,7 @@ class Form {
   }
 
   static buildObject (data) {
-    let options = this.object()
+    const options = this.object()
     data.forEach(row => {
       if (row.kind === 'grade') {
         options.grades.push({ optionId: row.optionid, option: row.option })
@@ -33,7 +33,7 @@ class Form {
   }
 
   static async options () {
-    let results = await databaseForm.getOptions()
+    const results = await databaseForm.getOptions()
     return this.buildObject(results.rows)
   }
 }

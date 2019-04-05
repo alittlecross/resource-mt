@@ -20,8 +20,8 @@ describe('class Email', () => {
 
   describe('.send', () => {
     it('should send an email', async () => {
-      let createTransport = sandbox.stub(nodemailer, 'createTransport').returns(transporter)
-      let sendMail = sandbox.stub(transporter, 'sendMail')
+      const createTransport = sandbox.stub(nodemailer, 'createTransport').returns(transporter)
+      const sendMail = sandbox.stub(transporter, 'sendMail')
 
       await email.send('michael.scott@scranton.com', 'Paper', '<div>We have run out</div>')
 

@@ -20,7 +20,7 @@ describe('class AddEdit', () => {
     it(`should return false if the person doesn't exist in the database`, async () => {
       sandbox.stub(databasePeople, 'getPeople').returns(support.getPeopleDoubleZero())
 
-      let result = await addEdit.personExists(support.personFormData())
+      const result = await addEdit.personExists(support.personFormData())
 
       expect(result.status).equal(false)
     })
@@ -28,7 +28,7 @@ describe('class AddEdit', () => {
     it(`should return true if the person exists in the database`, async () => {
       sandbox.stub(databasePeople, 'getPeople').returns(support.getPeopleDouble())
 
-      let result = await addEdit.personExists(support.personFormData())
+      const result = await addEdit.personExists(support.personFormData())
 
       expect(result.status).equal(true)
       expect(result.message).equal('staff number or email already in use')
@@ -37,7 +37,7 @@ describe('class AddEdit', () => {
 
   describe('.skills', () => {
     it('does nothing if no skills', async () => {
-      let addSkills = sandbox.stub(databaseAddEdit, 'addSkills')
+      const addSkills = sandbox.stub(databaseAddEdit, 'addSkills')
 
       await addEdit.skills({ }, 1)
 
@@ -45,7 +45,7 @@ describe('class AddEdit', () => {
     })
 
     it('should add skills to the database (one)', async () => {
-      let addSkills = sandbox.stub(databaseAddEdit, 'addSkills')
+      const addSkills = sandbox.stub(databaseAddEdit, 'addSkills')
 
       await addEdit.skills({ skills: 1 }, 1)
 
@@ -53,7 +53,7 @@ describe('class AddEdit', () => {
     })
 
     it('should add skills to the database (multi)', async () => {
-      let addSkills = sandbox.stub(databaseAddEdit, 'addSkills')
+      const addSkills = sandbox.stub(databaseAddEdit, 'addSkills')
 
       await addEdit.skills({ skills: [1, 2] }, 1)
 

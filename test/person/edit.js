@@ -18,9 +18,9 @@ describe('class Edit', () => {
 
   describe('.person', () => {
     it('should update person and skills in the database', async () => {
-      let updatePerson = sandbox.stub(databaseEdit, 'updatePerson')
-      let deleteSkills = sandbox.stub(databaseEdit, 'deleteSkills')
-      let skills = sandbox.stub(addEdit, 'skills')
+      const updatePerson = sandbox.stub(databaseEdit, 'updatePerson')
+      const deleteSkills = sandbox.stub(databaseEdit, 'deleteSkills')
+      const skills = sandbox.stub(addEdit, 'skills')
 
       await edit.person(support.personFormData())
 

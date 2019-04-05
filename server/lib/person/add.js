@@ -3,7 +3,7 @@ const databaseAdd = require('../../services/person/add')
 
 class Add {
   static async person (data) {
-    let result = await databaseAdd.addPerson(data)
+    const result = await databaseAdd.addPerson(data)
     await addEdit.skills(data, result.rows[0].personid)
     return result
   }

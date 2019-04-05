@@ -6,7 +6,7 @@ module.exports = {
     res.render('forgot-password.ejs')
   },
   post: async (req, res) => {
-    let result = await logIn.authenticate(req.body)
+    const result = await logIn.authenticate(req.body)
     if (result.status) {
       forgotPassword.sendReset(req.body)
       res.redirect('/')

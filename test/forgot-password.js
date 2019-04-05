@@ -17,8 +17,8 @@ describe('class ForgotPassword', () => {
 
   describe('.sendReset', () => {
     it('should send a password reset request email', async () => {
-      let storeResetRequest = sandbox.stub(databaseForgotPassword, 'storeResetRequest')
-      let send = sandbox.stub(email, 'send')
+      const storeResetRequest = sandbox.stub(databaseForgotPassword, 'storeResetRequest')
+      const send = sandbox.stub(email, 'send')
 
       await forgotPassword.sendReset({ email: 'michael.scott@scranton.com' })
 

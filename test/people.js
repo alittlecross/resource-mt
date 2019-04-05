@@ -17,7 +17,7 @@ describe('class People', () => {
 
   describe('.object', () => {
     it('should return a people object', () => {
-      let result = people.object(support.getPeopleDouble().rows[0])
+      const result = people.object(support.getPeopleDouble().rows[0])
 
       expect(Object.keys(result).length).equal(4)
       expect(result.firstName).equal('Dwight')
@@ -26,7 +26,7 @@ describe('class People', () => {
 
   describe('.buildArray', () => {
     it('should build, and return a people array', () => {
-      let results = people.buildArray(support.getPeopleDouble().rows)
+      const results = people.buildArray(support.getPeopleDouble().rows)
 
       expect(results.length).equal(2)
       expect(Object.keys(results[0]).length).equal(4)
@@ -38,7 +38,7 @@ describe('class People', () => {
     it('should get people from the database, build, and return a people array', async () => {
       sandbox.stub(databasePeople, 'getPeople').returns(support.getPeopleDouble())
 
-      let results = await people.getPeople()
+      const results = await people.getPeople()
 
       expect(results.length).equal(2)
       expect(Object.keys(results[0]).length).equal(4)
