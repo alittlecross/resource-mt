@@ -6,7 +6,9 @@
     <a class='banner-link right' href='/log-out'>log out</a>
     <a class='banner-link right' href='/dashboard'>dashboard</a>
     <% if (user.role === 'Resource Manager') { %>
-      <a class='banner-link' href='/person/add'>add</a>
+      <% if (breadcrumb.text === 'archive') { %>
+        <a class='banner-link' href='/person/add'>add</a>
+      <% } %>
       <a class='banner-link right' href='<%= breadcrumb.route %>'><%= breadcrumb.text %></a>
     <% } %>
   </div>
