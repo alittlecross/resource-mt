@@ -15,7 +15,7 @@ describe('class Form', () => {
     sandbox.restore()
   })
 
-  describe('.object', () => {
+  describe('constructor', () => {
     it('should return an options object', () => {
       const result = new Form()
 
