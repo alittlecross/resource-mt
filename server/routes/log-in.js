@@ -1,7 +1,7 @@
-const logIn = require('../lib/log-in')
+const LogIn = require('../lib/log-in')
 
 module.exports = async (req, res) => {
-  const result = await logIn.authenticate(req.body)
+  const result = await LogIn.authenticate(req.body)
   if (result.status && result.message === undefined) {
     req.session.user = result.user
     res.redirect('/dashboard')

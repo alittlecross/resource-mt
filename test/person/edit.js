@@ -1,7 +1,7 @@
-const addEdit = require('../../server/lib/person/add-edit')
-const databaseEdit = require('../../server/services/person/edit')
-const edit = require('../../server/lib/person/edit')
-const support = require('../support')
+const AddEdit = require('../../server/lib/person/add-edit')
+const DatabaseEdit = require('../../server/services/person/edit')
+const Edit = require('../../server/lib/person/edit')
+const Support = require('../support')
 
 const expect = require('chai').expect
 
@@ -18,11 +18,11 @@ describe('class Edit', () => {
 
   describe('.person', () => {
     it('should update person and skills in the database', async () => {
-      const updatePerson = sandbox.stub(databaseEdit, 'updatePerson')
-      const deleteSkills = sandbox.stub(databaseEdit, 'deleteSkills')
-      const skills = sandbox.stub(addEdit, 'skills')
+      const updatePerson = sandbox.stub(DatabaseEdit, 'updatePerson')
+      const deleteSkills = sandbox.stub(DatabaseEdit, 'deleteSkills')
+      const skills = sandbox.stub(AddEdit, 'skills')
 
-      await edit.person(support.personFormData())
+      await Edit.person(Support.personFormData())
 
       expect(updatePerson.callCount).equal(1)
       expect(deleteSkills.callCount).equal(1)

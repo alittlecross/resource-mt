@@ -1,8 +1,8 @@
-const dbc = require('../../../db/database-connection')
+const DatabaseConnection = require('../../../db/database-connection')
 
-class Database {
+class DatabaseAdd {
   static async addPerson (data) {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       INSERT INTO people (staffid, firstname, surname, email, gradeid, locationid, managerid, roleid, statusid)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING personid;
@@ -10,4 +10,4 @@ class Database {
   }
 }
 
-module.exports = Database
+module.exports = DatabaseAdd

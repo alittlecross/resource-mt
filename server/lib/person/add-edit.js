@@ -1,10 +1,10 @@
-const databaseAddEdit = require('../../services/person/add-edit')
-const databasePeople = require('../../services/people')
+const DatabaseAddEdit = require('../../services/person/add-edit')
+const DatabasePeople = require('../../services/people')
 
 class AddEdit {
   static async personExists (data, personId = '') {
     const query = `WHERE email = '${data.email}' ${personId} OR staffid = '${data.staffId}' ${personId}`
-    const result = await databasePeople.getPeople(query)
+    const result = await DatabasePeople.getPeople(query)
 
     if (result.rowCount === 0) {
       return {
@@ -27,7 +27,7 @@ class AddEdit {
       data.skills.forEach(skillId => {
         string += `INSERT INTO personskills VALUES (${personId}, ${skillId});`
       })
-      await databaseAddEdit.addSkills(string)
+      await DatabaseAddEdit.addSkills(string)
     }
   }
 }

@@ -1,8 +1,8 @@
-const databaseArchive = require('../../services/person/archive')
+const DatabaseArchive = require('../../services/person/archive')
 
 class Archive {
   static async person (archived, personId) {
-    await databaseArchive.change(archived, personId)
+    await DatabaseArchive.change(archived, personId)
   }
 }
 

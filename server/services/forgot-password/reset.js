@@ -1,8 +1,8 @@
-const dbc = require('../../../db/database-connection')
+const DatabaseConnection = require('../../../db/database-connection')
 
-class Database {
+class DatabaseReset {
   static async password (password, hash) {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       UPDATE people
       SET password = $1
       FROM resetrequests
@@ -11,7 +11,7 @@ class Database {
   }
 
   static async request (hash) {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       DELETE FROM resetrequests
       WHERE email IN 
         ( SELECT email
@@ -21,4 +21,4 @@ class Database {
   }
 }
 
-module.exports = Database
+module.exports = DatabaseReset

@@ -1,7 +1,7 @@
-const email = require('../server/lib/email')
-const nodemailer = require('nodemailer')
+const Email = require('../server/lib/email')
 
 const expect = require('chai').expect
+const nodemailer = require('nodemailer')
 
 describe('class Email', () => {
   let sandbox
@@ -23,7 +23,7 @@ describe('class Email', () => {
       const createTransport = sandbox.stub(nodemailer, 'createTransport').returns(transporter)
       const sendMail = sandbox.stub(transporter, 'sendMail')
 
-      await email.send('michael.scott@scranton.com', 'Paper', '<div>We have run out</div>')
+      await Email.send('michael.scott@scranton.com', 'Paper', '<div>We have run out</div>')
 
       expect(createTransport.callCount).equal(1)
       expect(sendMail.callCount).equal(1)
