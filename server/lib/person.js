@@ -18,7 +18,7 @@ class Person {
 
   static buildObject (data) {
     const detailsRow = data.find(row => row.kind === 'details')
-    const person = detailsRow ? new Person(detailsRow) : {}
+    const person = new Person(detailsRow)
     person.skills = data.filter(row => row.kind === 'skill').map(skill => skill.skillid)
 
     return person
