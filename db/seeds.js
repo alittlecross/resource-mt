@@ -1,3 +1,3 @@
-const run = require('./database-scripts')
+const Run = require('./database-scripts')
 
-run.scripts('seeds', 'ketchup')
+Run.scripts('seeds', 'ketchup')

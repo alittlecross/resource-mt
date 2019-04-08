@@ -1,39 +1,34 @@
-const databasePerson = require('../services/person')
+const DatabasePerson = require('../services/person')
 
 class Person {
-  static object (data) {
-    return {
-      personId: data.personid,
-      staffId: data.staffid,
-      firstName: data.firstname,
-      surname: data.surname,
-      email: data.email,
-      gradeId: data.gradeid,
-      locationId: data.locationid,
-      managerId: data.managerid,
-      role: data.role,
-      statusId: data.statusid,
-      skills: [],
-      archived: data.archived
-    }
+  constructor (data) {
+    this.personId = data.personid
+    this.staffId = data.staffid
+    this.firstName = data.firstname
+    this.surname = data.surname
+    this.email = data.email
+    this.gradeId = data.gradeid
+    this.locationId = data.locationid
+    this.managerId = data.managerid
+    this.role = data.role
+    this.statusId = data.statusid
+    this.skills = []
+    this.archived = data.archived
   }
 
   static buildObject (data) {
-    let person
-    data.forEach(row => {
-      if (row.kind === 'details') {
-        person = this.object(row)
-      } else {
-        person.skills.push(row.skillid)
-      }
-    })
+    const detailsRow = data.find(row => row.kind === 'details')
+    const person = detailsRow ? new Person(detailsRow) : {}
+    person.skills = data.filter(row => row.kind === 'skill').map(skill => skill.skillid)
+
     return person
   }
 
   static async getPerson (personId) {
     const query = `WHERE personid = ${personId}`
-    const result = await databasePerson.getPerson(query)
-    return this.buildObject(result.rows)
+    const result = await DatabasePerson.getPerson(query)
+
+    return Person.buildObject(result.rows)
   }
 }
 

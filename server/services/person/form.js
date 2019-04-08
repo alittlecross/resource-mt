@@ -1,8 +1,8 @@
-const dbc = require('../../../db/database-connection')
+const DatabaseConnection = require('../../../db/database-connection')
 
-class Database {
+class DatabaseForm {
   static async getOptions () {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       SELECT 'grade' AS kind, gradeid AS optionid, grade AS option
       FROM grades
 
@@ -39,4 +39,4 @@ class Database {
   }
 }
 
-module.exports = Database
+module.exports = DatabaseForm

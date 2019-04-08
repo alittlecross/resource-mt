@@ -1,6 +1,6 @@
-const databaseForm = require('../../server/services/person/form')
-const form = require('../../server/lib/person/form')
-const support = require('../support')
+const DatabaseForm = require('../../server/services/person/form')
+const Form = require('../../server/lib/person/form')
+const Support = require('../support')
 
 const expect = require('chai').expect
 
@@ -17,7 +17,7 @@ describe('class Form', () => {
 
   describe('.object', () => {
     it('should return an options object', () => {
-      const result = form.object()
+      const result = new Form()
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(0)
@@ -26,7 +26,7 @@ describe('class Form', () => {
 
   describe('.buildObject', () => {
     it('should build, and return an options object', () => {
-      const result = form.buildObject(support.getOptionsDouble().rows)
+      const result = Form.buildObject(Support.getOptionsDouble().rows)
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(3)
@@ -35,9 +35,9 @@ describe('class Form', () => {
 
   describe('.options', () => {
     it('should get options from the database, build, and return an options object', async () => {
-      sandbox.stub(databaseForm, 'getOptions').returns(support.getOptionsDouble())
+      sandbox.stub(DatabaseForm, 'getOptions').returns(Support.getOptionsDouble())
 
-      const result = await form.options()
+      const result = await Form.options()
 
       expect(Object.keys(result).length).equal(6)
       expect(result.roles.length).equal(3)

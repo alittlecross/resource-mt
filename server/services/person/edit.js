@@ -1,8 +1,8 @@
-const dbc = require('../../../db/database-connection')
+const DatabaseConnection = require('../../../db/database-connection')
 
-class Database {
+class DatabaseEdit {
   static async updatePerson (data) {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       UPDATE people
       SET
         staffid = $1,
@@ -20,11 +20,11 @@ class Database {
   }
 
   static async deleteSkills (data) {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       DELETE FROM personskills
       WHERE personid = $1;
     `, [data.personId])
   }
 }
 
-module.exports = Database
+module.exports = DatabaseEdit

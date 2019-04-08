@@ -1,9 +1,9 @@
-const dbc = require('../../../db/database-connection')
+const DatabaseConnection = require('../../../db/database-connection')
 
-class Database {
+class DatabaseAddEdit {
   static async addSkills (string) {
-    return dbc.query(string)
+    return DatabaseConnection.query(string)
   }
 }
 
-module.exports = Database
+module.exports = DatabaseAddEdit

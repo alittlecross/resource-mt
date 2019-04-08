@@ -1,8 +1,8 @@
-const dbc = require('../../db/database-connection')
+const DatabaseConnection = require('../../db/database-connection')
 
-class Database {
+class DatabasePerson {
   static async getPerson (where) {
-    return dbc.query(`
+    return DatabaseConnection.query(`
       SELECT 'details' AS kind, personid, staffid, firstname, surname, email, gradeid, locationid, managerid, role, statusid, archived, 0 AS skillid
       FROM people
       INNER JOIN roles
@@ -20,4 +20,4 @@ class Database {
   }
 }
 
-module.exports = Database
+module.exports = DatabasePerson

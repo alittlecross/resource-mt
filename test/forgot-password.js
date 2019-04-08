@@ -1,6 +1,6 @@
-const databaseForgotPassword = require('../server/services/forgot-password')
-const email = require('../server/lib/email')
-const forgotPassword = require('../server/lib/forgot-password')
+const DatabaseForgotPassword = require('../server/services/forgot-password')
+const Email = require('../server/lib/email')
+const ForgotPassword = require('../server/lib/forgot-password')
 
 const expect = require('chai').expect
 
@@ -17,10 +17,10 @@ describe('class ForgotPassword', () => {
 
   describe('.sendReset', () => {
     it('should send a password reset request email', async () => {
-      const storeResetRequest = sandbox.stub(databaseForgotPassword, 'storeResetRequest')
-      const send = sandbox.stub(email, 'send')
+      const storeResetRequest = sandbox.stub(DatabaseForgotPassword, 'storeResetRequest')
+      const send = sandbox.stub(Email, 'send')
 
-      await forgotPassword.sendReset({ email: 'michael.scott@scranton.com' })
+      await ForgotPassword.sendReset({ email: 'michael.scott@scranton.com' })
 
       expect(storeResetRequest.callCount).equal(1)
       expect(send.callCount).equal(1)

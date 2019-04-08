@@ -1,4 +1,4 @@
-const reset = require('../../lib/forgot-password/reset')
+const Reset = require('../../lib/forgot-password/reset')
 
 module.exports = {
   get: (req, res) => {
@@ -6,7 +6,7 @@ module.exports = {
   },
   post: async (req, res) => {
     if (req.body.password === req.body.repassword) {
-      await reset.password(req.body.password, req.params.hash)
+      await Reset.password(req.body.password, req.params.hash)
       res.redirect('/')
     } else {
       req.session.flash = { message: 'passwords did not match' }

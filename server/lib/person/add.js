@@ -1,10 +1,10 @@
-const addEdit = require('./add-edit')
-const databaseAdd = require('../../services/person/add')
+const AddEdit = require('./add-edit')
+const DatabaseAdd = require('../../services/person/add')
 
 class Add {
   static async person (data) {
-    const result = await databaseAdd.addPerson(data)
-    await addEdit.skills(data, result.rows[0].personid)
+    const result = await DatabaseAdd.addPerson(data)
+    await AddEdit.skills(data, result.rows[0].personid)
     return result
   }
 }

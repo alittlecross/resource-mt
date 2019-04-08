@@ -1,12 +1,13 @@
+const DatabaseReset = require('../../services/forgot-password/reset')
+
 const bcrypt = require('bcrypt')
-const databaseReset = require('../../services/forgot-password/reset')
 const saltRounds = 10
 
 class Reset {
   static async password (password, hash) {
     const hashedPassword = await bcrypt.hashSync(password, saltRounds)
-    await databaseReset.password(hashedPassword, hash)
-    await databaseReset.request(hash)
+    await DatabaseReset.password(hashedPassword, hash)
+    await DatabaseReset.request(hash)
   }
 }
 

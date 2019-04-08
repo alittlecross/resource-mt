@@ -1,16 +1,17 @@
-const dbc = require('./database-connection')
+const DatabaseConnection = require('./database-connection')
+
 const fs = require('fs')
 
 class Run {
   static async updateTable (table, script) {
-    await dbc.query(`
+    await DatabaseConnection.query(`
       INSERT INTO ${table} (script)
       VALUES ('${script}');
     `)
   }
 
   static async scriptAlreadyRan (table, script) {
-    const result = await dbc.query(`
+    const result = await DatabaseConnection.query(`
       SELECT *
       FROM ${table}
       WHERE script = '${script}';
@@ -19,7 +20,7 @@ class Run {
   }
 
   static async tableExists (table) {
-    const result = await dbc.query(`
+    const result = await DatabaseConnection.query(`
       SELECT EXISTS (
         SELECT 1
         FROM   information_schema.tables 
@@ -32,7 +33,7 @@ class Run {
 
   static async createTable (table) {
     if (!await this.tableExists(table)) {
-      await dbc.query(`
+      await DatabaseConnection.query(`
         CREATE TABLE ${table} (
           id SERIAL PRIMARY KEY,
           script varchar(50),
@@ -54,7 +55,7 @@ class Run {
     for (const script of scripts) {
       if (await this.scriptAlreadyRan(type, script)) {
         const sql = fs.readFileSync(directory + script).toString()
-        await dbc.query(sql)
+        await DatabaseConnection.query(sql)
         await this.updateTable(type, script)
         console.log(`${type} ${script}`)
       }
