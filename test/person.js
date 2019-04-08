@@ -1,5 +1,5 @@
 const databasePerson = require('../server/services/person')
-const person = require('../server/lib/person')
+const Person = require('../server/lib/person')
 const support = require('./support')
 
 const expect = require('chai').expect
@@ -15,9 +15,9 @@ describe('class Person', () => {
     sandbox.restore()
   })
 
-  describe('.object', () => {
+  describe('constructor', () => {
     it('should return a person object', () => {
-      const result = person.object(support.getPersonDouble().rows[0])
+      const result = new Person(support.getPersonDouble().rows[0])
 
       expect(Object.keys(result).length).equal(12)
       expect(result.skills.length).equal(0)
@@ -27,7 +27,7 @@ describe('class Person', () => {
 
   describe('.buildObject', () => {
     it('should build, and return a person object', () => {
-      const result = person.buildObject(support.getPersonDouble().rows)
+      const result = Person.fromRows(support.getPersonDouble().rows)
 
       expect(Object.keys(result).length).equal(12)
       expect(result.skills.length).equal(1)
@@ -39,7 +39,7 @@ describe('class Person', () => {
     it('should get person and skills from the database, build, and return a person object', async () => {
       sandbox.stub(databasePerson, 'getPerson').returns(support.getPersonDouble())
 
-      const result = await person.getPerson(1)
+      const result = await Person.getPerson(1)
 
       expect(Object.keys(result).length).equal(12)
       expect(result.skills.length).equal(1)
