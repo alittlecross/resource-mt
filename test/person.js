@@ -33,6 +33,11 @@ describe('class Person', () => {
       expect(result.skills.length).equal(1)
       expect(result.firstName).equal('Michael')
     })
+    it('should return empty object for unknown person', () => {
+      const result = Person.fromRows([])
+      expect(Object.keys(result).length).equal(1)
+      expect(result.skills.length).equal(0)
+    })
   })
 
   describe('.getPerson', () => {
