@@ -1,17 +1,17 @@
 const DatabaseConnection = require('../../db/database-connection')
 
-class DatabasePeople {
-  static async getPeople () {
+class DatabaseDashboard {
+  static async getPeople (personId) {
     return DatabaseConnection.query(`
       SELECT *
       FROM people
       INNER JOIN roles
       ON people.roleid = roles.roleid
-      WHERE archived = FALSE
+      WHERE managerid = $1 AND personid != $1 AND archived = FALSE
 
       ORDER BY firstname, surname
-    `)
+    `, [personId])
   }
 }
 
-module.exports = DatabasePeople
+module.exports = DatabaseDashboard

@@ -17,8 +17,8 @@ class People {
     return people
   }
 
-  static async getPeople (query) {
-    const results = await DatabasePeople.getPeople(query)
+  static async getPeople () {
+    const results = await DatabasePeople.getPeople()
 
     return this.buildArray(results.rows)
   }

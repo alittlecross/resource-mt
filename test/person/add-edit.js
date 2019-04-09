@@ -1,6 +1,7 @@
 const AddEdit = require('../../server/lib/person/add-edit')
+const DatabaseAdd = require('../../server/services/person/add')
 const DatabaseAddEdit = require('../../server/services/person/add-edit')
-const DatabasePeople = require('../../server/services/people')
+const DatabaseEdit = require('../../server/services/person/edit')
 const Support = require('../support')
 
 const expect = require('chai').expect
@@ -16,9 +17,9 @@ describe('class AddEdit', () => {
     sandbox.restore()
   })
 
-  describe('.personExists', () => {
+  describe('.personExists (add)', () => {
     it(`should return false if the person doesn't exist in the database`, async () => {
-      sandbox.stub(DatabasePeople, 'getPeople').returns(Support.getPeopleDoubleZero())
+      sandbox.stub(DatabaseAdd, 'getPeople').returns(Support.getPeopleDoubleZero())
 
       const result = await AddEdit.personExists(Support.personFormData())
 
@@ -26,9 +27,28 @@ describe('class AddEdit', () => {
     })
 
     it(`should return true if the person exists in the database`, async () => {
-      sandbox.stub(DatabasePeople, 'getPeople').returns(Support.getPeopleDouble())
+      sandbox.stub(DatabaseAdd, 'getPeople').returns(Support.getPeopleDouble())
 
       const result = await AddEdit.personExists(Support.personFormData())
+
+      expect(result.status).equal(true)
+      expect(result.message).equal('staff number or email already in use')
+    })
+  })
+
+  describe('.personExists (edit)', () => {
+    it(`should return false if the person doesn't exist in the database`, async () => {
+      sandbox.stub(DatabaseEdit, 'getPeople').returns(Support.getPeopleDoubleZero())
+
+      const result = await AddEdit.personExists(Support.personFormData(), true)
+
+      expect(result.status).equal(false)
+    })
+
+    it(`should return true if the person exists in the database`, async () => {
+      sandbox.stub(DatabaseEdit, 'getPeople').returns(Support.getPeopleDouble())
+
+      const result = await AddEdit.personExists(Support.personFormData(), true)
 
       expect(result.status).equal(true)
       expect(result.message).equal('staff number or email already in use')

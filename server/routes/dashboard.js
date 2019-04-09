@@ -1,7 +1,6 @@
-const People = require('../lib/people')
+const Dashboard = require('../lib/dashboard')
 
 module.exports = async (req, res) => {
-  const query = `WHERE managerid = ${req.session.user.personId} AND personid != ${req.session.user.personId} AND archived = FALSE`
-  const results = await People.getPeople(query)
+  const results = await Dashboard.getPeople(req.session.user.personId)
   res.render('dashboard.ejs', { people: results, user: req.session.user })
 }
