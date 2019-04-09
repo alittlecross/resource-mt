@@ -14,8 +14,7 @@ module.exports = {
     }
   },
   post: async (req, res) => {
-    const personId = `AND personid != ${req.body.personId}`
-    const result = await AddEdit.personExists(req.body, personId)
+    const result = await AddEdit.personExists(req.body, true)
     if (!result.status) {
       await Edit.person(req.body)
       res.redirect(`/${req.body.personId}/person`)

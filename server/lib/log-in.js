@@ -1,12 +1,11 @@
-const DatabasePeople = require('../services/people')
+const DatabaseLogIn = require('../services/log-in')
 const People = require('../lib/people')
 
 const bcrypt = require('bcrypt')
 
 class LogIn {
   static async authenticate (data) {
-    const query = `WHERE email = '${data.email}'`
-    const result = await DatabasePeople.getPeople(query)
+    const result = await DatabaseLogIn.getPeople(data.email)
     if (result.rowCount > 0 && data.password === undefined) {
       return {
         status: true,

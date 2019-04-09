@@ -1,4 +1,4 @@
-const DatabasePeople = require('../server/services/people')
+const DatabaseLogIn = require('../server/services/log-in')
 const LogIn = require('../server/lib/log-in')
 const People = require('../server/lib/people')
 const Support = require('./support')
@@ -19,7 +19,7 @@ describe('class logIn', () => {
   describe('.authenticate', () => {
     it('correct email and password should be successful', async () => {
       sandbox.createStubInstance(People, Support.objectDouble())
-      sandbox.stub(DatabasePeople, 'getPeople').returns(Support.getPeopleDouble())
+      sandbox.stub(DatabaseLogIn, 'getPeople').returns(Support.getPeopleDouble())
 
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
 
@@ -28,7 +28,7 @@ describe('class logIn', () => {
     })
 
     it('incorrect password should be unsuccessful', async () => {
-      sandbox.stub(DatabasePeople, 'getPeople').returns(Support.getPeopleDouble())
+      sandbox.stub(DatabaseLogIn, 'getPeople').returns(Support.getPeopleDouble())
 
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'BattlestarGalactica' })
 
@@ -37,7 +37,7 @@ describe('class logIn', () => {
     })
 
     it('incorrect email should be unsuccessful', async () => {
-      sandbox.stub(DatabasePeople, 'getPeople').returns({ rowCount: 0 })
+      sandbox.stub(DatabaseLogIn, 'getPeople').returns({ rowCount: 0 })
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
 
       expect(result.status).equal(false)
@@ -45,7 +45,7 @@ describe('class logIn', () => {
     })
 
     it('correct email with no password should be unsuccessful', async () => {
-      sandbox.stub(DatabasePeople, 'getPeople').returns({ rowCount: 1 })
+      sandbox.stub(DatabaseLogIn, 'getPeople').returns({ rowCount: 1 })
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com' })
 
       expect(result.status).equal(true)

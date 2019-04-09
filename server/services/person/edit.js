@@ -1,6 +1,18 @@
 const DatabaseConnection = require('../../../db/database-connection')
 
 class DatabaseEdit {
+  static async getPeople (data) {
+    return DatabaseConnection.query(`
+      SELECT *
+      FROM people
+      INNER JOIN roles
+      ON people.roleid = roles.roleid
+      WHERE email = $1 AND personid != $2 OR staffid = $3 AND personid != $2
+
+      ORDER BY firstname, surname
+    `, [data.email, data.personId, data.staffId])
+  }
+
   static async updatePerson (data) {
     return DatabaseConnection.query(`
       UPDATE people
