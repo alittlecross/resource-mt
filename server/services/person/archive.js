@@ -5,7 +5,7 @@ class DatabaseArchive {
     return DatabaseConnection.query(`
     UPDATE people
     SET archived = $1
-    WHERE personid = $2
+    WHERE personid = $2;
     `, [archived, personId])
   }
 }

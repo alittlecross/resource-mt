@@ -75,10 +75,10 @@ class Support {
     }
   }
 
-  static objectDouble () {
+  static peopleObjectDouble () {
     return {
       personId: 2,
-      firstName: 'Dwight',
+      firstName: 'Twight',
       surname: 'Schrute',
       role: 'Assistant to the Regional Manager'
     }
@@ -99,6 +99,35 @@ class Support {
         { kind: 'skill', optionid: 2, option: 'Farming' },
         { kind: 'skill', optionid: 3, option: 'Selling' },
         { kind: 'status', optionid: 1, option: 'Permanent' } ]
+    }
+  }
+
+  static optionObjectDouble () {
+    return {
+      optionId: 42,
+      option: `Don't Panic`
+    }
+  }
+
+  static submitRequestDouble () {
+    return {
+      personId: '1',
+      start: '24/03/2005',
+      end: '',
+      dates: '2005-3-24',
+      typeId: '1',
+      durationId: '3'
+    }
+  }
+
+  static submitRequestNoJsDouble () {
+    return {
+      personId: '1',
+      start: '24/03/2005',
+      end: '',
+      dates: '',
+      typeId: '1',
+      durationId: '3'
     }
   }
 

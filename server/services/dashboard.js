@@ -9,7 +9,7 @@ class DatabaseDashboard {
       ON people.roleid = roles.roleid
       WHERE managerid = $1 AND personid != $1 AND archived = FALSE
 
-      ORDER BY firstname, surname
+      ORDER BY firstname, surname;
     `, [personId])
   }
 }

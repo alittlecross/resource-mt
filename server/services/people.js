@@ -9,7 +9,7 @@ class DatabasePeople {
       ON people.roleid = roles.roleid
       WHERE archived = FALSE
 
-      ORDER BY firstname, surname
+      ORDER BY firstname, surname;
     `)
   }
 }

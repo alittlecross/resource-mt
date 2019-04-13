@@ -9,7 +9,7 @@ class DatabaseAdd {
       ON people.roleid = roles.roleid
       WHERE email = $1 OR staffid = $2
 
-      ORDER BY firstname, surname
+      ORDER BY firstname, surname;
     `, [data.email, data.staffId])
   }
 
