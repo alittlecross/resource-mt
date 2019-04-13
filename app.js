@@ -35,6 +35,9 @@ app.post('/forgot-password', require('./server/routes/forgot-password').post)
 app.get('/:hash/forgot-password', require('./server/routes/forgot-password/reset').get)
 app.post('/:hash/forgot-password', require('./server/routes/forgot-password/reset').post)
 
+app.get('/leave', require('./server/routes/leave').get)
+app.post('/leave', require('./server/routes/leave').post)
+
 app.listen(port)
 
 module.exports = app

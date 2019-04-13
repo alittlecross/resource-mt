@@ -1,48 +1,23 @@
 const DatabaseForm = require('../../services/person/form')
+const Option = require('../person/form/option')
 
 class Form {
-  constructor () {
-    this.grades = []
-    this.locations = []
-    this.managers = []
-    this.roles = []
-    this.statuses = []
-    this.skills = []
+  constructor (data) {
+    this.grades = this.filterData(data, 'grade')
+    this.locations = this.filterData(data, 'location')
+    this.managers = this.filterData(data, 'manager')
+    this.roles = this.filterData(data, 'role')
+    this.statuses = this.filterData(data, 'status')
+    this.skills = this.filterData(data, 'skill')
   }
 
-  static buildObject (data) {
-    const options = new Form()
-    options.grades = data.filter(row => row.kind === 'grade').map(option => {
-      this.optionId = option.optionid
-      this.option = option.option
-    })
-    options.locations = data.filter(row => row.kind === 'location').map(option => {
-      this.optionId = option.optionid
-      this.option = option.option
-    })
-    options.managers = data.filter(row => row.kind === 'manager').map(option => {
-      this.optionId = option.optionid
-      this.option = option.option
-    })
-    options.roles = data.filter(row => row.kind === 'role').map(option => {
-      this.optionId = option.optionid
-      this.option = option.option
-    })
-    options.statuses = data.filter(row => row.kind === 'status').map(option => {
-      this.optionId = option.optionid
-      this.option = option.option
-    })
-    options.skills = data.filter(row => row.kind === 'skill').map(option => {
-      this.optionId = option.optionid
-      this.option = option.option
-    })
-
-    return options
+  filterData (data, kind) {
+    return data.filter(row => row.kind === kind).map(option => new Option(option))
   }
 
   static async options () {
     const results = await DatabaseForm.getOptions()
-    return this.buildObject(results.rows)
+    return new Form(results.rows)
   }
 }
 

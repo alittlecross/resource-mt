@@ -9,7 +9,7 @@ class DatabaseEdit {
       ON people.roleid = roles.roleid
       WHERE email = $1 AND personid != $2 OR staffid = $3 AND personid != $2
 
-      ORDER BY firstname, surname
+      ORDER BY firstname, surname;
     `, [data.email, data.personId, data.staffId])
   }
 

@@ -9,7 +9,7 @@ class DatabaseLogIn {
       ON people.roleid = roles.roleid
       WHERE email = $1
 
-      ORDER BY firstname, surname
+      ORDER BY firstname, surname;
     `, [email])
   }
 }

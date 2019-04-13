@@ -1,0 +1,61 @@
+<head>
+  <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+  <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+
+  <script>
+    const dateFormat = 'dd/mm/yy'
+    const dateStrings = <%- JSON.stringify(bankHolidays) %>
+    const bankHolidays = dateStrings.map(s => Date.parse(s))
+
+    const clean = d => d.getDay() !== 0 && d.getDay() !== 6 && !bankHolidays.includes(d.getTime())
+    const convertDate = d => {
+      const split = d.split('/')
+      return new Date(split[2], split[1] - 1, split[0])
+    }
+    const getDate = d => $.datepicker.parseDate(dateFormat, d.value)
+
+    const createRange = () => {
+      const s = convertDate(document.getElementById('start').value)
+      const e = convertDate(document.getElementById('end').value)
+      const range = [s]
+
+      let d = s.getDate()
+
+      while (range[range.length - 1] < e) range.push(new Date(s.getFullYear(), s.getMonth(), ++d))
+
+      const leave = range.filter(date => clean(date))
+      const dates = leave.map(d => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`)
+      const c = leave.length
+
+      document.getElementById('count').innerText = c > 1 ? `${c} days` : `${c} day`
+      document.getElementById('dates').setAttribute('value', dates)
+    }
+    
+    $(() => {
+      const options = {
+        dateFormat: dateFormat,
+        beforeShowDay: date => [ clean(date) ]
+      }
+      const start = $('#start').datepicker(options).on('change', function() {
+        createRange()
+        end.datepicker('option', 'minDate', getDate(this))
+      })
+      const end = $('#end').datepicker(options).on('change', function() {
+        createRange()
+        start.datepicker('option', 'maxDate', getDate(this))
+      })
+    })
+
+    const toggleEnd = () => {
+      if (document.getElementById('diebus').checked === true) {
+        document.getElementById('end-date').style.display = 'block'
+        document.getElementById('start-label').innerText = 'start'
+      } else {
+        createRange()
+        document.getElementById('end').value = ''
+        document.getElementById('end-date').style.display = 'none'
+        document.getElementById('start-label').innerText = 'date'
+      }
+    }
+  </script>
+</head>

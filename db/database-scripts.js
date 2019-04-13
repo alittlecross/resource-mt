@@ -32,7 +32,7 @@ class Run {
   }
 
   static async createTable (table) {
-    if (!await this.tableExists(table)) {
+    if (!await Run.tableExists(table)) {
       await DatabaseConnection.query(`
         CREATE TABLE ${table} (
           id SERIAL PRIMARY KEY,
@@ -46,17 +46,17 @@ class Run {
 
   static async scripts (type, database) {
     process.env.PKDATABASE = database
-    await this.createTable(type)
+    await Run.createTable(type)
     const directory = `./db/${type}/`
     const scripts = []
     fs.readdirSync(directory).forEach(file => {
       scripts.push(file)
     })
     for (const script of scripts) {
-      if (await this.scriptAlreadyRan(type, script)) {
+      if (await Run.scriptAlreadyRan(type, script)) {
         const sql = fs.readFileSync(directory + script).toString()
         await DatabaseConnection.query(sql)
-        await this.updateTable(type, script)
+        await Run.updateTable(type, script)
         console.log(`${type} ${script}`)
       }
     }
