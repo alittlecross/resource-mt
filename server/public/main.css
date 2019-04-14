@@ -519,18 +519,6 @@ input[type='submit'].leave-form {
   }
 }
 
-@media screen and (max-width: 441px) {
-  input[type='submit'].authenticate {
-    margin-right: 0;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  #ui-datepicker-div[style] {
-    left: 20px !important;
-  }
-}
-
 @media screen and (max-width: 313px) {
   #forgot-password {
     float: left;

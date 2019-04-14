@@ -57,5 +57,21 @@
         document.getElementById('start-label').innerText = 'date'
       }
     }
+
+    const recentre = () => {
+      const width = document.querySelector('body').offsetWidth + 40
+      if (width < 452) {
+        const left = (width - 280) / 2
+        const style = document.createElement('style')
+        style.innerHTML = `
+          #ui-datepicker-div[style] {
+            left: ${left}px !important;
+          }
+        `
+        const script = document.querySelector('script')
+        script.parentNode.insertBefore(style, script)
+      }
+    }
+
   </script>
 </head>
