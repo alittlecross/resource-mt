@@ -3,11 +3,21 @@ const DatabaseConnection = require('../../db/database-connection')
 class DatabaseLeave {
   static async bankHolidays () {
     return DatabaseConnection.query(`
-      SELECT bankholidays.holidaydate, descriptions.description
+      SELECT holidaydate, description
       FROM bankholidays
       INNER JOIN descriptions
-      ON bankholidays.descriptionid = descriptions.descriptionid;
+      ON bankholidays.descriptionid = descriptions.descriptionid
+      
+      ORDER BY holidaydate;
     `)
+  }
+
+  static async getRequest (data) {
+    return DatabaseConnection.query(`
+      SELECT *
+      FROM leave
+      WHERE personid = $1;
+    `, [data.personId])
   }
 
   static async submitRequest (data) {
