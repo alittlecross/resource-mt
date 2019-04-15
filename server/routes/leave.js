@@ -8,7 +8,9 @@ module.exports = {
     res.render('leave.ejs', { bankHolidays: bankHolidays, user: req.session.user })
   },
   post: async (req, res) => {
-    await Leave.submitRequest(req.body)
-    res.redirect('/leave')
+    if (parseInt(req.body.personId) === req.session.user.personId) {
+      await Leave.submitRequest(req.body)
+      res.redirect('/leave')
+    }
   }
 }
