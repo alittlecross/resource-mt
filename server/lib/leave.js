@@ -4,7 +4,7 @@ class Leave {
   constructor (data) {
     this.date = this.formatDate(data.leavedate)
     this.duration = this.formatDuration(data.duration)
-    this.as = data.leavetype
+    this.type = data.leavetype
     this.status = this.formatStatus(data.approved)
   }
 

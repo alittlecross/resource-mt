@@ -7,14 +7,16 @@
     const dateStrings = <%- JSON.stringify(bankHolidays) %>
     const bankHolidays = dateStrings.map(s => Date.parse(s))
 
-    const clean = d => d.getDay() !== 0 && d.getDay() !== 6 && !bankHolidays.includes(d.getTime())
-
-    const getDate = d => $.datepicker.parseDate(dateFormat, d.value)
-
     const convertDate = d => {
       const split = d.split('/')
       return new Date(split[2], split[1] - 1, split[0])
     }
+
+    const clean = d => d.getDay() !== 0 && d.getDay() !== 6 && !bankHolidays.includes(d.getTime())
+
+    const getDate = d => $.datepicker.parseDate(dateFormat, d.value)
+
+    const checked = () => document.getElementById('dies').checked === true
 
     const createRange = () => {
       const start = document.getElementById('start').value
@@ -37,8 +39,8 @@
         const dates = leave.map(d => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`)
         const c = leave.length
 
-        count.innerText = (c > 1) ? `${c} days` : `${c} day`
         document.getElementById('dates').setAttribute('value', dates)
+        count.innerText = checked() ? (c > 1) ? `${c} days` : '1 day' : 'half day'
       }
     }
     
@@ -58,32 +60,30 @@
     })
 
     const toggleEnd = () => {
-      if (document.getElementById('diebus').checked === true) {
+      if (checked()) {
         document.getElementById('end-date').style.display = 'block'
         document.getElementById('start-label').innerText = 'start'
       } else {
         document.getElementById('end').value = ''
         document.getElementById('end-date').style.display = 'none'
         document.getElementById('start-label').innerText = 'date'
-        createRange()
         $('#end').trigger('change')
         document.getElementById('ui-datepicker-div').innerHTML = ''
       }
+      createRange()
     }
 
     const recentre = () => {
       const width = document.querySelector('body').offsetWidth + 40
-      if (width < 452) {
-        const left = (width - 280) / 2
-        const style = document.createElement('style')
-        style.innerHTML = `
-          #ui-datepicker-div[style] {
-            left: ${left}px !important;
-          }
-        `
-        const script = document.querySelector('script')
-        script.parentNode.insertBefore(style, script)
-      }
+      const left = (width < 452) ? (width - 280) / 2 : document.getElementById('start').offsetLeft - 39.5
+      const style = document.createElement('style')
+      style.innerHTML = `
+        #ui-datepicker-div[style] {
+          left: ${left}px !important;
+        }
+      `
+      const script = document.querySelector('script')
+      script.parentNode.insertBefore(style, script)
     }
   </script>
 </head>
