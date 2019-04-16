@@ -152,6 +152,25 @@ class Support {
       statusId: '1'
     }
   }
+
+  static getRequestDouble () {
+    return {
+      rowCount: 3,
+      rows:
+      [ { leavedate: '2019-04-03T23:00:00.000Z',
+        duration: 'range',
+        leavetype: 'annual',
+        approved: false },
+      { leavedate: '2019-04-02T23:00:00.000Z',
+        duration: 'range',
+        leavetype: 'annual',
+        approved: false },
+      { leavedate: '2019-04-01T23:00:00.000Z',
+        duration: 'range',
+        leavetype: 'annual',
+        approved: false } ]
+    }
+  }
 }
 
 module.exports = Support
