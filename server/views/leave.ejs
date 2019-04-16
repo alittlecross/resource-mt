@@ -17,11 +17,11 @@
         <input type='text' name='personId' hidden value='<%= user.personId %>'>
 
         <div class='form-row'>
-          <label id='start-label' class='leave-label'>date</label>
+          <label id='start-label' class='leave-label'>start</label>
           <input class='leave-form right' type='text' id='start' name='start' placeholder='dd/mm/yyyy' required>
         </div>
     
-        <div id='end-date' class='form-row' style='display: none'>
+        <div id='end-date' class='form-row'>
           <label class='leave-label'>end</label>
           <input class='leave-form right' type='text' id='end' name='end' placeholder='dd/mm/yyyy'>
         </div>
@@ -44,10 +44,7 @@
           <label class='leave-duration' for='post'>pm</label>
           
           <input class='hidden' type='radio' id='dies' name='durationId' value='3' onclick='toggleEnd()' checked>
-          <label class='leave-duration' for='dies'>both</label>
-          
-          <input class='hidden' type='radio' id='diebus' name='durationId' value='4' onclick='toggleEnd()'>
-          <label class='leave-duration' for='diebus'>more</label>
+          <label class='leave-duration' for='dies'>all day</label>
         </div>
     
       </form>
@@ -63,14 +60,14 @@
         <tr>
           <th class='date'>date</th>
           <th class='duration'>duration</th>
-          <th class='as'>as</th>
+          <th class='type'>type</th>
           <th class='status'>status</th>
         </tr>
       <% leave.forEach(function(request) { %>
         <tr>
           <td class='date'><%= request.date %></td>
           <td class='duration'><%= request.duration %></td>
-          <td class='as'><%= request.as %></td>
+          <td class='type'><%= request.type %></td>
           <td class='status'><%= request.status %></td>
         </tr>
       <% }) %>

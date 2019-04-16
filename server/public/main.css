@@ -98,28 +98,6 @@ select, th, td,
 
 /* #region color */
 
-#leave td,
-#forgot-password,
-.banner-link,
-.count-label,
-.field-label,
-.leave-label,
-.person:hover,
-.ui-datepicker-prev span,
-.ui-datepicker-next span,
-.ui-datepicker-unselectable span {
-  color: #777777;
-}
-
-.ui-datepicker-current-day a {
-  color: #222222;
-}
-
-#forgot-password:hover,
-.banner-link:hover {
-  color: #ffffff;
-}
-
 input[type=checkbox]:checked + label,
 input[type=radio]:checked + label,
 input[type='submit'].authenticate:hover,
@@ -141,6 +119,33 @@ input[type='submit'].person-record:hover,
 
 .ui-datepicker-current-day {
   background-color: #ffffff;
+}
+
+input[type=checkbox]:checked + label,
+input[type=radio]:checked + label {
+  box-shadow: 0 0 3px 2px #005eff;
+}
+
+#leave td,
+#forgot-password,
+.banner-link,
+.count-label,
+.field-label,
+.leave-label,
+.person:hover,
+.ui-datepicker-prev span,
+.ui-datepicker-next span,
+.ui-datepicker-unselectable span {
+  color: #777777;
+}
+
+.ui-datepicker-current-day a {
+  color: #222222;
+}
+
+#forgot-password:hover,
+.banner-link:hover {
+  color: #ffffff;
 }
 
 /* #endregion */
@@ -323,7 +328,6 @@ input[type='submit'].person-record {
 }
 
 #leave-right {
-  width: 377px;
   vertical-align: top;
 }
 
@@ -378,19 +382,10 @@ input.leave-form {
   text-align: center;
 }
 
-.leave-type {
+.leave-type, .leave-duration {
   margin: 5px;
   border-radius: 5px;
   width: 49px;
-  padding: 10px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.leave-duration {
-  margin: 5px;
-  border-radius: 5px;
-  width: 38px;
   padding: 10px;
   cursor: pointer;
   text-align: center;
@@ -429,6 +424,22 @@ input[type='submit'].leave-form {
 
 #leave th {
   font-weight: 400;
+}
+
+#leave th.date {
+  width: 71px;
+}
+
+#leave th.duration {
+  width: 66px;
+}
+
+#leave th.type {
+  width: 55px;
+}
+
+#leave th.status {
+  width: 65px;
 }
 
 /* #endregion */
@@ -553,6 +564,16 @@ input[type='submit'].leave-form {
     width: 600px;
   }
 
+  #leave-container {
+    width: 770px;
+  }
+
+  #leave-left {
+    margin-right: 16px;
+  }
+}
+
+@media screen and (max-width: 809px) {
   #leave-container {
     display: block;
     width: auto;
