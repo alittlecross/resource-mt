@@ -8,49 +8,74 @@
     <a class='banner-link right' href='/dashboard'>dashboard</a>
   </div>
 
-  <div id='sub-title'>leave request</div>
-
-  <form id='leave-form' action='/leave' autocomplete='off' method='POST'>
-
-    <input type='text' name='personId' hidden value='<%= user.personId %>'>
-    <div class='form-row'>
-      <label id='start-label' class='leave-label'>date</label>
-      <input class='leave-form right' type='text' id='start' name='start' placeholder='dd/mm/yyyy' required>
-    </div>
-
-    <div id='end-date' class='form-row' style='display: none'>
-      <label class='leave-label'>end</label>
-      <input class='leave-form right' type='text' id='end' name='end' placeholder='dd/mm/yyyy'>
-    </div>
-
-    <input id='dates' type='text' name='dates' value=''>
-
-    <div class='button-row top'>
-      <input class='hidden' type='radio' id='annui' name='typeId' value='1' checked>
-      <label class='leave-type' for='annui'>annual</label>
-      
-      <input class='hidden' type='radio' id='lento' name='typeId' value='2'>
-      <label class='leave-type' for='lento'>flexi</label>
-    </div>
-    
-    <div class='button-row bottom'>
-      <input class='hidden' type='radio' id='ante' name='durationId' value='1' onclick='toggleEnd()'>
-      <label class='leave-duration' for='ante'>am</label>
-      
-      <input class='hidden' type='radio' id='post' name='durationId' value='2' onclick='toggleEnd()'>
-      <label class='leave-duration' for='post'>pm</label>
-      
-      <input class='hidden' type='radio' id='dies' name='durationId' value='3' onclick='toggleEnd()' checked>
-      <label class='leave-duration' for='dies'>both</label>
-      
-      <input class='hidden' type='radio' id='diebus' name='durationId' value='4' onclick='toggleEnd()'>
-      <label class='leave-duration' for='diebus'>more</label>
-    </div>
-
-  </form>
+  <div id='leave-container'>
+    <div id='leave-left'>
+      <div id='sub-title'>leave request</div>
   
-  <input class='leave-form' form='leave-form' type='submit' value='submit'>
-  <label id='count' class='count-label'></label>
+      <form id='leave-form' action='/leave' autocomplete='off' method='POST'>
+    
+        <input type='text' name='personId' hidden value='<%= user.personId %>'>
 
-  </table>
+        <div class='form-row'>
+          <label id='start-label' class='leave-label'>date</label>
+          <input class='leave-form right' type='text' id='start' name='start' placeholder='dd/mm/yyyy' required>
+        </div>
+    
+        <div id='end-date' class='form-row' style='display: none'>
+          <label class='leave-label'>end</label>
+          <input class='leave-form right' type='text' id='end' name='end' placeholder='dd/mm/yyyy'>
+        </div>
+    
+        <input id='dates' type='text' name='dates' hidden value=''>
+    
+        <div class='button-row top'>
+          <input class='hidden' type='radio' id='annui' name='typeId' value='1' checked>
+          <label class='leave-type' for='annui'>annual</label>
+          
+          <input class='hidden' type='radio' id='lento' name='typeId' value='2'>
+          <label class='leave-type' for='lento'>flexi</label>
+        </div>
+        
+        <div class='button-row bottom'>
+          <input class='hidden' type='radio' id='ante' name='durationId' value='1' onclick='toggleEnd()'>
+          <label class='leave-duration' for='ante'>am</label>
+          
+          <input class='hidden' type='radio' id='post' name='durationId' value='2' onclick='toggleEnd()'>
+          <label class='leave-duration' for='post'>pm</label>
+          
+          <input class='hidden' type='radio' id='dies' name='durationId' value='3' onclick='toggleEnd()' checked>
+          <label class='leave-duration' for='dies'>both</label>
+          
+          <input class='hidden' type='radio' id='diebus' name='durationId' value='4' onclick='toggleEnd()'>
+          <label class='leave-duration' for='diebus'>more</label>
+        </div>
+    
+      </form>
+  
+      <input class='leave-form' form='leave-form' type='submit' value='submit'>
+      <label id='count' class='count-label'></label>
+    </div>
+  
+    <div id='leave-right'>
+      <div id='sub-title'>leave</div>
+  
+      <table id='leave'>
+        <tr>
+          <th class='date'>date</th>
+          <th class='duration'>duration</th>
+          <th class='as'>as</th>
+          <th class='status'>status</th>
+        </tr>
+      <% leave.forEach(function(request) { %>
+        <tr>
+          <td class='date'><%= request.date %></td>
+          <td class='duration'><%= request.duration %></td>
+          <td class='as'><%= request.as %></td>
+          <td class='status'><%= request.status %></td>
+        </tr>
+      <% }) %>
+      </table>
+
+    </div>
+  </div>
 </body>

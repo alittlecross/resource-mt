@@ -8,27 +8,38 @@
     const bankHolidays = dateStrings.map(s => Date.parse(s))
 
     const clean = d => d.getDay() !== 0 && d.getDay() !== 6 && !bankHolidays.includes(d.getTime())
+
+    const getDate = d => $.datepicker.parseDate(dateFormat, d.value)
+
     const convertDate = d => {
       const split = d.split('/')
       return new Date(split[2], split[1] - 1, split[0])
     }
-    const getDate = d => $.datepicker.parseDate(dateFormat, d.value)
 
     const createRange = () => {
-      const s = convertDate(document.getElementById('start').value)
-      const e = convertDate(document.getElementById('end').value)
-      const range = [s]
+      const start = document.getElementById('start').value
+      const end = document.getElementById('end').value
+      const count = document.getElementById('count')
 
-      let d = s.getDate()
+      if (start === '') {
+        count.innerText = ''
+        document.getElementById('dates').setAttribute('value', '')
+      } else {
+        const s = convertDate(start)
+        const e = convertDate(end)
+        const range = [s]
 
-      while (range[range.length - 1] < e) range.push(new Date(s.getFullYear(), s.getMonth(), ++d))
+        let d = s.getDate()
 
-      const leave = range.filter(date => clean(date))
-      const dates = leave.map(d => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`)
-      const c = leave.length
+        while (range[range.length - 1] < e) range.push(new Date(s.getFullYear(), s.getMonth(), ++d))
 
-      document.getElementById('count').innerText = c > 1 ? `${c} days` : `${c} day`
-      document.getElementById('dates').setAttribute('value', dates)
+        const leave = range.filter(date => clean(date))
+        const dates = leave.map(d => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`)
+        const c = leave.length
+
+        count.innerText = (c > 1) ? `${c} days` : `${c} day`
+        document.getElementById('dates').setAttribute('value', dates)
+      }
     }
     
     $(() => {
@@ -37,12 +48,12 @@
         beforeShowDay: date => [ clean(date) ]
       }
       const start = $('#start').datepicker(options).on('change', function() {
-        createRange()
         end.datepicker('option', 'minDate', getDate(this))
+        createRange()
       })
       const end = $('#end').datepicker(options).on('change', function() {
-        createRange()
         start.datepicker('option', 'maxDate', getDate(this))
+        createRange()
       })
     })
 
@@ -51,10 +62,12 @@
         document.getElementById('end-date').style.display = 'block'
         document.getElementById('start-label').innerText = 'start'
       } else {
-        createRange()
         document.getElementById('end').value = ''
         document.getElementById('end-date').style.display = 'none'
         document.getElementById('start-label').innerText = 'date'
+        createRange()
+        $('#end').trigger('change')
+        document.getElementById('ui-datepicker-div').innerHTML = ''
       }
     }
 
@@ -72,6 +85,5 @@
         script.parentNode.insertBefore(style, script)
       }
     }
-
   </script>
 </head>

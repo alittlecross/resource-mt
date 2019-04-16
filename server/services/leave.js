@@ -14,9 +14,15 @@ class DatabaseLeave {
 
   static async getRequest (data) {
     return DatabaseConnection.query(`
-      SELECT *
+      SELECT leavedate, duration, leavetype, approved
       FROM leave
-      WHERE personid = $1;
+      INNER JOIN durations
+      ON leave.durationid = durations.durationid
+      INNER JOIN leavetypes
+      ON leave.typeid = leavetypes.typeid
+      WHERE personid = $1
+      
+      ORDER BY leavedate DESC;
     `, [data.personId])
   }
 

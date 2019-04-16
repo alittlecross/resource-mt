@@ -98,6 +98,7 @@ select, th, td,
 
 /* #region color */
 
+#leave td,
 #forgot-password,
 .banner-link,
 .count-label,
@@ -310,6 +311,22 @@ input[type='submit'].person-record {
 
 /* #region leave */
 
+#leave-container {
+  display: block;
+  margin: auto;
+  width: 1004px;
+}
+
+#leave-left {
+  margin-right: 250px;
+  width: 377px;
+}
+
+#leave-right {
+  width: 377px;
+  vertical-align: top;
+}
+
 #leave-form {
   display: block;
   max-width: 369px;
@@ -383,7 +400,6 @@ input[type='submit'].leave-form {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  clear: right;
   margin: 5px 4px;
   border: none;
   border-radius: 5px;
@@ -394,6 +410,25 @@ input[type='submit'].leave-form {
 
 .count-label {
   margin: 0 5px;
+}
+
+#leave {
+  display: table;
+  border-collapse: collapse;
+}
+
+#leave tr {
+  display: table-row;
+}
+
+#leave th, #leave td {
+  display: table-cell;
+  text-align: center;
+  padding: 5px 15px;
+}
+
+#leave th {
+  font-weight: 400;
 }
 
 /* #endregion */
@@ -489,17 +524,50 @@ input[type='submit'].leave-form {
   #people {
     width: 1200px;
   }
+
+  #leave-container {
+    width: 954px;
+  }
+
+  #leave-left {
+    margin-right: 200px;
+  }
 }
 
 @media screen and (max-width: 1239px) {
   #people {
     width: 900px;
   }
+
+  #leave-container {
+    width: 854px;
+  }
+
+  #leave-left {
+    margin-right: 100px;
+  }
 }
 
 @media screen and (max-width: 939px) {
   #people {
     width: 600px;
+  }
+
+  #leave-container {
+    display: block;
+    width: auto;
+  }
+  
+  #leave-left {
+    display: block;
+    margin-right: 0px;
+    width: auto;
+  }
+  
+  #leave-right {
+    float: none;
+    display: block;
+    width: auto;
   }
 }
 
@@ -516,6 +584,13 @@ input[type='submit'].leave-form {
   #title {
     margin: 2px;
     font-size: 30px
+  }
+}
+
+@media screen and (max-width: 417px) {
+  #leave th, #leave td {
+    font-size: 4.34vw;
+    padding: 1.4vw 3.3vw;
   }
 }
 

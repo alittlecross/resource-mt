@@ -5,7 +5,7 @@ module.exports = {
   get: async (req, res) => {
     const bankHolidayRecords = await DatabaseLeave.bankHolidays()
     const bankHolidayDates = bankHolidayRecords.rows.map(row => row.holidaydate)
-    const leave = await DatabaseLeave.getRequest(req.session.user)
+    const leave = await Leave.getRequest(req.session.user)
     res.render('leave.ejs', { bankHolidays: bankHolidayDates, leave: leave, user: req.session.user })
   },
   post: async (req, res) => {
