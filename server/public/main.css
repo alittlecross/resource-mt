@@ -76,6 +76,7 @@ select, th, td,
 .person-link,
 .field-label,
 .leave-label,
+.table-link,
 .count-label,
 .ui-datepicker-title,
 .ui-datepicker-title span {
@@ -132,6 +133,7 @@ input[type=radio]:checked + label {
 .count-label,
 .field-label,
 .leave-label,
+.table-link,
 .person:hover,
 .ui-datepicker-prev span,
 .ui-datepicker-next span,
@@ -144,7 +146,8 @@ input[type=radio]:checked + label {
 }
 
 #forgot-password:hover,
-.banner-link:hover {
+.banner-link:hover,
+.table-link:hover {
   color: #ffffff;
 }
 
@@ -324,7 +327,7 @@ input[type='submit'].person-record {
 
 #leave-left {
   margin-right: 250px;
-  width: 377px;
+  width: 366px;
 }
 
 #leave-right {
@@ -439,7 +442,7 @@ input[type='submit'].leave-form {
 }
 
 #leave th.status {
-  width: 65px;
+  width: 76px;
 }
 
 /* #endregion */
@@ -608,10 +611,10 @@ input[type='submit'].leave-form {
   }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 427px) {
   #leave th, #leave td {
-    font-size: 4.34vw;
-    padding: 1.4vw 3.3vw;
+    font-size: 4.25vw;
+    padding: 1.4vw 3.1vw;
   }
 }
 

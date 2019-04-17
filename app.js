@@ -38,6 +38,8 @@ app.post('/:hash/forgot-password', require('./server/routes/forgot-password/rese
 app.get('/leave', require('./server/routes/leave').get)
 app.post('/leave', require('./server/routes/leave').post)
 
+app.get('/:leaveId/leave/:action', require('./server/routes/leave/action'))
+
 app.listen(port)
 
 module.exports = app

@@ -12,24 +12,28 @@ class DatabaseLeave {
     `)
   }
 
-  static async getRequest (data) {
+  static async getRequests (personId) {
     return DatabaseConnection.query(`
-      SELECT leavedate, duration, leavetype, approved
+    SELECT leaveid, leave.personid, leavedate, duration, leavetype, status, CONCAT(firstname, ' ', surname) as requester
       FROM leave
       INNER JOIN durations
       ON leave.durationid = durations.durationid
       INNER JOIN leavetypes
       ON leave.typeid = leavetypes.typeid
-      WHERE personid = $1
+      INNER JOIN leavestatuses
+      ON leave.statusid = leavestatuses.statusid
+      INNER JOIN people
+      ON leave.personid = people.personid
+      WHERE leave.personid = $1
       
       ORDER BY leavedate DESC;
-    `, [data.personId])
+    `, [personId])
   }
 
-  static async submitRequest (data) {
+  static async submitRequest (string) {
     return DatabaseConnection.query(`
-      INSERT INTO leave (leavedate, personid, typeid, durationid)
-      VALUES (${data});
+      INSERT INTO leave (leavedate, personid, typeid, durationid, statusid)
+      VALUES (${string});
     `)
   }
 }

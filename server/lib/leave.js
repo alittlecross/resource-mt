@@ -2,10 +2,13 @@ const DatabaseLeave = require('../services/leave')
 
 class Leave {
   constructor (data) {
+    this.leaveId = data.leaveid
+    this.personId = data.personid
     this.date = this.formatDate(data.leavedate)
-    this.duration = this.formatDuration(data.duration)
+    this.duration = data.duration
     this.type = data.leavetype
-    this.status = this.formatStatus(data.approved)
+    this.status = data.status
+    this.requester = data.requester
   }
 
   formatDate (data) {
@@ -16,22 +19,14 @@ class Leave {
     return `${(d > 9) ? d : '0' + d}/${(m > 9) ? m : '0' + m}/${y}`
   }
 
-  formatDuration (data) {
-    return (data === 'am' || data === 'pm') ? data : 'all day'
-  }
-
-  formatStatus (data) {
-    return (data) ? 'approved' : 'pending'
-  }
-
-  static async getRequest (data) {
-    const results = await DatabaseLeave.getRequest(data)
+  static async getRequests (personId) {
+    const results = await DatabaseLeave.getRequests(personId)
     return results.rows.map(row => new Leave(row))
   }
 
   static async submitRequest (data) {
     const dates = (data.dates === '') ? [data.start] : data.dates.split(',')
-    const joiner = `', ${data.personId}, ${data.typeId}, ${data.durationId}`
+    const joiner = `', ${data.personId}, ${data.typeId}, ${data.durationId}, 2`
     const string = `'${dates.join(`${joiner}), ('`) + joiner}`
 
     DatabaseLeave.submitRequest(string)

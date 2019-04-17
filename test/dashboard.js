@@ -15,8 +15,16 @@ describe('class Dashboard', () => {
     sandbox.restore()
   })
 
+  describe('.getRequests', () => {
+    it('should get leave from the database, and return an array of leave objects', async () => {
+      sandbox.stub(DatabaseDashboard, 'getRequests').returns(Support.getRequestsDouble())
+
+      const result = await Dashboard.getRequests()
+    })
+  })
+
   describe('.getPeople', () => {
-    it('should get people from the database, build, and return a people array', async () => {
+    it('should get people from the database, build, and return an array of people objects', async () => {
       sandbox.stub(DatabaseDashboard, 'getPeople').returns(Support.getPeopleDouble())
 
       const results = await Dashboard.getPeople()
