@@ -31,11 +31,11 @@ class DatabaseEdit {
     `, [data.staffId, data.firstName, data.surname, data.email, data.gradeId, data.locationId, data.managerId, data.roleId, data.statusId, data.personId])
   }
 
-  static async deleteSkills (data) {
+  static async deleteSkills (personId) {
     return DatabaseConnection.query(`
       DELETE FROM personskills
       WHERE personid = $1;
-    `, [data.personId])
+    `, [personId])
   }
 }
 

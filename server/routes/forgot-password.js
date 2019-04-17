@@ -8,7 +8,7 @@ module.exports = {
   post: async (req, res) => {
     const result = await LogIn.authenticate(req.body)
     if (result.status) {
-      ForgotPassword.sendReset(req.body)
+      ForgotPassword.sendReset(req.body.email)
       res.redirect('/')
     } else {
       res.redirect('/')

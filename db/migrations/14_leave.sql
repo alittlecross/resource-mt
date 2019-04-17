@@ -4,7 +4,7 @@ CREATE TABLE leave (
   leavedate date,
   typeid int,
   durationid int,
-  approved boolean NOT NULL default false,
+  statusid int,
   FOREIGN KEY (typeid) REFERENCES leavetypes(typeid),
   FOREIGN KEY (durationid) REFERENCES durations(durationid)
 );

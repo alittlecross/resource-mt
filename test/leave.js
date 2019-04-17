@@ -17,9 +17,9 @@ describe('class Leave', () => {
 
   describe('constructor', () => {
     it('should return a leave object', () => {
-      const result = new Leave(Support.getRequestDouble().rows[0])
+      const result = new Leave(Support.getRequestsDouble().rows[0])
 
-      expect(result.duration).equal('all day')
+      expect(result.date).equal('04/04/19')
     })
   })
 
@@ -35,35 +35,11 @@ describe('class Leave', () => {
     })
   })
 
-  describe('formatDuration', () => {
-    it('should return a duration string', () => {
-      const leave = new Leave([])
-
-      const halfday = leave.formatDuration('am')
-      const allday = leave.formatDuration('both')
-
-      expect(halfday).equal('am')
-      expect(allday).equal('all day')
-    })
-  })
-
-  describe('formatStatus', () => {
-    it('should return a status string', () => {
-      const leave = new Leave([])
-
-      const approved = leave.formatStatus(true)
-      const pending = leave.formatStatus(false)
-
-      expect(approved).equal('approved')
-      expect(pending).equal('pending')
-    })
-  })
-
-  describe('.getRequest', () => {
+  describe('.getRequests', () => {
     it('should return and array of leave objects', async () => {
-      sandbox.stub(DatabaseLeave, 'getRequest').returns(Support.getRequestDouble())
+      sandbox.stub(DatabaseLeave, 'getRequests').returns(Support.getRequestsDouble())
 
-      const result = await Leave.getRequest()
+      const result = await Leave.getRequests()
 
       expect(result.length).equal(3)
       expect(result[0].status).equal('pending')

@@ -153,22 +153,31 @@ class Support {
     }
   }
 
-  static getRequestDouble () {
+  static getRequestsDouble () {
     return {
       rowCount: 3,
       rows:
-      [ { leavedate: '2019-04-03T23:00:00.000Z',
-        duration: 'range',
+      [ { leaveid: 1,
+        personid: 1,
+        leavedate: '2019-04-03T23:00:00.000Z',
+        duration: 'all day',
         leavetype: 'annual',
-        approved: false },
-      { leavedate: '2019-04-02T23:00:00.000Z',
-        duration: 'range',
+        status: 'pending',
+        requester: 'Michael Scott' },
+      { leaveid: 2,
+        personid: 1,
+        leavedate: '2019-04-02T23:00:00.000Z',
+        duration: 'all day',
         leavetype: 'annual',
-        approved: false },
-      { leavedate: '2019-04-01T23:00:00.000Z',
-        duration: 'range',
+        status: 'pending',
+        requester: 'Michael Scott' },
+      { leaveid: 3,
+        personid: 1,
+        leavedate: '2019-04-01T23:00:00.000Z',
+        duration: 'all day',
         leavetype: 'annual',
-        approved: false } ]
+        status: 'pending',
+        requester: 'Michael Scott' } ]
     }
   }
 }

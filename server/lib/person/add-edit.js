@@ -19,14 +19,10 @@ class AddEdit {
   }
 
   static async skills (data, personId) {
-    let string = ''
     if (data.skills !== undefined) {
-      if (!Array.isArray(data.skills)) {
-        data.skills = [data.skills]
-      }
-      data.skills.forEach(skillId => {
-        string += `INSERT INTO personskills VALUES (${personId}, ${skillId});`
-      })
+      const skillIds = (!Array.isArray(data.skills)) ? [data.skills] : data.skills
+      const joiner = `, ${personId}`
+      const string = `${skillIds.join(`${joiner}), (`) + joiner}`
       await DatabaseAddEdit.addSkills(string)
     }
   }

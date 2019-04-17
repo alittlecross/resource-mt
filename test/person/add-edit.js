@@ -59,7 +59,7 @@ describe('class AddEdit', () => {
     it('does nothing if no skills', async () => {
       const addSkills = sandbox.stub(DatabaseAddEdit, 'addSkills')
 
-      await AddEdit.skills({ }, 1)
+      await AddEdit.skills({}, 1)
 
       expect(addSkills.callCount).equal(0)
     })
