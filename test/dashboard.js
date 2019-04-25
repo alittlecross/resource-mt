@@ -17,9 +17,13 @@ describe('class Dashboard', () => {
 
   describe('.getRequests', () => {
     it('should get leave from the database, and return an array of leave objects', async () => {
-      sandbox.stub(DatabaseDashboard, 'getRequests').returns(Support.getRequestsDouble())
+      sandbox.stub(DatabaseDashboard, 'getRequests').returns(Support.getLeaveRequestDouble())
 
-      const result = await Dashboard.getRequests()
+      const results = await Dashboard.getRequests()
+
+      expect(results.length).equal(3)
+      expect(Object.keys(results[0]).length).equal(14)
+      expect(results[0].requester).equal('Michael Scott')
     })
   })
 

@@ -17,7 +17,7 @@ describe('class Leave', () => {
 
   describe('constructor', () => {
     it('should return a leave object', () => {
-      const result = new Leave(Support.getRequestsDouble().rows[0])
+      const result = new Leave(Support.getLeaveRequestDouble().rows[0])
 
       expect(result.date).equal('04/04/19')
     })
@@ -35,11 +35,21 @@ describe('class Leave', () => {
     })
   })
 
-  describe('.getRequests', () => {
-    it('should return and array of leave objects', async () => {
-      sandbox.stub(DatabaseLeave, 'getRequests').returns(Support.getRequestsDouble())
+  describe('.getBalance', () => {
+    it('should return a balance object', () => {
+      const result = Leave.getBalance(Support.leaveObjectArrayDouble())
 
-      const result = await Leave.getRequests()
+      expect(result.takenSoFar).equal(1)
+      expect(result.planned).equal(1)
+      expect(result.requested).equal(1)
+    })
+  })
+
+  describe('.getLeave', () => {
+    it('should return and array of leave objects', async () => {
+      sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
+
+      const result = await Leave.getLeave()
 
       expect(result.length).equal(3)
       expect(result[0].status).equal('pending')

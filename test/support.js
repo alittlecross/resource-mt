@@ -153,7 +153,7 @@ class Support {
     }
   }
 
-  static getRequestsDouble () {
+  static getLeaveRequestDouble () {
     return {
       rowCount: 3,
       rows:
@@ -163,22 +163,86 @@ class Support {
         duration: 'all day',
         leavetype: 'annual',
         status: 'pending',
-        requester: 'Michael Scott' },
+        requester: 'Michael Scott',
+        thisleaveyear: true,
+        passed: false,
+        anniversarydate: '2018-09-03T23:00:00.000Z',
+        allowance: 20,
+        broughtforward: 20,
+        total: 40 },
       { leaveid: 2,
         personid: 1,
         leavedate: '2019-04-02T23:00:00.000Z',
         duration: 'all day',
         leavetype: 'annual',
         status: 'pending',
-        requester: 'Michael Scott' },
+        requester: 'Michael Scott',
+        thisleaveyear: true,
+        passed: false,
+        anniversarydate: '2018-09-03T23:00:00.000Z',
+        allowance: 20,
+        broughtforward: 20,
+        total: 40 },
       { leaveid: 3,
         personid: 1,
         leavedate: '2019-04-01T23:00:00.000Z',
         duration: 'all day',
         leavetype: 'annual',
         status: 'pending',
-        requester: 'Michael Scott' } ]
+        requester: 'Michael Scott',
+        thisleaveyear: true,
+        passed: false,
+        anniversarydate: '2018-09-03T23:00:00.000Z',
+        allowance: 20,
+        broughtforward: 20,
+        total: 40 } ]
     }
+  }
+
+  static leaveObjectArrayDouble () {
+    return [ {
+      leaveId: 49,
+      personId: 1,
+      date: '16/05/19',
+      duration: 'all day',
+      value: 1,
+      type: 'annual',
+      status: 'approved',
+      requester: 'Michael Scott',
+      thisLeaveYear: true,
+      passed: true,
+      anniversaryDate: '03/09/18',
+      allowance: 20,
+      broughtForward: 20,
+      total: 40 },
+    { leaveId: 48,
+      personId: 1,
+      date: '15/05/19',
+      duration: 'all day',
+      value: 1,
+      type: 'annual',
+      status: 'approved',
+      requester: 'Michael Scott',
+      thisLeaveYear: true,
+      passed: false,
+      anniversaryDate: '03/09/18',
+      allowance: 20,
+      broughtForward: 20,
+      total: 40 },
+    { leaveId: 47,
+      personId: 1,
+      date: '14/05/19',
+      duration: 'all day',
+      value: 1,
+      type: 'annual',
+      status: 'pending',
+      requester: 'Michael Scott',
+      thisLeaveYear: true,
+      passed: false,
+      anniversaryDate: '03/09/18',
+      allowance: 20,
+      broughtForward: 20,
+      total: 40 } ]
   }
 }
 
