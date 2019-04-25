@@ -22,21 +22,21 @@
   },
   "homepage": "https://github.com/alittlecross/project-ketchup#readme",
   "dependencies": {
-    "bcrypt": "3.0.5",
-    "body-parser": "1.18.3",
-    "ejs": "2.6.1",
-    "express": "4.16.4",
-    "express-session": "1.15.6",
-    "nodemailer": "6.0.0",
-    "pg": "7.9.0"
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "nodemailer": "^6.1.1",
+    "pg": "^7.10.0"
   },
   "devDependencies": {
-    "chai": "4.2.0",
+    "chai": "^4.2.0",
     "mocha": "^6.1.4",
-    "nodemon": "1.18.10",
+    "nodemon": "^1.18.11",
     "nyc": "^14.1.0",
-    "sinon": "7.3.0",
-    "zombie": "6.1.4"
+    "sinon": "^7.3.2",
+    "zombie": "^6.1.4"
   },
   "standard": {
     "ignore": []
