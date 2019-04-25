@@ -51,6 +51,41 @@
   
       <input class='leave-form' form='leave-form' type='submit' value='submit'>
       <label id='count' class='count-label'></label>
+
+      <div id='balance-container'>
+        <div id='sub-title'>leave balance</div>
+      
+        <table id='balance'>
+          <tr>
+            <th>leave start</th>
+            <td><%= balance.startDate %></td>
+          </tr>
+          <tr>
+            <th>allowance</th>
+            <td><%= balance.allowance %></td>
+          </tr>
+          <tr>
+            <th>carried over</th>
+            <td><%= balance.broughtForward %></td>
+          </tr>
+          <tr>
+            <th>total</th>
+            <td><%= balance.total %> (<%= balance.total %>)</td>
+          </tr>
+          <tr>
+            <th>taken so far</th>
+            <td><%= balance.takenSoFar %> (<%= balance.total - balance.takenSoFar %>)</td>
+          </tr>
+          <tr>
+            <th>planned</th>
+            <td><%= balance.planned %> (<%= balance.total - balance.takenSoFar - balance.planned %>)</td>
+          </tr>
+          <tr>
+            <th>requested</th>
+            <td><%= balance.requested %> (<%= balance.total - balance.takenSoFar - balance.planned - balance.requested %>)</td>
+          </tr>
+        </table>
+      </div>
     </div>
   
     <div id='leave-right'>

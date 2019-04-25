@@ -127,6 +127,7 @@ input[type=radio]:checked + label {
   box-shadow: 0 0 3px 2px #005eff;
 }
 
+#balance th,
 #leave td,
 #forgot-password,
 .banner-link,
@@ -410,12 +411,12 @@ input[type='submit'].leave-form {
   margin: 0 5px;
 }
 
-#leave {
+#balance, #leave {
   display: table;
   border-collapse: collapse;
 }
 
-#leave tr {
+#balance tr, #leave tr {
   display: table-row;
 }
 
@@ -425,7 +426,32 @@ input[type='submit'].leave-form {
   padding: 5px 15px;
 }
 
-#leave th {
+#balance td, #balance th {
+  display: table-cell;
+  vertical-align: top;
+  padding: 5px 15px;
+}
+
+#balance-container {
+  display: block;
+  margin-top: 40px; 
+  width: 365px;
+}
+
+#balance {
+  margin: auto;
+}
+
+#balance th {
+  text-align: left;
+}
+
+#balance td {
+  min-width: 100px;
+  text-align: right;
+}
+
+#balance th, #leave th {
   font-weight: 400;
 }
 
@@ -612,6 +638,10 @@ input[type='submit'].leave-form {
 }
 
 @media screen and (max-width: 427px) {
+  #balance-container {
+    width: 100%;
+  }
+
   #leave th, #leave td {
     font-size: 4.25vw;
     padding: 1.4vw 3.1vw;
