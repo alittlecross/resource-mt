@@ -9,17 +9,11 @@ class People {
   }
 
   static buildArray (data) {
-    const people = []
-    data.forEach(row => {
-      people.push(new People(row))
-    })
-
-    return people
+    return data.map(row => new People(row))
   }
 
   static async getPeople () {
     const results = await DatabasePeople.getPeople()
-
     return People.buildArray(results.rows)
   }
 }

@@ -17,8 +17,9 @@ describe('class Leave', () => {
 
   describe('constructor', () => {
     it('should return a leave object', () => {
-      const result = new Leave(Support.getLeaveRequestDouble().rows[0])
+      const result = new Leave(Support.getLeaveRequestDouble().rows.filter(row => row.type === 'request')[0])
 
+      expect(Object.keys(result).length).equal(10)
       expect(result.date).equal('04/04/19')
     })
   })
@@ -35,6 +36,16 @@ describe('class Leave', () => {
     })
   })
 
+  describe('bankHolidays', () => {
+    it('should return an array of bank holiday dates', async () => {
+      sandbox.stub(DatabaseLeave, 'bankHolidays').returns(Support.bankHolidaysDouble())
+
+      const results = await Leave.bankHolidays()
+
+      expect(results.length).equal(8)
+    })
+  })
+
   describe('.getBalance', () => {
     it('should return a balance object', () => {
       const result = Leave.getBalance(Support.leaveObjectArrayDouble())
@@ -46,13 +57,14 @@ describe('class Leave', () => {
   })
 
   describe('.getLeave', () => {
-    it('should return and array of leave objects', async () => {
+    it('should return an objects showing balance and requests', async () => {
       sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
 
       const result = await Leave.getLeave()
 
-      expect(result.length).equal(3)
-      expect(result[0].status).equal('pending')
+      expect(result.balance.allowance).equal(20)
+      expect(result.requests.length).equal(3)
+      expect(result.requests[0].status).equal('pending')
     })
   })
 
