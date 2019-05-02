@@ -17,16 +17,13 @@ class Person {
   }
 
   static buildObject (data) {
-    const detailsRow = data.find(row => row.kind === 'details')
-    const person = new Person(detailsRow)
+    const person = new Person(data.find(row => row.kind === 'details'))
     person.skills = data.filter(row => row.kind === 'skill').map(skill => skill.skillid)
-
     return person
   }
 
   static async getPerson (personId) {
     const result = await DatabasePerson.getPerson(personId)
-
     return Person.buildObject(result.rows)
   }
 }

@@ -155,9 +155,24 @@ class Support {
 
   static getLeaveRequestDouble () {
     return {
-      rowCount: 3,
+      rowCount: 4,
       rows:
-      [ { leaveid: 1,
+      [ { type: 'balance',
+        leaveid: null,
+        personid: null,
+        leavedate: null,
+        duration: null,
+        leavetype: null,
+        status: null,
+        requester: null,
+        thisleaveyear: null,
+        passed: null,
+        anniversarydate: '2018-09-03T23:00:00.000Z',
+        allowance: 20,
+        broughtforward: 20,
+        total: 40 },
+      { type: 'request',
+        leaveid: 2,
         personid: 1,
         leavedate: '2019-04-03T23:00:00.000Z',
         duration: 'all day',
@@ -166,11 +181,12 @@ class Support {
         requester: 'Michael Scott',
         thisleaveyear: true,
         passed: false,
-        anniversarydate: '2018-09-03T23:00:00.000Z',
-        allowance: 20,
-        broughtforward: 20,
-        total: 40 },
-      { leaveid: 2,
+        anniversarydate: null,
+        allowance: null,
+        broughtforward: null,
+        total: null },
+      { type: 'request',
+        leaveid: 3,
         personid: 1,
         leavedate: '2019-04-02T23:00:00.000Z',
         duration: 'all day',
@@ -179,11 +195,12 @@ class Support {
         requester: 'Michael Scott',
         thisleaveyear: true,
         passed: false,
-        anniversarydate: '2018-09-03T23:00:00.000Z',
-        allowance: 20,
-        broughtforward: 20,
-        total: 40 },
-      { leaveid: 3,
+        anniversarydate: null,
+        allowance: null,
+        broughtforward: null,
+        total: null },
+      { type: 'request',
+        leaveid: 3,
         personid: 1,
         leavedate: '2019-04-01T23:00:00.000Z',
         duration: 'all day',
@@ -192,10 +209,59 @@ class Support {
         requester: 'Michael Scott',
         thisleaveyear: true,
         passed: false,
-        anniversarydate: '2018-09-03T23:00:00.000Z',
-        allowance: 20,
-        broughtforward: 20,
-        total: 40 } ]
+        anniversarydate: null,
+        allowance: null,
+        broughtforward: null,
+        total: null } ]
+    }
+  }
+
+  static getRequestsDashboardDouble () {
+    return {
+      rowCount: 3,
+      rows:
+      [ { type: 'request',
+        leaveid: 2,
+        personid: 1,
+        leavedate: '2019-04-02T23:00:00.000Z',
+        duration: 'all day',
+        leavetype: 'annual',
+        status: 'pending',
+        requester: 'Michael Scott',
+        thisleaveyear: true,
+        passed: false,
+        anniversarydate: null,
+        allowance: null,
+        broughtforward: null,
+        total: null },
+      { type: 'request',
+        leaveid: 3,
+        personid: 1,
+        leavedate: '2019-04-01T23:00:00.000Z',
+        duration: 'all day',
+        leavetype: 'annual',
+        status: 'pending',
+        requester: 'Michael Scott',
+        thisleaveyear: true,
+        passed: false,
+        anniversarydate: null,
+        allowance: null,
+        broughtforward: null,
+        total: null },
+      { type: 'request',
+        leaveid: 3,
+        personid: 1,
+        leavedate: '2019-04-01T23:00:00.000Z',
+        duration: 'all day',
+        leavetype: 'annual',
+        status: 'pending',
+        requester: 'Michael Scott',
+        thisleaveyear: true,
+        passed: false,
+        anniversarydate: null,
+        allowance: null,
+        broughtforward: null,
+        total: null } ]
     }
   }
 
@@ -243,6 +309,29 @@ class Support {
       allowance: 20,
       broughtForward: 20,
       total: 40 } ]
+  }
+
+  static bankHolidaysDouble () {
+    return {
+      rowCount: 5,
+      rows:
+      [ { holidaydate: '2018-04-01T23:00:00.000Z',
+        description: 'Easter Monday' },
+      { holidaydate: '2018-05-06T23:00:00.000Z',
+        description: 'Early May bank holiday' },
+      { holidaydate: '2018-05-27T23:00:00.000Z',
+        description: 'Spring bank holiday' },
+      { holidaydate: '2018-08-26T23:00:00.000Z',
+        description: 'Summer bank holiday' },
+      { holidaydate: '2018-12-25T00:00:00.000Z',
+        description: 'Christmas Day' },
+      { holidaydate: '2018-12-26T00:00:00.000Z',
+        description: 'Boxing Day' },
+      { holidaydate: '2019-01-01T00:00:00.000Z',
+        description: 'New Year\'s Day' },
+      { holidaydate: '2019-04-18T23:00:00.000Z',
+        description: 'Good Friday' } ]
+    }
   }
 }
 
