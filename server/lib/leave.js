@@ -4,7 +4,7 @@ class Leave {
   constructor (data) {
     this.leaveId = data.leaveid
     this.personId = data.personid
-    this.date = this.formatDate(data.leavedate)
+    this.date = Leave.formatDate(data.leavedate)
     this.duration = data.duration
     this.value = (data.duration === 'all day') ? 1 : 0.5
     this.type = data.leavetype
@@ -14,7 +14,7 @@ class Leave {
     this.passed = data.passed
   }
 
-  formatDate (data) {
+  static formatDate (data) {
     const date = new Date(data)
     const d = date.getDate()
     const m = date.getMonth() + 1
@@ -27,23 +27,25 @@ class Leave {
     return results.rows.map(row => row.holidaydate)
   }
 
-  static getBalance (data) {
+  static getBalance (balance, requests) {
     return {
-      startDate: data[0].anniversarydate,
-      allowance: data[0].allowance,
-      broughtForward: data[0].broughtforward,
-      total: data[0].total,
-      takenSoFar: data.filter(e => e.passed === true && e.thisLeaveYear === true && e.status === 'approved').reduce((a, c) => a + c.value, 0),
-      planned: data.filter(e => e.passed === false && e.thisLeaveYear === true && e.status === 'approved').reduce((a, c) => a + c.value, 0),
-      requested: data.filter(e => e.status === 'pending').reduce((a, c) => a + c.value, 0)
+      startDate: Leave.formatDate(balance.anniversarydate),
+      allowance: balance.allowance,
+      broughtForward: balance.broughtforward,
+      total: balance.total,
+      takenSoFar: requests.filter(e => e.passed === true && e.thisLeaveYear === true && e.status === 'approved').reduce((a, c) => a + c.value, 0),
+      planned: requests.filter(e => e.passed === false && e.thisLeaveYear === true && e.status === 'approved').reduce((a, c) => a + c.value, 0),
+      requested: requests.filter(e => e.status === 'pending').reduce((a, c) => a + c.value, 0)
     }
   }
 
   static async getLeave (personId) {
     const results = await DatabaseLeave.getLeave(personId)
+    const balance = results.rows.filter(row => row.type === 'balance')[0]
+    const requests = results.rows.filter(row => row.type === 'request').map(row => new Leave(row))
     return {
-      balance: Leave.getBalance(results.rows.filter(row => row.type === 'balance')),
-      requests: results.rows.filter(row => row.type === 'request').map(row => new Leave(row))
+      balance: Leave.getBalance(balance, requests),
+      requests: requests
     }
   }
 

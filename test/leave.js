@@ -24,12 +24,10 @@ describe('class Leave', () => {
     })
   })
 
-  describe('formatDate', () => {
+  describe('.formatDate', () => {
     it('should return a date string in shortdate format', () => {
-      const leave = new Leave([])
-
-      const datelow = leave.formatDate('2019-04-03T23:00:00.000Z')
-      const datehigh = leave.formatDate('2019-12-12T00:00:00.000Z')
+      const datelow = Leave.formatDate('2019-04-03T23:00:00.000Z')
+      const datehigh = Leave.formatDate('2019-12-12T00:00:00.000Z')
 
       expect(datelow).equal('04/04/19')
       expect(datehigh).equal('12/12/19')
@@ -48,7 +46,7 @@ describe('class Leave', () => {
 
   describe('.getBalance', () => {
     it('should return a balance object', () => {
-      const result = Leave.getBalance(Support.leaveObjectArrayDouble())
+      const result = Leave.getBalance(Support.balanceObjectDouble(), Support.leaveObjectArrayDouble())
 
       expect(result.takenSoFar).equal(1)
       expect(result.planned).equal(1)
