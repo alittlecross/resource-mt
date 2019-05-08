@@ -1,6 +1,9 @@
 <%- include('_head') %>
 
 <body>
+
+  <content>
+
   <div id='banner'>
     <div id='small-title'>Resource Management&nbsp;Tool</div>
     <a class='banner-link right' href='/log-out'>log out</a>
@@ -18,4 +21,7 @@
       <a class='person' href='/<%= person.personId %>/person'><%= person.firstName + ' ' + person.surname %></a>
     <% }) %>
   </div>
+
+  </content>
+  
 </body>

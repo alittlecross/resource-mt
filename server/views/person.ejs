@@ -1,6 +1,9 @@
 <%- include('_head') %>
 
 <body>
+
+  <content id='person-page'>
+
   <div id='banner'>
     <div id='small-title'>Resource Management&nbsp;Tool</div>
     <% if (user.role === 'Resource Manager') { %>
@@ -11,102 +14,175 @@
     <a class='banner-link right' href='/people'>people</a>
   </div>
 
-  <form id='person-form' class='extra-bottom' autocomplete='off'>
-  
-    <input type='text' name='personId' hidden value='<%= person.personId %>'>
-    <div class='form-row'>
-      <label class='field-label'>staff number</label>
-      <input class='person-record right locked' type='text' name='staffId' value='<%= person.staffId %>' disabled>
-    </div>
-    <div class='form-row'>
-      <label class='field-label'>first name</label>
-      <input class='person-record right locked' type='text' name='firstName' value='<%= person.firstName%>' disabled>
-    </div>
-    <div class='form-row'>
-      <label class='field-label'>surname</label>
-      <input class='person-record right locked' type='text' name='surname' value='<%= person.surname %>' disabled>
-    </div>
-    <div class='form-row'>
-      <label class='field-label'>email</label>
-      <input class='person-record right locked' type='email' name='email' value='<%= person.email %>' disabled>
+  <div id='person-left'>
+    <div id='sub-title'>person</div>
+
+    <form id='person-form' class='extra-bottom' autocomplete='off'>
+
+      <input type='text' name='personId' hidden value='<%= person.personId %>'>
+
+      <div class='form-row'>
+        <label class='field-label'>staff number</label>
+        <input class='person-record locked' type='text' name='staffId' value='<%= person.staffId %>' disabled>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>first name</label>
+        <input class='person-record locked' type='text' name='firstName' value='<%= person.firstName%>' disabled>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>surname</label>
+        <input class='person-record locked' type='text' name='surname' value='<%= person.surname %>' disabled>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>email</label>
+        <input class='person-record locked' type='email' name='email' value='<%= person.email %>' disabled>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>grade</label>
+        <select class='person-record locked' name='gradeId' disabled>
+          <% options.grades.forEach(function(grade) { %>
+            <option value='<%= grade.optionId %>'
+              <% if (person.gradeId === grade.optionId) { %>
+                selected
+              <% } %>
+            ><%= grade.option %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>role</label>
+        <select class='person-record locked' name='roleId' disabled>
+          <% options.roles.forEach(function(role) { %>
+            <option value='<%= role.optionId %>'
+              <% if (person.role === role.option) { %>
+                selected
+              <% } %>
+            ><%= role.option %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>status</label>
+        <select class='person-record locked' name='statusId' disabled>
+          <% options.statuses.forEach(function(status) { %>
+            <option value='<%= status.optionId %>'
+              <% if (person.statusId === status.optionId) { %>
+                selected
+              <% } %>
+            ><%= status.option %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>location</label>
+        <select class='person-record locked' name='locationId' disabled>
+          <% options.locations.forEach(function(location) { %>
+            <option value='<%= location.optionId %>'
+              <% if (person.locationId === location.optionId) { %>
+                selected
+              <% } %>
+            ><%= location.option %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>manager</label>
+        <select class='person-record locked' name='managerId' disabled>
+          <% options.managers.forEach(function(manager) { %>
+            <option value='<%= manager.optionId %>'
+              <% if (person.managerId === manager.optionId) { %>
+                selected
+              <% } %>
+            ><%= manager.option %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>skills</label>
+        
+        <div id='skills' class='locked'>
+        <% options.skills.forEach(function(skill) { %>
+          <input
+          <% if (person.skills.includes(skill.optionId)) { %>
+            checked
+          <% } %>
+          class='hidden' type='checkbox' id='skill-<%= skill.optionId %>' name='skills' value='<%= skill.optionId %>' disabled>
+          <label class='skill-button' for='skill-<%= skill.optionId %>'><%= skill.option %></label>
+        <% }) %>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+  <% if (user.role === 'Resource Manager') { %>
+    <div id='leave-balance'>
+      <div id='sub-title'>leave balance</div>
+    
+      <table id='balance'>
+        <tr>
+          <th>leave start</th>
+          <td><%= balance.startDate %></td>
+        </tr>
+        <tr>
+          <th>allowance</th>
+          <td><%= balance.allowance %></td>
+        </tr>
+        <tr>
+          <th>carried over</th>
+          <td><%= balance.broughtForward %></td>
+        </tr>
+        <tr>
+          <th>total</th>
+          <td><%= balance.total %> (<%= balance.total %>)</td>
+        </tr>
+        <tr>
+          <th>taken so far</th>
+          <td><%= balance.takenSoFar %> (<%= balance.total - balance.takenSoFar %>)</td>
+        </tr>
+        <tr>
+          <th>planned</th>
+          <td><%= balance.planned %> (<%= balance.total - balance.takenSoFar - balance.planned %>)</td>
+        </tr>
+        <tr>
+          <th>requested</th>
+          <td><%= balance.requested %> (<%= balance.total - balance.takenSoFar - balance.planned - balance.requested %>)</td>
+        </tr>
+      </table>
     </div>
 
-    <div class='form-row'>
-      <label class='field-label'>grade</label>
-      <select class='person-record right locked' name='gradeId' disabled>
-        <% options.grades.forEach(function(grade) { %>
-          <option value='<%= grade.optionId %>'
-            <% if (person.gradeId === grade.optionId) { %>
-              selected
-            <% } %>
-          ><%= grade.option %></option>
+    <div id='leave-table'>
+      <div id='sub-title'>leave</div>
+      
+      <table id='leave'>
+        <tr>
+          <th class='date'>date</th>
+          <th class='duration'>duration</th>
+          <th class='type'>type</th>
+          <th class='status'>status</th>
+        </tr>
+        <% requests.forEach(function(request) { %>
+        <tr>
+          <td class='date'><%= request.date %></td>
+          <td class='duration'><%= request.duration %></td>
+          <td class='type'><%= request.type %></td>
+          <td class='status'><%= request.status %></td>
+        </tr>
         <% }) %>
-      </select>
+      </table>
     </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>role</label>
-      <select class='person-record right locked' name='roleId' disabled>
-        <% options.roles.forEach(function(role) { %>
-          <option value='<%= role.optionId %>'
-            <% if (person.role === role.option) { %>
-              selected
-            <% } %>
-          ><%= role.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>status</label>
-      <select class='person-record right locked' name='statusId' disabled>
-        <% options.statuses.forEach(function(status) { %>
-          <option value='<%= status.optionId %>'
-            <% if (person.statusId === status.optionId) { %>
-              selected
-            <% } %>
-          ><%= status.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>location</label>
-      <select class='person-record right locked' name='locationId' disabled>
-        <% options.locations.forEach(function(location) { %>
-          <option value='<%= location.optionId %>'
-            <% if (person.locationId === location.optionId) { %>
-              selected
-            <% } %>
-          ><%= location.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>manager</label>
-      <select class='person-record right locked' name='managerId' disabled>
-        <% options.managers.forEach(function(manager) { %>
-          <option value='<%= manager.optionId %>'
-            <% if (person.managerId === manager.optionId) { %>
-              selected
-            <% } %>
-          ><%= manager.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <label class='field-label'>skills</label>
-    <div id='skills' class='right locked'>
-      <% options.skills.forEach(function(skill) { %>
-        <input
-        <% if (person.skills.includes(skill.optionId)) { %>
-          checked
-        <% } %>
-        class='hidden' type='checkbox' id='skill-<%= skill.optionId %>' name='skills' value='<%= skill.optionId %>' disabled>
-        <label class='skill-button' for='skill-<%= skill.optionId %>'><%= skill.option %></label>
-      <% }) %>
-    </div>
-  
-  </form>
+  <% } %>
+
+  </content>
+
 </body>
