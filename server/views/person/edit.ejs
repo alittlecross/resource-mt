@@ -1,6 +1,9 @@
 <%- include('../_head') %>
 
 <body>
+
+  <content id='person-page'>
+
   <div id='banner'>
     <div id='small-title'>Resource Management&nbsp;Tool</div>
     <a class='banner-link right' href='/log-out'>log out</a>
@@ -8,116 +11,123 @@
     <a class='banner-link right' href='/people'>people</a>
   </div>
 
-  <form id='person-form' action='/<%= person.personId %>/person/edit' autocomplete='off' method='POST'>
-  
-    <input type='text' name='personId' hidden value='<%= person.personId %>'>
-    <div class='form-row'>
-      <label class='field-label'>staff number</label>
-      <input class='person-record right' type='text' name='staffId' value='<%= person.staffId %>'>
-    </div>
-    <div class='form-row'>
-      <label class='field-label'>first name</label>
-      <input class='person-record right' type='text' name='firstName' value='<%= person.firstName%>'>
-    </div>
-    <div class='form-row'>
-      <label class='field-label'>surname</label>
-      <input class='person-record right' type='text' name='surname' value='<%= person.surname %>'>
-    </div>
-    <div class='form-row'>
-      <label class='field-label'>email</label>
-      <input class='person-record right' type='email' name='email' value='<%= person.email %>'>
-    </div>
+  <div id='person-left'>
+    <div id='sub-title'>person</div>
 
-    <div class='form-row'>
-      <label class='field-label'>grade</label>
-      <select class='person-record right' name='gradeId'>
-        <% options.grades.forEach(function(grade) { %>
-          <option value='<%= grade.optionId %>'
-            <% if (person.gradeId === grade.optionId) { %>
-              selected
-            <% } %>
-          ><%= grade.option %></option>
-        <% }) %>
-      </select>
-    </div>
+    <form id='person-form' action='/<%= person.personId %>/person/edit' autocomplete='off' method='POST'>
     
-    <div class='form-row'>
-      <label class='field-label'>role</label>
-      <select class='person-record right' name='roleId'>
-        <% options.roles.forEach(function(role) { %>
-          <option value='<%= role.optionId %>'
-            <% if (person.role === role.option) { %>
-              selected
-            <% } %>
-          ><%= role.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>status</label>
-      <select class='person-record right' name='statusId'>
-        <% options.statuses.forEach(function(status) { %>
-          <option value='<%= status.optionId %>'
-            <% if (person.statusId === status.optionId) { %>
-              selected
-            <% } %>
-          ><%= status.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>location</label>
-      <select class='person-record right' name='locationId'>
-        <% options.locations.forEach(function(location) { %>
-          <option value='<%= location.optionId %>'
-            <% if (person.locationId === location.optionId) { %>
-              selected
-            <% } %>
-          ><%= location.option %></option>
-        <% }) %>
-      </select>
-    </div>
-    
-    <div class='form-row'>
-      <label class='field-label'>manager</label>
-      <select class='person-record right' name='managerId'>
-          <% options.managers.forEach(function(manager) { %>
-            <option value='<%= manager.optionId %>'
-              <% if (person.managerId === manager.optionId) { %>
+      <input type='text' name='personId' hidden value='<%= person.personId %>'>
+      <div class='form-row'>
+        <label class='field-label'>staff number</label>
+        <input class='person-record right' type='text' name='staffId' value='<%= person.staffId %>'>
+      </div>
+      <div class='form-row'>
+        <label class='field-label'>first name</label>
+        <input class='person-record right' type='text' name='firstName' value='<%= person.firstName%>'>
+      </div>
+      <div class='form-row'>
+        <label class='field-label'>surname</label>
+        <input class='person-record right' type='text' name='surname' value='<%= person.surname %>'>
+      </div>
+      <div class='form-row'>
+        <label class='field-label'>email</label>
+        <input class='person-record right' type='email' name='email' value='<%= person.email %>'>
+      </div>
+
+      <div class='form-row'>
+        <label class='field-label'>grade</label>
+        <select class='person-record right' name='gradeId'>
+          <% options.grades.forEach(function(grade) { %>
+            <option value='<%= grade.optionId %>'
+              <% if (person.gradeId === grade.optionId) { %>
                 selected
               <% } %>
-            ><%= manager.option %></option>
+            ><%= grade.option %></option>
           <% }) %>
-      </select>
-    </div>
-    
-    <label class='field-label'>skills</label>
-    <div id='skills' class='right'>
-      <% options.skills.forEach(function(skill) { %>
-        <input
-        <% if (person.skills.includes(skill.optionId)) { %>
-          checked
-        <% } %>
-        class='hidden' type='checkbox' id='skill-<%= skill.optionId %>' name='skills' value='<%= skill.optionId %>'>
-        <label class='skill-button' for='skill-<%= skill.optionId %>'><%= skill.option %></label>
-      <% }) %>
-    </div>
+        </select>
+      </div>
+      
+      <div class='form-row'>
+        <label class='field-label'>role</label>
+        <select class='person-record right' name='roleId'>
+          <% options.roles.forEach(function(role) { %>
+            <option value='<%= role.optionId %>'
+              <% if (person.role === role.option) { %>
+                selected
+              <% } %>
+            ><%= role.option %></option>
+          <% }) %>
+        </select>
+      </div>
+      
+      <div class='form-row'>
+        <label class='field-label'>status</label>
+        <select class='person-record right' name='statusId'>
+          <% options.statuses.forEach(function(status) { %>
+            <option value='<%= status.optionId %>'
+              <% if (person.statusId === status.optionId) { %>
+                selected
+              <% } %>
+            ><%= status.option %></option>
+          <% }) %>
+        </select>
+      </div>
+      
+      <div class='form-row'>
+        <label class='field-label'>location</label>
+        <select class='person-record right' name='locationId'>
+          <% options.locations.forEach(function(location) { %>
+            <option value='<%= location.optionId %>'
+              <% if (person.locationId === location.optionId) { %>
+                selected
+              <% } %>
+            ><%= location.option %></option>
+          <% }) %>
+        </select>
+      </div>
+      
+      <div class='form-row'>
+        <label class='field-label'>manager</label>
+        <select class='person-record right' name='managerId'>
+            <% options.managers.forEach(function(manager) { %>
+              <option value='<%= manager.optionId %>'
+                <% if (person.managerId === manager.optionId) { %>
+                  selected
+                <% } %>
+              ><%= manager.option %></option>
+            <% }) %>
+        </select>
+      </div>
+      
+      <label class='field-label'>skills</label>
+      <div id='skills' class='right'>
+        <% options.skills.forEach(function(skill) { %>
+          <input
+          <% if (person.skills.includes(skill.optionId)) { %>
+            checked
+          <% } %>
+          class='hidden' type='checkbox' id='skill-<%= skill.optionId %>' name='skills' value='<%= skill.optionId %>'>
+          <label class='skill-button' for='skill-<%= skill.optionId %>'><%= skill.option %></label>
+        <% }) %>
+      </div>
 
-  </form>
-  
-  <input class='person-record' form='person-form' type='submit' value='submit'>
-  <% if (person.archived === false) { %>
-    <a class='banner-link' href='/<%= person.personId %>/person/archive/true'>archive</a>
-  <% } else { %>
-    <a class='banner-link' href='/<%= person.personId %>/person/archive/false'>restore</a>
-  <% } %>
-  <a class='banner-link extra-bottom' href='/<%= person.personId %>/person'>cancel</a>
+    </form>
+    
+    <input class='person-record' form='person-form' type='submit' value='submit'>
+    <% if (person.archived === false) { %>
+      <a class='banner-link' href='/<%= person.personId %>/person/archive/true'>archive</a>
+    <% } else { %>
+      <a class='banner-link' href='/<%= person.personId %>/person/archive/false'>restore</a>
+    <% } %>
+    <a class='banner-link extra-bottom' href='/<%= person.personId %>/person'>cancel</a>
+  </div>
 
   <div id='flash'>
     <% if (flash && flash.message) { %>
       <%= flash.message %>
     <% } %>
   </div>
+
+  </content>
+
 </body>

@@ -1,6 +1,9 @@
 <%- include('_head') %>
 
 <body>
+
+  <content>
+
   <div id='banner'>
     <div id='small-title'>Resource Management&nbsp;Tool</div>
     <a class='banner-link' href='/people'>people</a>
@@ -9,25 +12,29 @@
   </div>
 
   <% if(requests.length > 0) { %>
-    <div id='sub-title'>leave requests</div>
-    <table id='leave'>
-      <tr>
-        <th class='requester'>requester</th>
-        <th class='date'>date</th>
-        <th class='duration'>duration</th>
-        <th class='type'>type</th>
-        <th class='action'>action</th>
-      </tr>
-    <% requests.forEach(function(request) { %>
-      <tr>
-        <td class='requester'><%= request.requester %></td>
-        <td class='date'><%= request.date %></td>
-        <td class='duration'><%= request.duration %></td>
-        <td class='type'><%= request.type %></td>
-        <td class='action'><a class='table-link' href='/<%= request.leaveId %>/leave/1'>approve</a> / <a class='table-link' href='/<%= request.leaveId %>/leave/3'>reject</a></td>
-      </tr>
-    <% }) %>
-    </table>
+    <div id='leave-requests-table'>
+      <div id='sub-title'>leave requests</div>
+
+      <table id='leave'>
+        <tr>
+          <th class='requester'>requester</th>
+          <th class='date'>date</th>
+          <th class='duration'>duration</th>
+          <th class='type'>type</th>
+          <th class='action'>action</th>
+        </tr>
+      <% requests.forEach(function(request) { %>
+        <tr>
+          <td class='requester'><%= request.requester %></td>
+          <td class='date'><%= request.date %></td>
+          <td class='duration'><%= request.duration %></td>
+          <td class='type'><%= request.type %></td>
+          <td class='action'><a class='table-link' href='/<%= request.leaveId %>/leave/1'>approve</a> / <a class='table-link' href='/<%= request.leaveId %>/leave/3'>reject</a></td>
+        </tr>
+      <% }) %>
+      </table>
+
+    </div>
   <% } %>
 
 <!-- <table>
@@ -78,4 +85,7 @@
   <% } %> -->
 
   </table>
+
+  </content>
+
 </body>

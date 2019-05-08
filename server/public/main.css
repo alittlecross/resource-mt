@@ -9,6 +9,7 @@
   font-size: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
+  vertical-align: top;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -19,7 +20,6 @@ html {
 body {
   display: block;
   margin: 20px;
-  background-color: #333333;
   background-attachment: fixed
 }
 
@@ -43,7 +43,8 @@ select {
   border-radius: 0;
 }
 
-::placeholder, .locked {
+.locked,
+::placeholder {
   color: #777777;
 }
 
@@ -57,9 +58,23 @@ select {
   float: right;
 }
 
+content {
+  display: block;
+  margin: 0 auto;
+  max-width: 1020px;
+}
+
 /* #endregion */
 
 /* #region font */
+
+#title {
+  font-size: 60px;
+}
+
+#small-title {
+  font-size: 25px;
+}
 
 input[type='submit'],
 #sub-title,
@@ -70,7 +85,9 @@ input[type='submit'],
   font-size: 20px;
 }
 
-select, th, td,
+select,
+th,
+td,
 #flash,
 .authenticate,
 .person-link,
@@ -108,6 +125,7 @@ input[type='submit'].person-record:hover,
   background-color: #222222;
 }
 
+body,
 #ui-datepicker-div {
   background-color: #333333;
 }
@@ -126,6 +144,7 @@ input[type=checkbox]:checked + label,
 input[type=radio]:checked + label {
   box-shadow: 0 0 3px 2px #005eff;
 }
+
 
 #balance th,
 #leave td,
@@ -158,11 +177,11 @@ input[type=radio]:checked + label {
 
 #title {
   display: block;
-  font-size: 60px;
   font-weight: 600;
 }
 
-#sub-title, #flash {
+#flash,
+#sub-title {
   display: block;
   margin: 15px;
 }
@@ -220,7 +239,6 @@ input[type='submit'].authenticate {
 }
 
 #small-title {
-  font-size: 25px;
   font-weight: 600;
   vertical-align: top;
 }
@@ -234,14 +252,8 @@ input[type='submit'].authenticate {
 
 /* #region people */
 
-#people {
-  display: block;
-  margin: auto;
-  width: 1800px;
-}
-
 .person {
-  width: 300px;
+  width: 255px;
   padding: 20px 0;
   text-align: center;
 }
@@ -250,18 +262,18 @@ input[type='submit'].authenticate {
 
 /* #region person */
 
+#person-left {
+  margin: 0 25px;
+  width: 554px;
+}
+
 #person-form {
-  display: block;
-  max-width: 550px;
-  padding-right: 4px;
+  padding-right: 4px; 
   padding-left: 4px;
 }
 
 #person-form .form-row {
-  clear: right;
-  display: block;
   margin-bottom: 15px;
-  height: 40px;
 }
 
 .field-label {
@@ -269,17 +281,20 @@ input[type='submit'].authenticate {
   width: 141px;
   height: 40px;
   line-height: 40px;
+  vertical-align: top;
 }
 
-input.person-record:disabled, select.person-record:disabled, input[type=checkbox]:disabled + label {
+input.person-record:disabled,
+select.person-record:disabled,
+input[type=checkbox]:disabled + label {
   cursor: default;
 }
 
-input.person-record, select.person-record {
+input.person-record,
+select.person-record {
   border: 1px solid #ffffff;
   border-radius: 5px;
-  width: 100%;
-  max-width: 394px;
+  width: 394px;
   height: 40px;
   padding: 0 10px;
   background: none;
@@ -287,8 +302,7 @@ input.person-record, select.person-record {
 }
 
 #skills {
-  width: 100%;
-  max-width: 394px;
+  width: 394px;
 }
 
 .skill-button {
@@ -312,27 +326,23 @@ input[type='submit'].person-record {
   cursor: pointer;
 }
 
+#person-page > #leave-balance {
+  margin: 0 25px;
+  width: 366px;
+}
+
 .extra-bottom {
   padding-bottom: 20px;
 }
-
+ 
 /* #endregion */
 
 /* #region leave */
 
-#leave-container {
-  display: block;
-  margin: auto;
-  width: 1004px;
-}
-
-#leave-left {
-  margin-right: 250px;
+#leave-page > #leave-balance,
+#leave-page > #leave-request {
+  margin: 0 72px;
   width: 366px;
-}
-
-#leave-right {
-  vertical-align: top;
 }
 
 #leave-form {
@@ -386,7 +396,8 @@ input.leave-form {
   text-align: center;
 }
 
-.leave-type, .leave-duration {
+.leave-duration,
+.leave-type{
   margin: 5px;
   border-radius: 5px;
   width: 49px;
@@ -408,38 +419,37 @@ input[type='submit'].leave-form {
 }
 
 .count-label {
-  margin: 0 5px;
+  margin: 5px;
+  height: 40px;
+  line-height: 40px;
 }
 
-#balance, #leave {
+#balance,
+#leave {
   display: table;
   border-collapse: collapse;
 }
 
-#balance tr, #leave tr {
+#balance tr,
+#leave tr {
   display: table-row;
 }
 
-#leave th, #leave td {
-  display: table-cell;
-  text-align: center;
-  padding: 5px 15px;
-}
-
-#balance td, #balance th {
-  display: table-cell;
-  vertical-align: top;
-  padding: 5px 15px;
-}
-
-#balance-container {
-  display: block;
-  margin-top: 40px; 
-  width: 365px;
+#balance th,
+#leave th {
+  font-weight: 400;
 }
 
 #balance {
   margin: auto;
+}
+
+#balance td,
+#balance th {
+  display: table-cell;
+  vertical-align: top;
+  width: 140px;
+  padding: 5px 15px;
 }
 
 #balance th {
@@ -447,12 +457,26 @@ input[type='submit'].leave-form {
 }
 
 #balance td {
-  min-width: 100px;
   text-align: right;
 }
 
-#balance th, #leave th {
-  font-weight: 400;
+#leave-table {
+  display: block;
+  margin: auto;
+  width: 388px;
+}
+
+#leave-requests-table {
+  display: block;
+  margin: auto;
+  width: 545px;
+}
+
+#leave th,
+#leave td {
+  display: table-cell;
+  text-align: center;
+  padding: 5px 15px;
 }
 
 #leave th.date {
@@ -477,10 +501,6 @@ input[type='submit'].leave-form {
 
 #ui-datepicker-div {
   width: 280px;
-}
-
-#ui-datepicker-div[style] {
-  left: 152px !important;
 }
 
 .ui-datepicker-header {
@@ -525,7 +545,8 @@ input[type='submit'].leave-form {
   border-radius: 5px;
 }
 
-.ui-datepicker-prev span, .ui-datepicker-next span {
+.ui-datepicker-prev span,
+.ui-datepicker-next span {
   cursor: pointer;
   width: 20px;
 }
@@ -535,10 +556,12 @@ input[type='submit'].leave-form {
   height: 40px;
 }
 
-.ui-datepicker-calendar th, .ui-datepicker-calendar td {
+.ui-datepicker-calendar th,
+.ui-datepicker-calendar td {
   display: table-cell;
   width: 40px;
   text-align: center;
+  vertical-align: middle;
 }
 
 .ui-datepicker-calendar td:hover {
@@ -554,7 +577,7 @@ input[type='submit'].leave-form {
 
 /* #region smaller-screens */
 
-@media screen and (max-width: 1839px) {
+/* @media screen and (max-width: 1839px) {
   #people {
     width: 1500px;
   }
@@ -652,6 +675,6 @@ input[type='submit'].leave-form {
   #forgot-password {
     float: left;
   }
-}
+} */
 
 /* #endregion */
