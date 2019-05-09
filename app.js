@@ -40,6 +40,9 @@ app.post('/leave', require('./server/routes/leave').post)
 
 app.get('/:leaveId/leave/:action', require('./server/routes/leave/action'))
 
+app.get('/:leaveId/leave-cancel', require('./server/routes/leave/cancel'))
+app.get('/:leaveId/leave-remove/:personId', require('./server/routes/leave/remove'))
+
 app.listen(port)
 
 module.exports = app

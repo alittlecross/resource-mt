@@ -11,106 +11,11 @@
     <a class='banner-link right' href='/dashboard'>dashboard</a>
   </div>
 
-  <div id='leave-request'>
-    <div id='sub-title'>leave request</div>
+  <%- include('_leave-requests') %>
+  
+  <%- include('_leave-balance') %>
 
-    <form id='leave-form' action='/leave' autocomplete='off' method='POST'>
-  
-      <input type='text' name='personId' hidden value='<%= user.personId %>'>
-
-      <div class='form-row'>
-        <label id='start-label' class='leave-label'>start</label>
-        <input class='leave-form right' type='text' id='start' name='start' placeholder='dd/mm/yyyy' required>
-      </div>
-  
-      <div id='end-date' class='form-row'>
-        <label class='leave-label'>end</label>
-        <input class='leave-form right' type='text' id='end' name='end' placeholder='dd/mm/yyyy'>
-      </div>
-  
-      <input id='dates' type='text' name='dates' hidden value=''>
-  
-      <div class='button-row top'>
-        <input class='hidden' type='radio' id='annui' name='typeId' value='1' checked>
-        <label class='leave-type' for='annui'>annual</label>
-        
-        <input class='hidden' type='radio' id='lento' name='typeId' value='2'>
-        <label class='leave-type' for='lento'>flexi</label>
-      </div>
-      
-      <div class='button-row bottom'>
-        <input class='hidden' type='radio' id='ante' name='durationId' value='1' onclick='toggleEnd()'>
-        <label class='leave-duration' for='ante'>am</label>
-        
-        <input class='hidden' type='radio' id='post' name='durationId' value='2' onclick='toggleEnd()'>
-        <label class='leave-duration' for='post'>pm</label>
-        
-        <input class='hidden' type='radio' id='dies' name='durationId' value='3' onclick='toggleEnd()' checked>
-        <label class='leave-duration' for='dies'>all day</label>
-      </div>
-  
-    </form>
-
-    <input class='leave-form' form='leave-form' type='submit' value='submit'>
-    <label id='count' class='count-label'></label>
-  </div>
-
-  <div id='leave-balance'>
-    <div id='sub-title'>leave balance</div>
-  
-    <table id='balance'>
-      <tr>
-        <th>leave start</th>
-        <td><%= balance.startDate %></td>
-      </tr>
-      <tr>
-        <th>allowance</th>
-        <td><%= balance.allowance %></td>
-      </tr>
-      <tr>
-        <th>carried over</th>
-        <td><%= balance.broughtForward %></td>
-      </tr>
-      <tr>
-        <th>total</th>
-        <td><%= balance.total %> (<%= balance.total %>)</td>
-      </tr>
-      <tr>
-        <th>taken so far</th>
-        <td><%= balance.takenSoFar %> (<%= balance.total - balance.takenSoFar %>)</td>
-      </tr>
-      <tr>
-        <th>planned</th>
-        <td><%= balance.planned %> (<%= balance.total - balance.takenSoFar - balance.planned %>)</td>
-      </tr>
-      <tr>
-        <th>requested</th>
-        <td><%= balance.requested %> (<%= balance.total - balance.takenSoFar - balance.planned - balance.requested %>)</td>
-      </tr>
-    </table>
-  </div>
-  
-  <div id='leave-table'>
-    <div id='sub-title'>leave</div>
-
-    <table id='leave'>
-      <tr>
-        <th class='date'>date</th>
-        <th class='duration'>duration</th>
-        <th class='type'>type</th>
-        <th class='status'>status</th>
-      </tr>
-    <% requests.forEach(function(request) { %>
-      <tr>
-        <td class='date'><%= request.date %></td>
-        <td class='duration'><%= request.duration %></td>
-        <td class='type'><%= request.type %></td>
-        <td class='status'><%= request.status %></td>
-      </tr>
-    <% }) %>
-    </table>
-
-  </div>
+  <%- include('_leave-table') %>
 
   </content>
   

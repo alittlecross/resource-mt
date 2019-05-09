@@ -122,6 +122,28 @@ class Support {
     }
   }
 
+  static submitDuplicateRequestDouble () {
+    return {
+      personId: '1',
+      start: '01/04/2019',
+      end: '',
+      dates: '2019-4-2',
+      typeId: '1',
+      durationId: '3'
+    }
+  }
+
+  static submitDuplicateRequestsDouble () {
+    return {
+      personId: '1',
+      start: '02/04/2019',
+      end: '03/04/2019',
+      dates: '2019-4-2,2019-4-3',
+      typeId: '1',
+      durationId: '3'
+    }
+  }
+
   static submitRequestNoJsDouble () {
     return {
       personId: '1',

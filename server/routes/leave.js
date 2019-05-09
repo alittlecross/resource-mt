@@ -5,11 +5,12 @@ module.exports = {
     const user = req.session.user
     const bankHolidays = await Leave.bankHolidays()
     const leave = await Leave.getLeave(user.personId)
-    res.render('leave.ejs', { balance: leave.balance, bankHolidays: bankHolidays, requests: leave.requests, user: user })
+    res.render('leave.ejs', { balance: leave.balance, bankHolidays: bankHolidays, flash: res.locals.flash, requests: leave.requests, user: user, view: 'leave' })
   },
   post: async (req, res) => {
     if (parseInt(req.body.personId) === req.session.user.personId) {
-      await Leave.submitRequest(req.body)
+      let result = await Leave.submitRequest(req.body)
+      if (!result.status) req.session.flash = { message_1: result.message_1, message_2: result.message_2 }
       res.redirect('/leave')
     }
   }

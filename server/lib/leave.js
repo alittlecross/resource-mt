@@ -29,13 +29,14 @@ class Leave {
 
   static getBalance (balance, requests) {
     return {
-      startDate: Leave.formatDate(balance.anniversarydate),
+      startDate: Leave.formatDate(balance.startdate),
+      endDate: Leave.formatDate(balance.enddate),
       allowance: balance.allowance,
       broughtForward: balance.broughtforward,
       total: balance.total,
-      takenSoFar: requests.filter(e => e.passed === true && e.thisLeaveYear === true && e.status === 'approved').reduce((a, c) => a + c.value, 0),
-      planned: requests.filter(e => e.passed === false && e.thisLeaveYear === true && e.status === 'approved').reduce((a, c) => a + c.value, 0),
-      requested: requests.filter(e => e.status === 'pending').reduce((a, c) => a + c.value, 0)
+      takenSoFar: requests.filter(e => e.passed === true && e.thisLeaveYear === true && e.type === 'annual' && e.status === 'approved').reduce((a, c) => a + c.value, 0),
+      planned: requests.filter(e => e.passed === false && e.thisLeaveYear === true && e.type === 'annual' && e.status === 'approved').reduce((a, c) => a + c.value, 0),
+      requested: requests.filter(e => e.thisLeaveYear === true && e.type === 'annual' && e.status === 'pending').reduce((a, c) => a + c.value, 0)
     }
   }
 
@@ -50,10 +51,26 @@ class Leave {
   }
 
   static async submitRequest (data) {
+    console.log(data)
+    const results = await this.getLeave(data.personId)
     const dates = (data.dates === '') ? [data.start] : data.dates.split(',')
     const joiner = `', ${data.personId}, ${data.typeId}, ${data.durationId}, 2`
     const string = `'${dates.join(`${joiner}), ('`) + joiner}`
-    DatabaseLeave.submitRequest(string)
+    const count = results.requests.map(e => e.date).filter(r => dates.map(d => Leave.formatDate(d)).includes(r)).length
+    const s = count > 1 ? 's' : ''
+
+    if (count) {
+      return {
+        status: false,
+        message_1: `date${s} already requested.`,
+        message_2: 'cancel and resubmit to amend.'
+      }
+    } else {
+      await DatabaseLeave.submitRequest(string)
+      return {
+        status: true
+      }
+    }
   }
 }
 

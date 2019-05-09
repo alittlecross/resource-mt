@@ -68,19 +68,37 @@ describe('class Leave', () => {
 
   describe('.submitRange', () => {
     it('should construct a leave request string', async () => {
-      const leave = sandbox.stub(DatabaseLeave, 'submitRequest')
+      sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
+      sandbox.stub(DatabaseLeave, 'submitRequest')
 
-      await Leave.submitRequest(Support.submitRequestDouble())
+      const result = await Leave.submitRequest(Support.submitRequestDouble())
 
-      expect(leave.callCount).equal(1)
+      expect(result.status).equal(true)
     })
 
     it('should construct a leave request string (no JS)', async () => {
-      const leave = sandbox.stub(DatabaseLeave, 'submitRequest')
+      sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
+      sandbox.stub(DatabaseLeave, 'submitRequest')
 
-      await Leave.submitRequest(Support.submitRequestNoJsDouble())
+      const result = await Leave.submitRequest(Support.submitRequestNoJsDouble())
 
-      expect(leave.callCount).equal(1)
+      expect(result.status).equal(true)
+    })
+
+    it('should return a message if submitting a duplicate request', async () => {
+      sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
+
+      const result = await Leave.submitRequest(Support.submitDuplicateRequestDouble())
+
+      expect(result.status).equal(false)
+    })
+
+    it('should return a message if submitting a duplicate requests', async () => {
+      sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
+
+      const result = await Leave.submitRequest(Support.submitDuplicateRequestsDouble())
+
+      expect(result.status).equal(false)
     })
   })
 })
