@@ -17,18 +17,22 @@
     <form id='person-form' action='/<%= person.personId %>/person/edit' autocomplete='off' method='POST'>
     
       <input type='text' name='personId' hidden value='<%= person.personId %>'>
+
       <div class='form-row'>
         <label class='field-label'>staff number</label>
         <input class='person-record right' type='text' name='staffId' value='<%= person.staffId %>'>
       </div>
+
       <div class='form-row'>
         <label class='field-label'>first name</label>
         <input class='person-record right' type='text' name='firstName' value='<%= person.firstName%>'>
       </div>
+
       <div class='form-row'>
         <label class='field-label'>surname</label>
         <input class='person-record right' type='text' name='surname' value='<%= person.surname %>'>
       </div>
+      
       <div class='form-row'>
         <label class='field-label'>email</label>
         <input class='person-record right' type='email' name='email' value='<%= person.email %>'>

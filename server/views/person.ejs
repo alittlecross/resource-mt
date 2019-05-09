@@ -126,61 +126,11 @@
   </div>
 
   <% if (user.role === 'Resource Manager') { %>
-    <div id='leave-balance'>
-      <div id='sub-title'>leave balance</div>
-    
-      <table id='balance'>
-        <tr>
-          <th>leave start</th>
-          <td><%= balance.startDate %></td>
-        </tr>
-        <tr>
-          <th>allowance</th>
-          <td><%= balance.allowance %></td>
-        </tr>
-        <tr>
-          <th>carried over</th>
-          <td><%= balance.broughtForward %></td>
-        </tr>
-        <tr>
-          <th>total</th>
-          <td><%= balance.total %> (<%= balance.total %>)</td>
-        </tr>
-        <tr>
-          <th>taken so far</th>
-          <td><%= balance.takenSoFar %> (<%= balance.total - balance.takenSoFar %>)</td>
-        </tr>
-        <tr>
-          <th>planned</th>
-          <td><%= balance.planned %> (<%= balance.total - balance.takenSoFar - balance.planned %>)</td>
-        </tr>
-        <tr>
-          <th>requested</th>
-          <td><%= balance.requested %> (<%= balance.total - balance.takenSoFar - balance.planned - balance.requested %>)</td>
-        </tr>
-      </table>
-    </div>
 
-    <div id='leave-table'>
-      <div id='sub-title'>leave</div>
-      
-      <table id='leave'>
-        <tr>
-          <th class='date'>date</th>
-          <th class='duration'>duration</th>
-          <th class='type'>type</th>
-          <th class='status'>status</th>
-        </tr>
-        <% requests.forEach(function(request) { %>
-        <tr>
-          <td class='date'><%= request.date %></td>
-          <td class='duration'><%= request.duration %></td>
-          <td class='type'><%= request.type %></td>
-          <td class='status'><%= request.status %></td>
-        </tr>
-        <% }) %>
-      </table>
-    </div>
+    <%- include('_leave-balance') %>
+
+    <%- include('_leave-table') %>
+
   <% } %>
 
   </content>

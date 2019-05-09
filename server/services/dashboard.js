@@ -10,12 +10,8 @@ class DatabaseDashboard {
              leavetype,
              status,
              CONCAT(firstname, ' ', surname) AS requester,
-             (anniversarydate < leavedate AND status <> 'rejected' AND leavetype <> 'flexi') AS thisleaveyear,
-             (leavedate < CURRENT_DATE) AS passed,
-             anniversarydate,
-             allowance,
-             broughtforward,
-             (broughtforward + allowance) AS total
+             (status <> 'rejected') AS thisleaveyear,
+             (leavedate < CURRENT_DATE) AS passed
       FROM leave
       INNER JOIN durations
       ON leave.durationid = durations.durationid
@@ -25,11 +21,8 @@ class DatabaseDashboard {
       ON leave.statusid = leavestatuses.statusid
       INNER JOIN people
       ON leave.personid = people.personid
-      LEFT JOIN leaveanniversary
-      ON leave.personid = leaveanniversary.personid
-      WHERE leaveanniversary.current = TRUE
 
-      AND status = 'pending'
+      WHERE status = 'pending'
       AND managerid = $1
             
       ORDER BY leaveid;

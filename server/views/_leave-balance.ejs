@@ -1,0 +1,38 @@
+<div id='leave-balance'>
+  <div id='sub-title'>leave balance</div>
+
+  <table id='balance'>
+    <tr>
+      <th>start date</th>
+      <td><%= balance.startDate %></td>
+    </tr>
+    <tr>
+      <th>end date</th>
+      <td><%= balance.endDate%></td>
+    </tr>
+    <tr>
+      <th>allowance</th>
+      <td><%= balance.allowance %></td>
+    </tr>
+    <tr>
+      <th>days carried over</th>
+      <td><%= balance.broughtForward %></td>
+    </tr>
+    <tr>
+      <th>leave year entitlement</th>
+      <td><%= balance.total %></td>
+    </tr>
+    <tr>
+      <th>taken so far</th>
+      <td><%= balance.takenSoFar %> / <%= balance.total - balance.takenSoFar %></td>
+    </tr>
+    <tr>
+      <th>planned</th>
+      <td><%= balance.planned %> / <%= balance.total - balance.takenSoFar - balance.planned %></td>
+    </tr>
+    <tr>
+      <th>pending approval</th>
+      <td><%= balance.requested %> / <%= balance.total - balance.takenSoFar - balance.planned - balance.requested %></td>
+    </tr>
+  </table>
+</div>

@@ -1,4 +1,6 @@
 INSERT INTO leavetypes (leavetype)
 VALUES
   ('annual'),
-  ('flexi');
+  ('flexi'),
+  ('special'),
+  ('other');

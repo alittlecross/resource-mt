@@ -397,7 +397,7 @@ input.leave-form {
 }
 
 .leave-duration,
-.leave-type{
+.leave-type {
   margin: 5px;
   border-radius: 5px;
   width: 49px;
@@ -424,6 +424,10 @@ input[type='submit'].leave-form {
   line-height: 40px;
 }
 
+.flash-centre {
+  text-align: center
+}
+
 #balance,
 #leave {
   display: table;
@@ -448,51 +452,68 @@ input[type='submit'].leave-form {
 #balance th {
   display: table-cell;
   vertical-align: top;
-  width: 140px;
-  padding: 5px 15px;
+  padding: 6px 0;
 }
 
 #balance th {
   text-align: left;
+  width: 236px;
 }
 
 #balance td {
   text-align: right;
+  width: 100px;
 }
 
 #leave-table {
   display: block;
   margin: auto;
-  width: 388px;
+  width: 510px;
 }
 
 #leave-requests-table {
   display: block;
   margin: auto;
-  width: 545px;
+  width: 650px;
 }
 
 #leave th,
 #leave td {
   display: table-cell;
   text-align: center;
-  padding: 5px 15px;
+  padding: 6px 15px;
+}
+
+#leave th.requester {
+  width: 160px;
 }
 
 #leave th.date {
-  width: 71px;
+  width: 80px;
 }
 
 #leave th.duration {
-  width: 66px;
+  width: 70px;
 }
 
 #leave th.type {
-  width: 55px;
+  width: 60px;
 }
 
 #leave th.status {
-  width: 76px;
+  width: 80px;
+}
+
+#leave th.action {
+  width: 130px;
+}
+
+#leave th.delete {
+  width: 70px;
+}
+
+.not-this-year {
+  text-decoration: line-through solid #777777;
 }
 
 /* #endregion */

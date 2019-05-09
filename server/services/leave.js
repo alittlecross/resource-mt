@@ -23,9 +23,10 @@ class DatabaseLeave {
         leavetype,
         status,
         CONCAT(firstname, ' ', surname) AS requester,
-        (anniversarydate < leavedate AND status <> 'rejected' AND leavetype <> 'flexi') AS thisleaveyear,
+        (startdate < leavedate) AS thisleaveyear,
         (leavedate < CURRENT_DATE) AS passed,
-        NULL AS anniversarydate,
+        NULL AS startdate,
+        NULL AS enddate,
         NULL AS allowance,
         NULL AS broughtforward,
         NULL AS total
@@ -34,8 +35,8 @@ class DatabaseLeave {
       INNER JOIN leavetypes ON leave.typeid = leavetypes.typeid
       INNER JOIN leavestatuses ON leave.statusid = leavestatuses.statusid
       INNER JOIN people ON leave.personid = people.personid
-      LEFT JOIN leaveanniversary ON leave.personid = leaveanniversary.personid
-      WHERE leaveanniversary.current = TRUE AND leave.personid = $1
+      LEFT JOIN leaveyear ON leave.personid = leaveyear.personid
+      WHERE leaveyear.current = TRUE AND leave.personid = $1
 
       UNION
 
@@ -50,12 +51,13 @@ class DatabaseLeave {
         NULL AS requester,
         NULL AS thisleaveyear,
         NULL AS passed,
-        anniversarydate,
+        startdate,
+        enddate,
         allowance,
         broughtforward,
         (broughtforward + allowance) AS total
-      FROM leaveanniversary
-      WHERE current = TRUE AND leaveanniversary.personid = $1
+      FROM leaveyear
+      WHERE current = TRUE AND leaveyear.personid = $1
 
       ORDER BY leavedate DESC;
     `, [personId])
