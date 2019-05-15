@@ -111,12 +111,45 @@ class Support {
     }
   }
 
-  static submitRequestDouble () {
+  static submitRequestDoubleAm () {
     return {
       personId: '1',
       start: '24/03/2005',
       end: '',
       dates: '2005-3-24',
+      typeId: '1',
+      durationId: '1'
+    }
+  }
+
+  static submitRequestDoublePm () {
+    return {
+      personId: '1',
+      start: '24/03/2005',
+      end: '',
+      dates: '2005-3-24',
+      typeId: '1',
+      durationId: '2'
+    }
+  }
+
+  static submitRequestDoubleAllDay () {
+    return {
+      personId: '1',
+      start: '24/03/2005',
+      end: '',
+      dates: '2005-3-24',
+      typeId: '1',
+      durationId: '3'
+    }
+  }
+
+  static submitRequestNoJsDouble () {
+    return {
+      personId: '1',
+      start: '24/03/2005',
+      end: '',
+      dates: '',
       typeId: '1',
       durationId: '3'
     }
@@ -141,40 +174,6 @@ class Support {
       dates: '2019-4-2,2019-4-3',
       typeId: '1',
       durationId: '3'
-    }
-  }
-
-  static submitRequestNoJsDouble () {
-    return {
-      personId: '1',
-      start: '24/03/2005',
-      end: '',
-      dates: '',
-      typeId: '1',
-      durationId: '3'
-    }
-  }
-
-  static addPersonDouble () {
-    return {
-      rowCount: 1,
-      rows: [
-        { personid: 3 }
-      ]
-    }
-  }
-
-  static personFormData () {
-    return {
-      staffId: 'JH1234',
-      firstName: 'Jim',
-      surname: 'Halpert',
-      email: 'jim.halpert@scranton.com',
-      gradeId: '2',
-      locationId: '1',
-      managerId: '1',
-      roleid: '1',
-      statusId: '1'
     }
   }
 
@@ -214,7 +213,7 @@ class Support {
           leaveid: 3,
           personid: 1,
           leavedate: '2019-04-02T23:00:00.000Z',
-          duration: 'all day',
+          duration: 'am',
           leavetype: 'annual',
           status: 'pending',
           requester: 'Michael Scott',
@@ -228,7 +227,7 @@ class Support {
           leaveid: 3,
           personid: 1,
           leavedate: '2019-04-01T23:00:00.000Z',
-          duration: 'all day',
+          duration: 'pm',
           leavetype: 'annual',
           status: 'pending',
           requester: 'Michael Scott',
@@ -239,6 +238,29 @@ class Support {
           broughtforward: null,
           total: null }
       ]
+    }
+  }
+
+  static addPersonDouble () {
+    return {
+      rowCount: 1,
+      rows: [
+        { personid: 3 }
+      ]
+    }
+  }
+
+  static personFormData () {
+    return {
+      staffId: 'JH1234',
+      firstName: 'Jim',
+      surname: 'Halpert',
+      email: 'jim.halpert@scranton.com',
+      gradeId: '2',
+      locationId: '1',
+      managerId: '1',
+      roleid: '1',
+      statusId: '1'
     }
   }
 
@@ -366,6 +388,36 @@ class Support {
           description: 'New Year\'s Day' },
         { holidaydate: '2019-04-18T23:00:00.000Z',
           description: 'Good Friday' }
+      ]
+    }
+  }
+
+  static bankHolidaysSpecificWeekDouble () {
+    return [ new Date('2019-05-05T23:00:00.000Z') ]
+  }
+
+  static getLeaveDouble () {
+    return {
+      rowCount: 3,
+      rows: [
+        { personid: 1,
+          person: 'Michael Scott',
+          leaveid: 1,
+          leavedate: new Date('2019-05-06T23:00:00.000Z'),
+          duration: 'all day',
+          status: 'approved' },
+        { personid: 1,
+          person: 'Fay Toward',
+          leaveid: 2,
+          leavedate: new Date('2019-05-07T23:00:00.000Z'),
+          duration: 'am',
+          status: 'approved' },
+        { personid: 1,
+          person: 'Ian Noonan',
+          leaveid: 3,
+          leavedate: new Date('2019-05-07T23:00:00.000Z'),
+          duration: 'pm',
+          status: 'approved' }
       ]
     }
   }

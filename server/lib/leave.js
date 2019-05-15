@@ -22,8 +22,8 @@ class Leave {
     return `${(d > 9) ? d : '0' + d}/${(m > 9) ? m : '0' + m}/${y}`
   }
 
-  static async bankHolidays () {
-    const results = await DatabaseLeave.bankHolidays()
+  static async bankHolidays (from = '1900/01/01', to = '2100/12/31') {
+    const results = await DatabaseLeave.bankHolidays(from, to)
     return results.rows.map(row => row.holidaydate)
   }
 
@@ -51,12 +51,20 @@ class Leave {
   }
 
   static async submitRequest (data) {
-    console.log(data)
     const results = await this.getLeave(data.personId)
     const dates = (data.dates === '') ? [data.start] : data.dates.split(',')
+    let count = 0
+
+    if (data.durationId === '1') {
+      count = results.requests.filter(e => e.duration !== 'pm').map(e => e.date).filter(r => dates.map(d => Leave.formatDate(d)).includes(r)).length
+    } else if (data.durationId === '2') {
+      count = results.requests.filter(e => e.duration !== 'am').map(e => e.date).filter(r => dates.map(d => Leave.formatDate(d)).includes(r)).length
+    } else {
+      count = results.requests.map(e => e.date).filter(r => dates.map(d => Leave.formatDate(d)).includes(r)).length
+    }
+
     const joiner = `', ${data.personId}, ${data.typeId}, ${data.durationId}, 2`
     const string = `'${dates.join(`${joiner}), ('`) + joiner}`
-    const count = results.requests.map(e => e.date).filter(r => dates.map(d => Leave.formatDate(d)).includes(r)).length
     const s = count > 1 ? 's' : ''
 
     if (count) {
