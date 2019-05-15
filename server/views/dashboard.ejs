@@ -9,6 +9,9 @@
     <a class='banner-link' href='/people'>people</a>
     <a class='banner-link' href='/leave'>leave</a>
     <a class='banner-link right' href='/log-out'>log out</a>
+    <% if (!current) { %>
+      <a class='banner-link right' href='/dashboard/present'>current week</a>
+    <% } %>
   </div>
 
   <% if(requests.length > 0) { %>

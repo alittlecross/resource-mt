@@ -14,8 +14,12 @@ app.use(require('./server/plugins/flash'))
 
 app.get('/', require('./server/routes/index'))
 app.post('/log-in', require('./server/routes/log-in'))
-app.get('/dashboard', require('./server/routes/dashboard'))
 app.get('/log-out', require('./server/routes/log-out'))
+
+app.get('/dashboard/', require('./server/routes/dashboard'))
+app.get('/dashboard/past', require('./server/routes/dashboard/past'))
+app.get('/dashboard/present', require('./server/routes/dashboard/present'))
+app.get('/dashboard/future', require('./server/routes/dashboard/future'))
 
 app.get('/people', require('./server/routes/people'))
 app.get('/people/archive', require('./server/routes/people/archive'))

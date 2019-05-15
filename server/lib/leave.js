@@ -24,7 +24,7 @@ class Leave {
 
   static async bankHolidays (from = '1900/01/01', to = '2100/12/31') {
     const results = await DatabaseLeave.bankHolidays(from, to)
-    return results.rows.map(row => row.holidaydate)
+    return results.rows
   }
 
   static getBalance (balance, requests) {
