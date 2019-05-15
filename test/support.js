@@ -393,7 +393,10 @@ class Support {
   }
 
   static bankHolidaysSpecificWeekDouble () {
-    return [ new Date('2019-05-05T23:00:00.000Z') ]
+    return [
+      { holidaydate: new Date('2018-04-01T23:00:00.000Z'),
+        description: 'Easter Monday' }
+    ]
   }
 
   static getLeaveDouble () {

@@ -3,7 +3,8 @@ const Leave = require('../lib/leave')
 module.exports = {
   get: async (req, res) => {
     const user = req.session.user
-    const bankHolidays = await Leave.bankHolidays()
+    const results = await Leave.bankHolidays()
+    const bankHolidays = results.map(row => row.holidaydate)
     const leave = await Leave.getLeave(user.personId)
     res.render('leave.ejs', { balance: leave.balance, bankHolidays: bankHolidays, flash: res.locals.flash, requests: leave.requests, user: user, view: 'leave' })
   },

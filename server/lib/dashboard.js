@@ -2,25 +2,32 @@ const DatabaseDashboard = require('../services/dashboard')
 const Leave = require('../lib/leave')
 
 class Dashboard {
-  static async getLeave (personId, d = new Date()) {
-    d = new Date(d)
+  static getWeek (date) {
+    const d = new Date(date)
+    const week = []
 
-    const week = [
-      new Date(d.getFullYear(), d.getMonth(), d.getDate() - d.getDay()),
-      new Date(d.getFullYear(), d.getMonth(), d.getDate() - d.getDay() + 6)
-    ]
+    for (let i = 0; i < 7; ++i) week.push(new Date(d.getFullYear(), d.getMonth(), d.getDate() - d.getDay() + i))
+
+    return week
+  }
+
+  static async getLeave (personId, week) {
     const weekdays = [0, 0, 0, 0, 0, 0, 0]
-    const bankHolidays = await Leave.bankHolidays(week[0], week[1])
+    const bankHolidays = await Leave.bankHolidays(week[0], week[6])
 
-    bankHolidays.forEach(d => {
-      weekdays[d.getDay()] = {
+    for (let i = 0; i < bankHolidays.length; ++i) {
+      weekdays[bankHolidays[i].holidaydate.getDay()] = {
         leaveId: 0,
         duration: 'all day',
-        status: 'bank holiday'
+        status: bankHolidays[i].description
       }
+    }
+
+    bankHolidays.forEach(d => {
+
     })
 
-    const results = await DatabaseDashboard.getLeave(personId, week[0], week[1])
+    const results = await DatabaseDashboard.getLeave(personId, week[0], week[6])
     const team = []
 
     results.rows.forEach(row => {

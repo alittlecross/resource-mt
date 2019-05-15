@@ -79,6 +79,7 @@ content {
 input[type='submit'],
 #sub-title,
 .banner-link,
+.calendar-bar,
 .person,
 .ui-datepicker-prev span,
 .ui-datepicker-next span {
@@ -255,6 +256,10 @@ input[type='submit'].authenticate {
 #team-activity {
   margin: auto;
   width: 976px;
+}
+
+.calendar-bar {
+  margin: 15px;
 }
 
 #calendar {
@@ -585,7 +590,6 @@ input[type='submit'].leave-form {
 #team-activity {
   display: block;
   margin: auto;
-  /* width: 700px; */
 }
 
 /* #endregion */

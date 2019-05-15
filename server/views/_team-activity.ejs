@@ -1,14 +1,16 @@
 <div id='team-activity'>
-  <div id='sub-title'>team activity</div>
+  <div class='calendar-bar'>team activity</div>
+  <a class='calendar-bar right' href='/dashboard/future'>→</a>
+  <a class='calendar-bar right' href='/dashboard/past'>←</a>
 
   <table id='calendar'>
     <tr>
       <th class='team-member'></th>
-      <th class='weekday'>monday</th>
-      <th class='weekday'>tueday</th>
-      <th class='weekday'>wednesday</th>
-      <th class='weekday'>thursday</th>
-      <th class='weekday'>friday</th>
+      <th class='weekday'>mon <%= week[1].getDate() %>/<%= week[1].getMonth() + 1 %></th>
+      <th class='weekday'>tue <%= week[2].getDate() %>/<%= week[1].getMonth() + 1 %></th>
+      <th class='weekday'>wed <%= week[3].getDate() %>/<%= week[1].getMonth() + 1 %></th>
+      <th class='weekday'>thu <%= week[4].getDate() %>/<%= week[1].getMonth() + 1 %></th>
+      <th class='weekday'>fri <%= week[5].getDate() %>/<%= week[1].getMonth() + 1 %></th>
     </tr>
 
   <% leave.forEach(function(person) { %>
@@ -73,17 +75,13 @@
 
           <% } else if (person.leave[i].duration === 'all day') { %>
 
-            <div class='ad <%= person.leave[i].status %>'>
-
-              <% if (person.leave[i].status === 'pending') { %>
-                ...pending
-              <% } else if (person.leave[i].status === 'approved') { %>
-                leave
-              <% } else if (person.leave[i].status === 'bank holiday') { %>
-                bank holiday
-              <% } %>
-
-            </div>
+            <% if (person.leave[i].status === 'pending') { %>
+              <div class='ad pending'>...pending</div>
+            <% } else if (person.leave[i].status === 'approved') { %>
+              <div class='ad approved'>leave</div>
+            <% } else if (person.leave[i].status !== 'rejected') { %>
+              <div class='ad bank-holiday'><%= person.leave[i].status %></div>
+            <% } %>
 
           <% } %>
 
