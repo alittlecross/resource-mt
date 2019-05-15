@@ -29,16 +29,32 @@ class DatabaseDashboard {
     `, [personId])
   }
 
-  static async getPeople (personId) {
+  static async getLeave (personId, monday, friday) {
     return DatabaseConnection.query(`
-      SELECT *
+      SELECT people.personid,
+             CONCAT(firstname, ' ', surname) AS person,
+             leaveid,
+             leavedate,
+             duration,
+             status
       FROM people
-      INNER JOIN roles
-      ON people.roleid = roles.roleid
-      WHERE managerid = $1 AND personid != $1 AND archived = FALSE
-
-      ORDER BY firstname, surname;
-    `, [personId])
+      LEFT JOIN leave
+        ON people.personid = leave.personid
+        AND leave.leavedate >= $2
+        AND leave.leavedate <= $3
+      LEFT JOIN durations
+        ON leave.durationid = durations.durationid
+      LEFT JOIN leavestatuses
+        ON leave.statusid = leavestatuses.statusid
+      WHERE managerid IN (
+        SELECT managerid
+        FROM people
+        WHERE personid = $1
+      )
+      AND archived = FALSE
+      
+      ORDER BY person, leavedate, duration;
+    `, [personId, monday, friday])
   }
 }
 

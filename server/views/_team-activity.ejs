@@ -1,0 +1,100 @@
+<div id='team-activity'>
+  <div id='sub-title'>team activity</div>
+
+  <table id='calendar'>
+    <tr>
+      <th class='team-member'></th>
+      <th class='weekday'>monday</th>
+      <th class='weekday'>tueday</th>
+      <th class='weekday'>wednesday</th>
+      <th class='weekday'>thursday</th>
+      <th class='weekday'>friday</th>
+    </tr>
+
+  <% leave.forEach(function(person) { %>
+    <tr>
+      <td class='team-member'><a class='table-link' href='/<%= person.personId %>/person'><%= person.person %></a></td>
+
+      <% for (let i = 1; i < 6; ++i) { %>
+
+        <td class='weekday'>
+
+          <% if (person.leave[i] === 0) { %>
+
+            <div class='am'></div>
+            <div class='pm'></div>
+
+          <% } else if (Array.isArray(person.leave[i])) { %>
+
+            <div class='am <%= person.leave[i][0].status %>'>
+
+              <% if (person.leave[i][0].status === 'pending') { %>
+                ...pending
+              <% } else if (person.leave[i][0].status === 'approved') { %>
+                leave
+              <% } %>
+
+            </div>
+            <div class='pm <%= person.leave[i][1].status %>'>
+
+              <% if (person.leave[i][1].status === 'pending') { %>
+                ...pending
+              <% } else if (person.leave[i][1].status === 'approved') { %>
+                leave
+              <% } %>
+
+            </div>
+
+          <% } else if (person.leave[i].duration === 'am') { %>
+
+            <div class='am <%= person.leave[i].status %>'>
+
+              <% if (person.leave[i].status === 'pending') { %>
+                ...pending
+              <% } else if (person.leave[i].status === 'approved') { %>
+                leave
+              <% } %>
+
+            </div>
+            <div class='pm'></div>
+
+          <% } else if (person.leave[i].duration === 'pm') { %>
+
+            <div class='am'></div>
+            <div class='pm <%= person.leave[i].status %>'>
+
+              <% if (person.leave[i].status === 'pending') { %>
+                ...pending
+              <% } else if (person.leave[i].status === 'approved') { %>
+                leave
+              <% } %>
+
+            </div>
+
+          <% } else if (person.leave[i].duration === 'all day') { %>
+
+            <div class='ad <%= person.leave[i].status %>'>
+
+              <% if (person.leave[i].status === 'pending') { %>
+                ...pending
+              <% } else if (person.leave[i].status === 'approved') { %>
+                leave
+              <% } else if (person.leave[i].status === 'bank holiday') { %>
+                bank holiday
+              <% } %>
+
+            </div>
+
+          <% } %>
+
+        </td>
+
+      <% } %>
+
+    </tr>
+
+  <% }) %>
+
+  </table>
+
+</div>

@@ -250,6 +250,72 @@ input[type='submit'].authenticate {
 
 /* #endregion */
 
+/* #region dashboard */
+
+#team-activity {
+  margin: auto;
+  width: 976px;
+}
+
+#calendar {
+  display: table;
+  border-collapse: collapse;
+}
+
+#calendar tr {
+  display: table-row;
+}
+
+#calendar th {
+  font-weight: 400;
+}
+
+#calendar th,
+#calendar td {
+  display: table-cell;
+  text-align: center;
+  border: 1px solid #777777
+}
+
+#calendar th,
+.team-member {
+  padding: 6px 15px;
+  vertical-align: middle;
+}
+
+.weekday {
+  width: 130px;
+}
+
+.am, .pm, .ad {
+  display: block;
+  margin: 5px;
+  border-radius: 5px;
+  width: 136px;
+  padding: 5px 7px;
+  font-size: 14px;
+  font-style: italic;
+  text-align: left;
+}
+
+.am, .pm {
+  height: 20px;
+}
+
+.ad {
+  height: 55px;
+}
+
+.pending {
+  background-color: #444444;
+}
+
+.approved, .bank-holiday {
+  background-color: #222222;
+}
+
+/* #endregion */
+
 /* #region people */
 
 .person {
@@ -514,6 +580,12 @@ input[type='submit'].leave-form {
 
 .not-this-year {
   text-decoration: line-through solid #777777;
+}
+
+#team-activity {
+  display: block;
+  margin: auto;
+  /* width: 700px; */
 }
 
 /* #endregion */

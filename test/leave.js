@@ -66,14 +66,18 @@ describe('class Leave', () => {
     })
   })
 
-  describe('.submitRange', () => {
+  describe('.submitRequest', () => {
     it('should construct a leave request string', async () => {
       sandbox.stub(DatabaseLeave, 'getLeave').returns(Support.getLeaveRequestDouble())
       sandbox.stub(DatabaseLeave, 'submitRequest')
 
-      const result = await Leave.submitRequest(Support.submitRequestDouble())
+      const am = await Leave.submitRequest(Support.submitRequestDoubleAm())
+      const pm = await Leave.submitRequest(Support.submitRequestDoublePm())
+      const allDay = await Leave.submitRequest(Support.submitRequestDoubleAllDay())
 
-      expect(result.status).equal(true)
+      expect(am.status).equal(true)
+      expect(pm.status).equal(true)
+      expect(allDay.status).equal(true)
     })
 
     it('should construct a leave request string (no JS)', async () => {

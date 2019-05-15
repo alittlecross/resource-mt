@@ -25,7 +25,7 @@
         </tr>
       <% requests.forEach(function(request) { %>
         <tr>
-          <td class='requester'><%= request.requester %></td>
+          <td class='requester'><a class='table-link' href='/<%= request.personId %>/person'><%= request.requester %></a></td>
           <td class='date'><%= request.date %></td>
           <td class='duration'><%= request.duration %></td>
           <td class='type'><%= request.type %></td>
@@ -36,6 +36,8 @@
 
     </div>
   <% } %>
+
+  <%- include('_team-activity') %>
 
   </content>
 
