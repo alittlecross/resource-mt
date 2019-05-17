@@ -8,9 +8,7 @@ class People {
     this.role = data.role
   }
 
-  static buildArray (data) {
-    return data.map(row => new People(row))
-  }
+  static buildArray (data) { return data.map(row => new People(row)) }
 
   static async getPeople () {
     const results = await DatabasePeople.getPeople()

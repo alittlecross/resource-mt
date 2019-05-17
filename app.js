@@ -17,9 +17,7 @@ app.post('/log-in', require('./server/routes/log-in'))
 app.get('/log-out', require('./server/routes/log-out'))
 
 app.get('/dashboard/', require('./server/routes/dashboard'))
-app.get('/dashboard/past', require('./server/routes/dashboard/past'))
-app.get('/dashboard/present', require('./server/routes/dashboard/present'))
-app.get('/dashboard/future', require('./server/routes/dashboard/future'))
+app.get('/dashboard/:change', require('./server/routes/dashboard/change'))
 
 app.get('/people', require('./server/routes/people'))
 app.get('/people/archive', require('./server/routes/people/archive'))
@@ -44,7 +42,7 @@ app.post('/leave', require('./server/routes/leave').post)
 
 app.get('/:leaveId/leave/:action', require('./server/routes/leave/action'))
 
-app.get('/:leaveId/leave-cancel', require('./server/routes/leave/cancel'))
+app.get('/:leaveId/leave-cancel/:personId', require('./server/routes/leave/cancel'))
 app.get('/:leaveId/leave-remove/:personId', require('./server/routes/leave/remove'))
 
 app.listen(port)

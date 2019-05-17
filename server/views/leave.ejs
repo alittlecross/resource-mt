@@ -2,21 +2,17 @@
 <%- include('_date-picker') %>
 
 <body onload='recentre()'>
-
   <content id='leave-page'>
 
-  <div id='banner'>
-    <div id='small-title'>Resource Management&nbsp;Tool</div>
-    <a class='banner-link right' href='/log-out'>log out</a>
-    <a class='banner-link right' href='/dashboard'>dashboard</a>
-  </div>
+    <div id='banner'>
+      <div id='small-title'>Resource Management&nbsp;Tool</div>
+      <a class='banner-link right' href='/log-out'>log out</a>
+      <a class='banner-link right' href='/dashboard'>dashboard</a>
+    </div>
 
-  <%- include('_leave-requests') %>
-  
-  <%- include('_leave-balance') %>
-
-  <%- include('_leave-table') %>
+    <%- include('_leave-requests') %>
+    <%- include('_leave-balance') %>
+    <%- include('_leave-table') %>
 
   </content>
-  
 </body>

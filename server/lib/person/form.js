@@ -11,9 +11,7 @@ class Form {
     this.skills = this.filterData(data, 'skill')
   }
 
-  filterData (data, kind) {
-    return data.filter(row => row.kind === kind).map(option => new Option(option))
-  }
+  filterData (data, kind) { return data.filter(row => row.kind === kind).map(option => new Option(option)) }
 
   static async options () {
     const results = await DatabaseForm.getOptions()

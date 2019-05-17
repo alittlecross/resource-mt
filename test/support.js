@@ -393,10 +393,13 @@ class Support {
   }
 
   static bankHolidaysSpecificWeekDouble () {
-    return [
-      { holidaydate: new Date('2018-04-01T23:00:00.000Z'),
-        description: 'Easter Monday' }
-    ]
+    return {
+      rowCount: 1,
+      rows: [
+        { holidaydate: new Date('2018-04-01T23:00:00.000Z'),
+          description: 'Easter Monday' }
+      ]
+    }
   }
 
   static getLeaveDouble () {

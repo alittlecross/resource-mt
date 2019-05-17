@@ -14,11 +14,19 @@ class DatabaseAdd {
   }
 
   static async addPerson (data) {
-    return DatabaseConnection.query(`
+    const result = await DatabaseConnection.query(`
       INSERT INTO people (staffid, firstname, surname, email, gradeid, locationid, managerid, roleid, statusid)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      
       RETURNING personid;
     `, [data.staffId, data.firstName, data.surname, data.email, data.gradeId, data.locationId, data.managerId, data.roleId, data.statusId])
+
+    await DatabaseConnection.query(`
+      INSERT INTO leaveyear (personid)
+      VALUES ($1);
+    `, [result.rows[0].personid])
+
+    return result.rows[0].personid
   }
 }
 

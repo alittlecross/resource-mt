@@ -40,7 +40,7 @@ describe('class Leave', () => {
 
       const results = await Leave.bankHolidays()
 
-      expect(results.length).equal(8)
+      expect(results.rowCount).equal(5)
     })
   })
 
@@ -73,11 +73,11 @@ describe('class Leave', () => {
 
       const am = await Leave.submitRequest(Support.submitRequestDoubleAm())
       const pm = await Leave.submitRequest(Support.submitRequestDoublePm())
-      const allDay = await Leave.submitRequest(Support.submitRequestDoubleAllDay())
+      const ad = await Leave.submitRequest(Support.submitRequestDoubleAllDay())
 
-      expect(am.status).equal(true)
-      expect(pm.status).equal(true)
-      expect(allDay.status).equal(true)
+      expect(am.s).equal(undefined)
+      expect(pm.s).equal(undefined)
+      expect(ad.s).equal(undefined)
     })
 
     it('should construct a leave request string (no JS)', async () => {
@@ -86,7 +86,7 @@ describe('class Leave', () => {
 
       const result = await Leave.submitRequest(Support.submitRequestNoJsDouble())
 
-      expect(result.status).equal(true)
+      expect(result.s).equal(undefined)
     })
 
     it('should return a message if submitting a duplicate request', async () => {
@@ -94,7 +94,7 @@ describe('class Leave', () => {
 
       const result = await Leave.submitRequest(Support.submitDuplicateRequestDouble())
 
-      expect(result.status).equal(false)
+      expect(result.s).equal('')
     })
 
     it('should return a message if submitting a duplicate requests', async () => {
@@ -102,7 +102,7 @@ describe('class Leave', () => {
 
       const result = await Leave.submitRequest(Support.submitDuplicateRequestsDouble())
 
-      expect(result.status).equal(false)
+      expect(result.s).equal('s')
     })
   })
 })

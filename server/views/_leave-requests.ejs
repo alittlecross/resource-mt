@@ -2,43 +2,41 @@
   <div id='sub-title'>leave request</div>
 
   <form id='leave-form' action='/leave' autocomplete='off' method='POST'>
-
-    <input type='text' name='personId' hidden value='<%= user.personId %>'>
+    <input type='text' name='personId' value='<%= user.personId %>' hidden>
+    <input id='dates' type='text' name='dates' value='' hidden>
 
     <div class='form-row'>
       <label id='start-label' class='leave-label'>start</label>
-      <input class='leave-form right' type='text' id='start' name='start' placeholder='dd/mm/yyyy' required>
+      <input id='start' class='leave-form right' type='text' name='start' placeholder='dd/mm/yyyy' required>
     </div>
 
     <div id='end-date' class='form-row'>
       <label class='leave-label'>end</label>
-      <input class='leave-form right' type='text' id='end' name='end' placeholder='dd/mm/yyyy'>
+      <input id='end' class='leave-form right' type='text' name='end' placeholder='dd/mm/yyyy'>
     </div>
 
-    <input id='dates' type='text' name='dates' hidden value=''>
-
     <div class='button-row top'>
-      <input class='hidden' type='radio' id='annui' name='typeId' value='1' checked>
+      <input id='annui' class='hidden' type='radio' name='typeId' value='1' checked>
       <label class='leave-type' for='annui'>annual</label>
       
-      <input class='hidden' type='radio' id='lento' name='typeId' value='2'>
+      <input id='lento' class='hidden' type='radio' name='typeId' value='2'>
       <label class='leave-type' for='lento'>flexi</label>
 
-      <input class='hidden' type='radio' id='peculiari' name='typeId' value='3'>
+      <input id='peculiari' class='hidden' type='radio' name='typeId' value='3'>
       <label class='leave-type' for='peculiari'>special</label>
 
-      <input class='hidden' type='radio' id='alium' name='typeId' value='4'>
+      <input id='alium' class='hidden' type='radio' name='typeId' value='4'>
       <label class='leave-type' for='alium'>other</label>
     </div>
     
     <div class='button-row bottom'>
-      <input class='hidden' type='radio' id='ante' name='durationId' value='1' onclick='toggleEnd()'>
+      <input id='ante' class='hidden' type='radio' name='durationId' value='1' onclick='toggleEnd()'>
       <label class='leave-duration' for='ante'>am</label>
       
-      <input class='hidden' type='radio' id='post' name='durationId' value='2' onclick='toggleEnd()'>
+      <input id='post' class='hidden' type='radio' name='durationId' value='2' onclick='toggleEnd()'>
       <label class='leave-duration' for='post'>pm</label>
       
-      <input class='hidden' type='radio' id='dies' name='durationId' value='3' onclick='toggleEnd()' checked>
+      <input id='dies' class='hidden' type='radio' name='durationId' value='3' onclick='toggleEnd()' checked>
       <label class='leave-duration' for='dies'>all day</label>
     </div>
 
@@ -47,12 +45,6 @@
   <input class='leave-form' form='leave-form' type='submit' value='submit'>
   <label id='count' class='count-label'></label>
 
-  <% if (flash && flash.message_1) { %>
-    <div id='flash' class='flash-centre'>
-      <%= flash.message_1 %>
-      <br>
-      <%= flash.message_2 %>
-    </div>
-  <% } %>
+  <% if (flash && flash.message_1) { %><div id='flash' class='flash-centre'><%= flash.message_1 %><br><%= flash.message_2 %></div><% } %>
 
 </div>

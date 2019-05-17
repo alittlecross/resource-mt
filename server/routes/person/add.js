@@ -4,21 +4,35 @@ const Form = require('../../lib/person/form')
 
 module.exports = {
   get: async (req, res) => {
-    if (req.session.user.role === 'Resource Manager') {
-      const results = await Form.options()
-      res.render('./person/add.ejs', { flash: res.locals.flash, options: results })
+    if (!req.session.user) {
+      res.redirect('/')
+    } else if (req.session.user.role === 'Resource Manager') {
+      const options = await Form.options()
+
+      res.render('./person/add.ejs', {
+        flash: res.locals.flash,
+        options: options
+      })
     } else {
       res.redirect('/people')
     }
   },
+
   post: async (req, res) => {
-    const result = await AddEdit.personExists(req.body)
-    if (!result.status) {
-      const person = await Add.person(req.body)
-      res.redirect(`/${person.rows[0].personid}/person`)
-    } else {
-      req.session.flash = { message: result.message }
-      res.redirect('/person/add')
+    if (req.session.user.role === 'Resource Manager') {
+      const result = await AddEdit.personExists(req.body)
+
+      if (!result.status) {
+        const personId = await Add.person(req.body)
+
+        res.redirect(`/${personId}/person`)
+      } else {
+        req.session.flash = {
+          message: 'staff number or email already in use'
+        }
+
+        res.redirect('/person/add')
+      }
     }
   }
 }
