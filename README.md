@@ -39,6 +39,10 @@ In Terminal:
 
 `npm run migrations`
 
+To populate the database with seed data, in Terminal:
+
+`npm run seeds`
+
 Store local environmental variables by pasting each of the following into Terminal (if you have already set up user names, passwords, or changed the defaults for postgres, these should be entered beside the '=''s):
 
 ```
