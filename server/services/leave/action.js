@@ -5,6 +5,7 @@ class DatabaseLeaveAction {
     return DatabaseConnection.query(`
       UPDATE leave
       SET statusid = $2
+      
       WHERE leaveid = $1;
     `, [data.leaveId, data.action])
   }

@@ -9,20 +9,21 @@
       <th class='status'>status</th>
       <th class='delete'>action</th>
     </tr>
-    <% requests.forEach(function(request) { %>
+  <% requests.forEach(function(request) { %>
     <tr <% if (!request.thisLeaveYear) { %> class='not-this-year' <% } %>>
       <td class='date'><%= request.date %></td>
       <td class='duration'><%= request.duration %></td>
       <td class='type'><%= request.type %></td>
       <td class='status'><%= request.status %></td>
       <td class='delete'>
-        <% if (view === 'person') { %>
-          <a class='table-link' href='/<%= request.leaveId %>/leave-remove/<%= person.personId %>'>remove</a>
-        <% } else if (!request.passed) { %>
-          <a class='table-link' href='/<%= request.leaveId %>/leave-cancel'>cancel</a>
-        <% } %>
+      <% if (view === 'person') { %>
+        <a class='table-link' href='/<%= request.leaveId %>/leave-remove/<%= person.personId %>'>remove</a>
+      <% } else if (!request.passed) { %>
+        <a class='table-link' href='/<%= request.leaveId %>/leave-cancel/<%= user.personId %>'>cancel</a>
+      <% } %>
       </td>
     </tr>
     <% }) %>
   </table>
+
 </div>

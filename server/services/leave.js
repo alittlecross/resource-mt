@@ -3,11 +3,15 @@ const DatabaseConnection = require('../../db/database-connection')
 class DatabaseLeave {
   static async bankHolidays (from, to) {
     return DatabaseConnection.query(`
-      SELECT holidaydate, description
+      SELECT
+        holidaydate,
+        description
       FROM bankholidays
       INNER JOIN descriptions
       ON bankholidays.descriptionid = descriptions.descriptionid
-      WHERE holidaydate >= $1 AND holidaydate <= $2
+
+      WHERE holidaydate >= $1
+      AND holidaydate <= $2
       
       ORDER BY holidaydate;
     `, [from, to])
@@ -37,7 +41,9 @@ class DatabaseLeave {
       INNER JOIN leavestatuses ON leave.statusid = leavestatuses.statusid
       INNER JOIN people ON leave.personid = people.personid
       LEFT JOIN leaveyear ON leave.personid = leaveyear.personid
-      WHERE leaveyear.current = TRUE AND leave.personid = $1
+      
+      WHERE leaveyear.current = TRUE
+      AND leave.personid = $1
 
       UNION
 
@@ -58,7 +64,9 @@ class DatabaseLeave {
         broughtforward,
         (broughtforward + allowance) AS total
       FROM leaveyear
-      WHERE current = TRUE AND leaveyear.personid = $1
+      
+      WHERE current = TRUE
+      AND leaveyear.personid = $1
 
       ORDER BY leavedate DESC;
     `, [personId])

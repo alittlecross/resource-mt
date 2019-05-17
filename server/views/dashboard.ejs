@@ -1,18 +1,17 @@
 <%- include('_head') %>
 
 <body>
-
   <content>
 
-  <div id='banner'>
-    <div id='small-title'>Resource Management&nbsp;Tool</div>
-    <a class='banner-link' href='/people'>people</a>
-    <a class='banner-link' href='/leave'>leave</a>
-    <a class='banner-link right' href='/log-out'>log out</a>
+    <div id='banner'>
+      <div id='small-title'>Resource Management&nbsp;Tool</div>
+      <a class='banner-link' href='/people'>people</a>
+      <a class='banner-link' href='/leave'>leave</a>
+      <a class='banner-link right' href='/log-out'>log out</a>
     <% if (!current) { %>
       <a class='banner-link right' href='/dashboard/present'>current week</a>
     <% } %>
-  </div>
+    </div>
 
   <% if(requests.length > 0) { %>
     <div id='leave-requests-table'>
@@ -36,12 +35,11 @@
         </tr>
       <% }) %>
       </table>
-
+      
     </div>
   <% } %>
 
-  <%- include('_team-activity') %>
+    <%- include('_team-activity') %>
 
   </content>
-
 </body>

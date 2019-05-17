@@ -7,7 +7,11 @@ class DatabaseEdit {
       FROM people
       INNER JOIN roles
       ON people.roleid = roles.roleid
-      WHERE email = $1 AND personid != $2 OR staffid = $3 AND personid != $2
+
+      WHERE email = $1
+      AND personid != $2
+      OR staffid = $3
+      AND personid != $2
 
       ORDER BY firstname, surname;
     `, [data.email, data.personId, data.staffId])
@@ -26,7 +30,9 @@ class DatabaseEdit {
         managerid = $7,
         roleid = $8,
         statusid = $9
+
       WHERE personid = $10
+
       RETURNING personid;
     `, [data.staffId, data.firstName, data.surname, data.email, data.gradeId, data.locationId, data.managerId, data.roleId, data.statusId, data.personId])
   }
@@ -34,6 +40,7 @@ class DatabaseEdit {
   static async deleteSkills (personId) {
     return DatabaseConnection.query(`
       DELETE FROM personskills
+
       WHERE personid = $1;
     `, [personId])
   }

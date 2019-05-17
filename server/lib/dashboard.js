@@ -15,23 +15,19 @@ class Dashboard {
     const weekdays = [0, 0, 0, 0, 0, 0, 0]
     const bankHolidays = await Leave.bankHolidays(week[0], week[6])
 
-    for (let i = 0; i < bankHolidays.length; ++i) {
-      weekdays[bankHolidays[i].holidaydate.getDay()] = {
-        leaveId: 0,
+    for (let i = 0; i < bankHolidays.rows.length; ++i) {
+      weekdays[bankHolidays.rows[i].holidaydate.getDay()] = {
         duration: 'all day',
-        status: bankHolidays[i].description
+        status: 'bank-holiday',
+        description: bankHolidays.rows[i].description
       }
     }
-
-    bankHolidays.forEach(d => {
-
-    })
 
     const results = await DatabaseDashboard.getLeave(personId, week[0], week[6])
     const team = []
 
     results.rows.forEach(row => {
-      if (team[0] === undefined || team[0].personId !== row.personid) {
+      if (!team[0] || team[0].personId !== row.personid) {
         team.unshift({
           personId: row.personid,
           person: row.person,

@@ -22,10 +22,7 @@ class Leave {
     return `${(d > 9) ? d : '0' + d}/${(m > 9) ? m : '0' + m}/${y}`
   }
 
-  static async bankHolidays (from = '1900/01/01', to = '2100/12/31') {
-    const results = await DatabaseLeave.bankHolidays(from, to)
-    return results.rows
-  }
+  static async bankHolidays (from = '1900/01/01', to = '2100/12/31') { return DatabaseLeave.bankHolidays(from, to) }
 
   static getBalance (balance, requests) {
     return {
@@ -51,8 +48,8 @@ class Leave {
   }
 
   static async submitRequest (data) {
-    const results = await this.getLeave(data.personId)
     const dates = (data.dates === '') ? [data.start] : data.dates.split(',')
+    const results = await this.getLeave(data.personId)
     let count = 0
 
     if (data.durationId === '1') {
@@ -64,21 +61,13 @@ class Leave {
     }
 
     const joiner = `', ${data.personId}, ${data.typeId}, ${data.durationId}, 2`
-    const string = `'${dates.join(`${joiner}), ('`) + joiner}`
+    const output = {}
     const s = count > 1 ? 's' : ''
+    const string = `'${dates.join(`${joiner}), ('`) + joiner}`
 
-    if (count) {
-      return {
-        status: false,
-        message_1: `date${s} already requested.`,
-        message_2: 'cancel and resubmit to amend.'
-      }
-    } else {
-      await DatabaseLeave.submitRequest(string)
-      return {
-        status: true
-      }
-    }
+    count ? output.s = s : await DatabaseLeave.submitRequest(string)
+
+    return output
   }
 }
 

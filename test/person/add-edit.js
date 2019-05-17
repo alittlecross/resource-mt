@@ -32,7 +32,6 @@ describe('class AddEdit', () => {
       const result = await AddEdit.personExists(Support.personFormData())
 
       expect(result.status).equal(true)
-      expect(result.message).equal('staff number or email already in use')
     })
   })
 
@@ -51,7 +50,6 @@ describe('class AddEdit', () => {
       const result = await AddEdit.personExists(Support.personFormData(), true)
 
       expect(result.status).equal(true)
-      expect(result.message).equal('staff number or email already in use')
     })
   })
 

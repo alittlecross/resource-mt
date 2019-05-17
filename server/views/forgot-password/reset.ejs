@@ -1,25 +1,19 @@
 <%- include('../_head') %>
 
 <body>
-
   <content>
     
-  <div id='title'>Resource Management&nbsp;Tool</div>
-  <div id='sub-title'>reset password</div>
+    <div id='title'>Resource Management&nbsp;Tool</div>
+    <div id='sub-title'>reset password</div>
 
-  <form id='authenticate' action='/<%= hash %>/forgot-password' autocomplete='off' method='POST'>
-    <input class='authenticate' type='password' name='password' placeholder='new password' required>
-    <input class='authenticate' type='password' name='repassword' placeholder='re-enter password' required>
-  </form>
+    <form id='authenticate' action='/<%= hash %>/forgot-password' autocomplete='off' method='POST'>
+      <input class='authenticate' type='password' name='password' placeholder='new password' required>
+      <input class='authenticate' type='password' name='repassword' placeholder='re-enter password' required>
+    </form>
 
-  <input class='authenticate' form='authenticate' type='submit' value='submit'>
+    <input class='authenticate' form='authenticate' type='submit' value='submit'>
 
-  <div id='flash'>
-    <% if (flash && flash.message) { %>
-      <%= flash.message %>
-    <% } %>
-  </div>
+    <% if (flash && flash.message) { %><div id='flash'><%= flash.message %></div><% } %>
 
   </content>
-
 </body>

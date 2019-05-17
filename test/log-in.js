@@ -32,24 +32,23 @@ describe('class logIn', () => {
 
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'BattlestarGalactica' })
 
-      expect(result.status).equal(false)
-      expect(result.message).equal('email or password incorrect')
+      expect(result.status).equal(undefined)
     })
 
     it('incorrect email should be unsuccessful', async () => {
       sandbox.stub(DatabaseLogIn, 'getPeople').returns({ rowCount: 0 })
+
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
 
-      expect(result.status).equal(false)
-      expect(result.message).equal('email or password incorrect')
+      expect(result.status).equal(undefined)
     })
 
     it('correct email with no password should be unsuccessful', async () => {
       sandbox.stub(DatabaseLogIn, 'getPeople').returns({ rowCount: 1 })
+
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com' })
 
       expect(result.status).equal(true)
-      expect(result.message).equal('email or password incorrect')
     })
   })
 })

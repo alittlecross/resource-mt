@@ -10,7 +10,7 @@ class Person {
     this.gradeId = data.gradeid
     this.locationId = data.locationid
     this.managerId = data.managerid
-    this.role = data.role
+    this.roleId = data.roleid
     this.statusId = data.statusid
     this.skills = []
     this.archived = data.archived

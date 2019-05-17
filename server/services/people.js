@@ -7,6 +7,7 @@ class DatabasePeople {
       FROM people
       INNER JOIN roles
       ON people.roleid = roles.roleid
+      
       WHERE archived = FALSE
 
       ORDER BY firstname, surname;
