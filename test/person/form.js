@@ -18,7 +18,7 @@ describe('class Form', () => {
 
   describe('constructor', () => {
     it('should return an options object', () => {
-      sandbox.createStubInstance(Option, Support.optionObjectDouble())
+      // sandbox.createStubInstance(Option, Support.optionObjectDouble())
 
       const result = new Form(Support.getOptionsDouble().rows)
 
@@ -29,7 +29,7 @@ describe('class Form', () => {
 
   describe('filterData', () => {
     it('should return an array of options of one kind', () => {
-      sandbox.createStubInstance(Option, Support.optionObjectDouble())
+      // sandbox.createStubInstance(Option, Support.optionObjectDouble())
 
       const form = new Form([])
       const result = form.filterData(Support.getOptionsDouble().rows, 'manager')
@@ -40,7 +40,7 @@ describe('class Form', () => {
 
   describe('.options', () => {
     it('should get options from the database, build, and return an options object', async () => {
-      sandbox.createStubInstance(Option, Support.optionObjectDouble())
+      // sandbox.createStubInstance(Option, Support.optionObjectDouble())
       sandbox.stub(DatabaseForm, 'getOptions').returns(Support.getOptionsDouble())
 
       const result = await Form.options()

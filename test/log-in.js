@@ -18,7 +18,7 @@ describe('class logIn', () => {
 
   describe('.authenticate', () => {
     it('correct email and password should be successful', async () => {
-      sandbox.createStubInstance(People, Support.peopleObjectDouble())
+      // sandbox.createStubInstance(People, Support.peopleObjectDouble())
       sandbox.stub(DatabaseLogIn, 'getPeople').returns(Support.getPeopleDouble())
 
       const result = await LogIn.authenticate({ email: 'dwight.schrute@scranton.com', password: 'password' })
