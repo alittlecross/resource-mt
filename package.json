@@ -33,7 +33,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
-    "nodemon": "^1.18.11",
+    "nodemon": "^1.19.4",
     "nyc": "^14.1.0",
     "sinon": "^7.5.0",
     "zombie": "^6.1.4"
