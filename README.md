@@ -1,4 +1,4 @@
-## Project Ketchup
+## Resource MT
 
 A resource management tool.
 
